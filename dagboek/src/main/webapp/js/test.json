@@ -1,0 +1,7 @@
+{
+"data":[
+    {"ingredient":"Banaan", "hoeveelheid":"50", "energie":"89", "vet":"0,9", "verzagigd_vet":"0,3", "eiwit":"1,2", "koolhydraten":"20,4", "vezels":"1,9", "zout":"0,0"},
+    {"ingredient":"Appel", "hoeveelheid":"80", "energie":"77", "vet":"0,6", "verzagigd_vet":"0,1", "eiwit":"1,1", "koolhydraten":"15,6", "vezels":"2,5", "zout":"0,1"},
+    {"ingredient":"Brood", "hoeveelheid":"120", "energie":"320", "vet":"1,1", "verzagigd_vet":"0,4", "eiwit":"7,4", "koolhydraten":"30,6", "vezels":"4,8", "zout":"0,8"}
+]
+}

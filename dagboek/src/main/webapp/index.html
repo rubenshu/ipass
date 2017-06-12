@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<title>Login - Voedseldagboek</title>
+	<?php include 'static/includes.php';?>
+	<body>
+		<style>.fa-sign-in,.fa-coffee {font-size:200px}</style>
+		<?php include 'static/header.php';?>
+		
+		<div class="row-padding padding-16 container">
+			<div class="content">
+				<div class="column threequarter">
+					<h2 class="center">Login</h2>
+					<h5>
+
+						<form action="/action_page.php">
+
+							<div class="container login">
+								<label><b>Username</b></label>
+								<input type="text" placeholder="Enter Username" name="uname" required>
+
+									<label><b>Password</b></label>
+									<input type="password" placeholder="Enter Password" name="psw" required>
+
+										<button type="submit">Login</button>
+
+									</div>
+								</form>
+
+							</h5>
+						</div>
+
+						<div class="column quarter center">
+							<i class="fa fa-sign-in padding-64 text-red"></i>
+						</div>
+					</div>
+				</div>
+				<?php include 'static/footer.php';?>
+			</body>
+		</html>
+		

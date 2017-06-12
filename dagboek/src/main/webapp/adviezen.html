@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Adviezen - Voedseldagboek</title>
+		<?php include 'static/includes.php';?>
+		<script src="js/datepicker.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<?php include 'static/header.php';?>
+		<div class="row-padding padding-16 container">
+			<div class="content row">
+				<h2 id="add-date" class="center">Mijn dagboek</h2>
+				<div class="column quarter center">
+					<div class="datepicker">
+						<div class="datepickerhead"><h3 style="margin:0;height:48px;">Datum</h3></div>
+						<div class="datepickercont"><input type="text" id="datepicker"></div>
+					</div>
+				</div>
+				
+				<div class="column threequarter dagboektable">
+					<div class="container bodyheader">
+					<p>Dit advies is gebaseerd op één ingevulde dag. Je hoeft niet elke dag de juiste hoeveelheid van alle voedingsstoffen binnen te krijgen. Kijk altijd naar een periode van ongeveer 1 à 2 weken.</p>
+					</div>
+					
+					<div class="container advies">
+					<p class="macro" id="energie">Energie: 2200 kcal</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="vet">Vet: 24,3g - 15%</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="verzagigd_vet">Verzagigd vet: 12,1g - 5%</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="eiwit">Eiwit: 128,9g - 35%</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="koolhydraten">Koolhydraten: 100g - 40%</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="vezels">Vezels: 40,3g</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					
+					<p class="macro" id="zout">Zout: 4,8g</p>
+					<p class="advies">De hoeveelheid energie die je uit je voeding haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze richtlijn geldt voor mensen van jouw leeftijd en geslacht die een niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je de ontwikkeling van je gewicht in de gaten houden, vul je gewicht regelmatig in en kijk in de grafiek.</p>
+					</div>
+
+					</div>
+				</div>
+			</div>
+			<?php include 'static/footer.php';?>
+			<!--<script src="js/adviezen.js" type="text/javascript"></script>-->
+			<script>setDate()</script>
+			
+			<ul id="autocomplete" style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto;left: 806px;top: 251px;">
+			</ul>
+			
+			<ul id="recentcomplete" style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto;left: 716px;top: 251px;">
+			</ul>
+		</body>
+</html>
