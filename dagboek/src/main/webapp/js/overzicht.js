@@ -4,16 +4,16 @@ $(document).ready(function () {
 });
 
 // Load ingredients from JSON test file
-function loadIngredients() {
-	$.get("js/test.json", (data) => {
-		$(".overzicht").html('<table class="table tableoverzicht" id="table"><tr class="bodyheader"><th class="ingredient" style="background-color:#c1c1c1;">Ingrediënt</th><th class="hoeveelheid style="background-color:#c1c1c1;""></th><th class="energie" style="background-color:#c1c1c1;">Energie (g)</th><th class="vet" style="background-color:#c1c1c1;">Vet (g)</th><th class="verzagigd-vet" style="background-color:#c1c1c1;">Verzadigd vet (g)</th><th class="eiwit" style="background-color:#c1c1c1;">Eiwit (g)</th><th class="koolhydraten" style="background-color:#c1c1c1;">Koolhydr. (g)</th><th class="vezels" style="background-color:#c1c1c1;">Vezels (g)</th><th class="zout" style="background-color:#c1c1c1;">Zout (g)</th>');
-		$(".table").append('</tr><tr class="totaal"><td class="ingredient">Totaal</td><td class="hoeveelheid"></td><td class="energie" id="energie"></td><td class="vet" id="vet"></td><td class="verzagigd-vet" id="verzagigd-vet"></td><td class="eiwit" id="eiwit"></td><td class="koolhydraten" id="koolhydraten"></td><td class="vezels" id="vezels"></td><td class="zout" id="zout"></td></tr></table>');
-		$(data.data).each(function (index) {
-			$(".table").find('tr:last').prev().after('<tr><td class="ingredient">' + this.ingredient + '</td><td class="hoeveelheid">' + this.hoeveelheid + '</td><td class="energie">' + this.energie + '</td><td class="vet">' + this.vet + '</td><td class="verzagigd-vet">' + this.verzagigd_vet + '</td><td class="eiwit">' + this.eiwit + '</td><td class="koolhydraten">' + this.koolhydraten + '</td><td class="vezels">' + this.vezels + '</td><td class="zout">' + this.zout + '</td></tr>');
-			loadTotals();
-		});
-	});
-}
+//function loadIngredients() {	
+//	$.get("js/test.json", (data) => {
+//		$(".overzicht").html('<table class="table tableoverzicht" id="table"><tr class="bodyheader"><th class="ingredient" style="background-color:#c1c1c1;">Ingrediënt</th><th class="hoeveelheid style="background-color:#c1c1c1;""></th><th class="energie" style="background-color:#c1c1c1;">Energie (g)</th><th class="vet" style="background-color:#c1c1c1;">Vet (g)</th><th class="verzagigd-vet" style="background-color:#c1c1c1;">Verzadigd vet (g)</th><th class="eiwit" style="background-color:#c1c1c1;">Eiwit (g)</th><th class="koolhydraten" style="background-color:#c1c1c1;">Koolhydr. (g)</th><th class="vezels" style="background-color:#c1c1c1;">Vezels (g)</th><th class="zout" style="background-color:#c1c1c1;">Zout (g)</th>');
+//		$(".table").append('</tr><tr class="totaal"><td class="ingredient">Totaal</td><td class="hoeveelheid"></td><td class="energie" id="energie"></td><td class="vet" id="vet"></td><td class="verzagigd-vet" id="verzagigd-vet"></td><td class="eiwit" id="eiwit"></td><td class="koolhydraten" id="koolhydraten"></td><td class="vezels" id="vezels"></td><td class="zout" id="zout"></td></tr></table>');
+//		$(data.data).each(function (index) {
+//			$(".table").find('tr:last').prev().after('<tr><td class="ingredient">' + this.ingredient + '</td><td class="hoeveelheid">' + this.hoeveelheid + '</td><td class="energie">' + this.energie + '</td><td class="vet">' + this.vet + '</td><td class="verzagigd-vet">' + this.verzagigd_vet + '</td><td class="eiwit">' + this.eiwit + '</td><td class="koolhydraten">' + this.koolhydraten + '</td><td class="vezels">' + this.vezels + '</td><td class="zout">' + this.zout + '</td></tr>');
+//			loadTotals();
+//		});
+//	});
+//}
 
 //Update totaal
 function loadTotals() {

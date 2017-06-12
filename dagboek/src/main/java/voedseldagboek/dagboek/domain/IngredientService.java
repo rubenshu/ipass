@@ -10,4 +10,8 @@ public class IngredientService {
 	public List<Ingredient> getAllIngredients() {
 		return ingredientDAO.findAll();
 	}
+	
+	//public List<Ingredient> getToday() {
+	//	return ingredientDAO.findToday();
+	//}
 }

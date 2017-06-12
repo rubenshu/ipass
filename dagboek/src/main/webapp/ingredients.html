@@ -10,10 +10,10 @@
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
 	rel="stylesheet" type="text/css" />
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/initialize_page.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="js/jquery-ui-i18n.min.js"></script>
-<script src="js/initialize_page.js" type="text/javascript"></script>
 
 
 <body>
@@ -66,24 +66,10 @@ body, h1, h2, h3, h4, h5, h6 {
 
 	<div class="row-padding padding-16 container">
 		<div class="content">
-			<div class="column threequarter" id="homepage">
+			<div class="column threequarter">
 				<h2 class="center">Login</h2>
 				<h5>
-
-					<form action="restservices/authentication" method="post"
-						id="loginform">
-
-						<div class="container login">
-							<label><b>Username</b></label> <input type="text"
-								placeholder="Enter Username" name="gebruikersnaam" id="gebruikersnaam" required>
-							<label><b>Password</b></label> <input type="password"
-								placeholder="Enter Password" name="wachtwoord" required>
-
-							<button type="button" id="loginbutton" value="login">Login</button>
-
-						</div>
-					</form>
-
+				
 				</h5>
 			</div>
 
@@ -96,6 +82,18 @@ body, h1, h2, h3, h4, h5, h6 {
 	<footer class="container padding-64 center opacity">
 		<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
 	</footer>
-	<script src="js/home.js" type="text/javascript"></script>
+	
+	<script>$.ajax({
+		url: "restservices/ingredients/",
+		method: "GET",
+		beforeSend: function (xhr) {
+		var token = window.sessionStorage.getItem("sessionToken");
+		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+		},
+		success: function (countryList) {
+		/* Handle countryList */
+		console.log("Succes");
+		}
+		});</script>
 </body>
 </html>

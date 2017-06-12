@@ -1,6 +1,8 @@
 package voedseldagboek.dagboek.services;
 
 import java.util.List;
+
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -18,6 +20,7 @@ import voedseldagboek.dagboek.domain.ServiceProvider;
 public class IngredientResource {
 	
 	@GET
+	@RolesAllowed({ "user" })
 	@Produces("application/json")
 	public String getIngredients() {
 		IngredientService service = ServiceProvider.getIngredientService();
@@ -25,6 +28,18 @@ public class IngredientResource {
 		
 		return ingredientArray.toString();
 	}
+	
+	//@GET
+	//@RolesAllowed("user")
+	//@Path("/loadingredients")
+	//@Produces("application/json")
+	//public String getToday(@PathParam("gebruikersnaam") String gebruikersnaam, @PathParam("datum") String datum){
+		//IngredientService service = ServiceProvider.getIngredientService();
+		//JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));		
+	//	return ingredientArray.toString();
+			//}
+	
+	
 	
 
 	private JsonArray buildJsonIngredientArray(List<Ingredient> ingredients) {
