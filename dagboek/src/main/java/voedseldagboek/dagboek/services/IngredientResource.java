@@ -32,11 +32,9 @@ public class IngredientResource {
 		
 		for (Ingredient c : ingredients) {
 			JsonObjectBuilder job = Json.createObjectBuilder();
-			System.out.println(c.getIngredientnaam());
 			job.add("ingredientnaam", c.getIngredientnaam());
-			/*job.add("name", c.getName());
-			job.add("account", c.getAccount());
-			job.add("street", c.getAddress().getStreet());*/
+			job.add("calorieen", c.getCalorieen());
+			
 			
 			jsonArrayBuilder.add(job);
 		}

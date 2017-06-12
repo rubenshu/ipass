@@ -25,11 +25,10 @@ public class IngredientDAO extends BaseDAO {
 				double verzadigd_vet = dbResultSet.getDouble("verzadigd_vet");
 				double eiwit = dbResultSet.getDouble("eiwit");
 				double koolhydraten = dbResultSet.getDouble("koolhydraten");
-				double vezels = dbResultSet.getDouble("surface");
+				double vezels = dbResultSet.getDouble("vezels");
 				double zout = dbResultSet.getDouble("zout");
 				Ingredient ing = new Ingredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
 				results.add(ing);
-				System.out.println(ing);
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
