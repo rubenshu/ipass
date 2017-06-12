@@ -1,38 +1,103 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Overzicht - Voedseldagboek</title>
-		<?php include 'static/includes.php';?>
-		<script src="js/datepicker.js" type="text/javascript"></script>
-	</head>
-	<body>
-		<?php include 'static/header.php';?>
-		<div class="row-padding padding-16 container">
-			<div class="content row">
-				<h2 id="add-date" class="center">Mijn overzicht</h2>
-				<div class="column quarter center">
-					<div class="datepicker">
-						<div class="datepickerhead"><h3 style="margin:0;height:48px;">Datum</h3></div>
-						<div class="datepickercont"><input type="text" id="datepicker"></div>
+<head>
+<title>Overzicht - Voedseldagboek</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+	href="imports/font-awesome-4.7.0/css/font-awesome.min.css">
+<link
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+	rel="stylesheet" type="text/css" />
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/initialize_page.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/jquery-ui-i18n.min.js"></script>
+
+<script src="js/datepicker.js" type="text/javascript"></script>
+</head>
+<body>
+	<style>
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", sans-serif
+}
+
+.mainMenu, h1, button {
+	font-family: "Montserrat", sans-serif
+}
+</style>
+
+	<!-- Navbar -->
+	<!-- Header -->
+	<header class="container red center">
+		<h1 class="margin jumbo">Voedseldagboek</h1>
+		<!--<p class="xlarge">Een voedseldagboek</p>-->
+	</header>
+
+	<div>
+		<div class="topmenu mainMenu red shadow center">
+			<a
+				class="menu-item button hide-menu-two hide-large right padding-one hover-white large red"
+				href="javascript:void(0);" onclick="mobFunc()"
+				title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
+				href="index.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Home</a>
+			<a href="dagboek.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Dagboek</a>
+			<a href="adviezen.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Adviezen</a>
+			<a href="overzicht.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Overzicht</a>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navMob"
+			class="mainMenu-block white hide hide-large hide-menu-two">
+			<a href="index.html" class="menu-item button padding-one">Home</a> <a
+				href="dagboek.html" class="menu-item button padding-one">Dagboek</a>
+			<a href="adviezen.html" class="menu-item button padding-one">Adviezen</a>
+			<a href="overzicht.html" class="menu-item button padding-one">Overzicht</a>
+		</div>
+	</div>
+	<div class="row-padding padding-16 container">
+		<div class="content row">
+			<h2 id="add-date" class="center">Mijn overzicht</h2>
+			<div class="column quarter center">
+				<div class="datepicker">
+					<div class="datepickerhead">
+						<h3 style="margin: 0; height: 48px;">Datum</h3>
 					</div>
-				</div>
-				
-				<div class="column threequarter overzichttable">
-					<div class="overzicht">
-						<p>Overzicht wordt geladen...</p>
-						<p>Werkt het niet? Probeer de pagina te verversen.</p>
-						</div>
+					<div class="datepickercont">
+						<input type="text" id="datepicker">
 					</div>
 				</div>
 			</div>
-			<?php include 'static/footer.php';?>
-			<script src="js/overzicht.js" type="text/javascript"></script>
-			<script>setDate()</script>
-			
-			<ul id="autocomplete" style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto;left: 806px;top: 251px;">
-			</ul>
-			
-			<ul id="recentcomplete" style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto;left: 716px;top: 251px;">
-			</ul>
-		</body>
-	</html>
+
+			<div class="column threequarter overzichttable">
+				<div class="overzicht">
+					<p>Overzicht wordt geladen...</p>
+					<p>Werkt het niet? Probeer de pagina te verversen.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="container padding-64 center opacity">
+		<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
+	</footer>
+	<script src="js/overzicht.js" type="text/javascript"></script>
+	<script>
+		setDate()
+	</script>
+
+	<ul id="autocomplete"
+		style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto; left: 806px; top: 251px;">
+	</ul>
+
+	<ul id="recentcomplete"
+		style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto; left: 716px; top: 251px;">
+	</ul>
+</body>
+</html>

@@ -1,81 +1,99 @@
 <!DOCTYPE html>
 <html>
-	<title>Login - Voedseldagboek</title>
-	<meta charset="UTF-8">
+<title>Login - Voedseldagboek</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="imports/font-awesome-4.7.0/css/font-awesome.min.css">
-<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />  
+<link rel="stylesheet"
+	href="imports/font-awesome-4.7.0/css/font-awesome.min.css">
+<link
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+	rel="stylesheet" type="text/css" />
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="js/initialize_page.js" type="text/javascript"></script>
-<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="js/jquery-ui-i18n.min.js"></script>
-	
-	
-	<body>
-		<style>.fa-sign-in,.fa-coffee {font-size:200px}
-	body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-	.mainMenu,h1,button {font-family: "Montserrat", sans-serif}
+
+
+<body>
+	<style>
+.fa-sign-in, .fa-coffee {
+	font-size: 200px
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", sans-serif
+}
+
+.mainMenu, h1, button {
+	font-family: "Montserrat", sans-serif
+}
 </style>
 
-<!-- Navbar -->
-<!-- Header -->
-<header class="container red center">
-	<h1 class="margin jumbo">Voedseldagboek</h1>
-	<!--<p class="xlarge">Een voedseldagboek</p>-->
-</header>
+	<!-- Navbar -->
+	<!-- Header -->
+	<header class="container red center">
+		<h1 class="margin jumbo">Voedseldagboek</h1>
+		<!--<p class="xlarge">Een voedseldagboek</p>-->
+	</header>
 
-<div>
-	<div class="topmenu mainMenu red shadow center">
-		<a class="menu-item button hide-menu-two hide-large right padding-one hover-white large red" href="javascript:void(0);" onclick="mobFunc()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-		<a href="index.html" class="menu-item button hide-menu-item padding-one hover-white">Home</a>
-		<a href="dagboek.html" class="menu-item button hide-menu-item padding-one hover-white">Dagboek</a>
-		<a href="adviezen.html" class="menu-item button hide-menu-item padding-one hover-white">Adviezen</a>
-		<a href="overzicht.html" class="menu-item button hide-menu-item padding-one hover-white">Overzicht</a>
+	<div>
+		<div class="topmenu mainMenu red shadow center">
+			<a
+				class="menu-item button hide-menu-two hide-large right padding-one hover-white large red"
+				href="javascript:void(0);" onclick="mobFunc()"
+				title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
+				href="index.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Home</a>
+			<a href="dagboek.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Dagboek</a>
+			<a href="adviezen.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Adviezen</a>
+			<a href="overzicht.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Overzicht</a>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navMob"
+			class="mainMenu-block white hide hide-large hide-menu-two">
+			<a href="index.html" class="menu-item button padding-one">Home</a> <a
+				href="dagboek.html" class="menu-item button padding-one">Dagboek</a>
+			<a href="adviezen.html" class="menu-item button padding-one">Adviezen</a>
+			<a href="overzicht.html" class="menu-item button padding-one">Overzicht</a>
+		</div>
 	</div>
 
-	<!-- Navbar on small screens -->
-	<div id="navMob" class="mainMenu-block white hide hide-large hide-menu-two">
-		<a href="index.html" class="menu-item button padding-one">Home</a>
-		<a href="dagboek.html" class="menu-item button padding-one">Dagboek</a>
-		<a href="adviezen.html" class="menu-item button padding-one">Adviezen</a>
-		<a href="overzicht.html" class="menu-item button padding-one">Overzicht</a>
+	<div class="row-padding padding-16 container">
+		<div class="content">
+			<div class="column threequarter">
+				<h2 class="center">Login</h2>
+				<h5>
+
+					<form action="/action_page.php">
+
+						<div class="container login">
+							<label><b>Username</b></label> <input type="text"
+								placeholder="Enter Username" name="uname" required> <label><b>Password</b></label>
+							<input type="password" placeholder="Enter Password" name="psw"
+								required>
+
+							<button type="submit">Login</button>
+
+						</div>
+					</form>
+
+				</h5>
+			</div>
+
+			<div class="column quarter center">
+				<i class="fa fa-sign-in padding-64 text-red"></i>
+			</div>
+		</div>
 	</div>
-</div>
-		
-		<div class="row-padding padding-16 container">
-			<div class="content">
-				<div class="column threequarter">
-					<h2 class="center">Login</h2>
-					<h5>
-
-						<form action="/action_page.php">
-
-							<div class="container login">
-								<label><b>Username</b></label>
-								<input type="text" placeholder="Enter Username" name="uname" required>
-
-									<label><b>Password</b></label>
-									<input type="password" placeholder="Enter Password" name="psw" required>
-
-										<button type="submit">Login</button>
-
-									</div>
-								</form>
-
-							</h5>
-						</div>
-
-						<div class="column quarter center">
-							<i class="fa fa-sign-in padding-64 text-red"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Footer -->
-<footer class="container padding-64 center opacity">  
-	<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
-</footer>
-			</body>
-		</html>
-		
+	<!-- Footer -->
+	<footer class="container padding-64 center opacity">
+		<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
+	</footer>
+</body>
+</html>
