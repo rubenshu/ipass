@@ -48,4 +48,6 @@ public class IngredientDAO extends BaseDAO {
 	public Ingredient findByString(String ingredientNaam) {
 		return selectIngredients("SELECT ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient WHERE ingredientnaam = " +ingredientNaam).get(0);
 	}
+	
+	
 }

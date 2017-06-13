@@ -49,7 +49,12 @@ public class IngredientResource {
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("ingredientnaam", c.getIngredientnaam());
 			job.add("calorieen", c.getCalorieen());
-			
+			job.add("vet", c.getVet());
+			job.add("verzadigd_vet", c.getVerzadigd_vet());
+			job.add("eiwit", c.getEiwit());
+			job.add("koolhydraten", c.getKoolhydraten());
+			job.add("vezels", c.getVezels());
+			job.add("zout", c.getZout());
 			
 			jsonArrayBuilder.add(job);
 		}
