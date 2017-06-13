@@ -41,8 +41,7 @@ public class GebruikerloginDAO extends BaseDAO {
 			
 			while (dbResultSet.next()) {
 				String gebruikersnaam = dbResultSet.getString("gebruikersnaam");
-				String role = dbResultSet.getString("role");
-				Gebruikerlogin newGebruikerlogin = new Gebruikerlogin(gebruikersnaam, "", role);
+				Gebruikerlogin newGebruikerlogin = new Gebruikerlogin(gebruikersnaam, "", "");
 				results.add(newGebruikerlogin);
 			}
 		} catch (SQLException sqle) {
@@ -53,7 +52,7 @@ public class GebruikerloginDAO extends BaseDAO {
 	}
 	
 	public Gebruikerlogin findByString(String gebruikersnaam) {
-		return selectGebruikers("SELECT gebruikresnaam FROM ingredient WHERE gebruikersnaam = " +gebruikersnaam).get(0);
+		return selectGebruikers("SELECT gebruikersnaam FROM gebruikerlogin WHERE gebruikersnaam = '"+gebruikersnaam +"'").get(0);
 	}
 	
 }

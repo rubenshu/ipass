@@ -68,9 +68,7 @@ body, h1, h2, h3, h4, h5, h6 {
 		<div class="content">
 			<div class="column threequarter">
 				<h2 class="center">Login</h2>
-				<h5>
-				
-				</h5>
+				<h5></h5>
 			</div>
 
 			<div class="column quarter center">
@@ -82,18 +80,22 @@ body, h1, h2, h3, h4, h5, h6 {
 	<footer class="container padding-64 center opacity">
 		<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
 	</footer>
-	
-	<script>$.ajax({
-		url: "restservices/ingredients/",
-		method: "GET",
-		beforeSend: function (xhr) {
-		var token = window.sessionStorage.getItem("sessionToken");
-		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
-		},
-		success: function (countryList) {
-		/* Handle countryList */
-		console.log("Succes");
-		}
-		});</script>
+
+	<script>
+	var url = "restservices/loadingredients?Q1=" + username + "&Q2=" + datum;
+		$.ajax({
+			url : "restservices/loadingredients?Q1=ruben&Q2=2017-06-12",
+			method : "GET",
+			beforeSend : function(xhr) {
+				var token = window.sessionStorage.getItem("sessionToken");
+				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+			},
+			success : function(countryList) {
+				console.log(countryList);
+				/* Handle countryList */
+				console.log("Succes");
+			}
+		});
+	</script>
 </body>
 </html>

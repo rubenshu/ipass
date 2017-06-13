@@ -1,12 +1,12 @@
 package voedseldagboek.dagboek.persistence;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import voedseldagboek.dagboek.domain.Dagboek;
 import voedseldagboek.dagboek.domain.Gebruikerlogin;
@@ -16,7 +16,7 @@ public class DagboekDAO extends BaseDAO {
 	private GebruikerloginDAO gebruikerloginDAO = new GebruikerloginDAO();
 	private IngredientDAO ingredientDAO = new IngredientDAO();
 
-	private List<Dagboek> selectIngredients(String query) {
+	private List<Dagboek> selectDagboek(String query) {
 		List<Dagboek> results = new ArrayList<Dagboek>();
 		
 		try (Connection con = super.getConnection()) {
@@ -51,11 +51,11 @@ public class DagboekDAO extends BaseDAO {
 	//	return selectIngredients("SELECT ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient");
 	//}
 	
-	//public List<Ingredient> findToday(huidigeGebruiker, geselecteerdeDatum) {
-		//return selectIngredients("SELECT ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient WHERE ingredientnaam = " +ingredientNaam).get(0);
-	//}
+	public List<Dagboek> findToday(String huidigeGebruiker, String datum) {
+		return selectDagboek("SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"+huidigeGebruiker+"' AND datum = '"+datum+"'");
+	}
 	
 	public Dagboek findById(int dagboek_id) {
-		return selectIngredients("SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = " +dagboek_id).get(0);
+		return selectDagboek("SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = " +dagboek_id).get(0);
 	}
 }

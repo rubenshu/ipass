@@ -1,7 +1,5 @@
 package voedseldagboek.dagboek.services;
-
 import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -9,45 +7,34 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
+import javax.ws.rs.QueryParam;
+import voedseldagboek.dagboek.domain.Dagboek;
 import voedseldagboek.dagboek.domain.Ingredient;
 import voedseldagboek.dagboek.domain.IngredientService;
 import voedseldagboek.dagboek.domain.ServiceProvider;
 
-@Path("/ingredients")
+@Path("/loadingredients")
 public class IngredientResource {
 	
 	@GET
-	@RolesAllowed({ "user" })
+	@RolesAllowed("user")
 	@Produces("application/json")
-	public String getIngredients() {
+	public String getToday(
+			@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum){
 		IngredientService service = ServiceProvider.getIngredientService();
-		JsonArray ingredientArray = buildJsonIngredientArray(service.getAllIngredients());
-		
+		JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));
 		return ingredientArray.toString();
-	}
-	
-	//@GET
-	//@RolesAllowed("user")
-	//@Path("/loadingredients")
-	//@Produces("application/json")
-	//public String getToday(@PathParam("gebruikersnaam") String gebruikersnaam, @PathParam("datum") String datum){
-		//IngredientService service = ServiceProvider.getIngredientService();
-		//JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));		
-	//	return ingredientArray.toString();
-			//}
-	
-	
-	
+	}	
 
-	private JsonArray buildJsonIngredientArray(List<Ingredient> ingredients) {
+	private JsonArray buildJsonIngredientArray(List<Dagboek> list) {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 		
-		for (Ingredient c : ingredients) {
+		for (Dagboek d : list) {
+			Ingredient c = d.getIngredient();
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("ingredientnaam", c.getIngredientnaam());
+			job.add("hoeveelheid", d.getHoeveelheid());
 			job.add("calorieen", c.getCalorieen());
 			job.add("vet", c.getVet());
 			job.add("verzadigd_vet", c.getVerzadigd_vet());
@@ -58,7 +45,7 @@ public class IngredientResource {
 			
 			jsonArrayBuilder.add(job);
 		}
-		System.out.println(jsonArrayBuilder.build());
-		return jsonArrayBuilder.build();
+		JsonArray c = jsonArrayBuilder.build();
+		return c;
 	}
 }
