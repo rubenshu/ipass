@@ -15,7 +15,7 @@ import voedseldagboek.dagboek.domain.Ingredient;
 import voedseldagboek.dagboek.domain.IngredientService;
 import voedseldagboek.dagboek.domain.ServiceProvider;
 
-@Path("/loadingredients")
+@Path("/ingredients")
 public class DagboekResource {
 
 	@GET
@@ -35,6 +35,17 @@ public class DagboekResource {
 		IngredientService service = ServiceProvider.getIngredientService();
 		JsonArray ingredientArray = buildJsonAllIngredientArray(service.getAll());
 		return ingredientArray.toString();
+	}
+	
+	@GET
+	@Path("/all")
+	@RolesAllowed("user")
+	@Produces("application/json")
+	public void insertIngredient(@QueryParam("Q1") int hoeveelheid, @QueryParam("Q2") String datum,@QueryParam("Q3") String ingredientnaam , @QueryParam("Q4") String gebruikersnaam) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		service.insertIngredient(hoeveelheid, datum, ingredientnaam, gebruikersnaam);
+		//JsonArray ingredientArray = buildJsonAllIngredientArray(service.getAll());
+		//return ingredientArray.toString();
 	}
 	
 	private JsonArray buildJsonAllIngredientArray(List<Ingredient> list) {

@@ -16,4 +16,8 @@ public class IngredientService {
 	public List<Dagboek> getToday(String gebruikersnaam, String datum) {
 		return dagboekDAO.findToday(gebruikersnaam, datum);
 	}
+
+	public void insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
+		dagboekDAO.insertIngredient(hoeveelheid, datum, ingredientnaam, gebruikersnaam);
+	}
 }

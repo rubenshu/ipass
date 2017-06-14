@@ -18,7 +18,7 @@ $(document).ready(function () {
 function loadIngredients(selected) {	
 	var username = window.sessionStorage.getItem("huidigeGebruiker");
 	var datum = document.getElementById("datepicker").value;
-	var url = "restservices/loadingredients?Q1=" + username + "&Q2=" + datum;
+	var url = "restservices/ingredients?Q1=" + username + "&Q2=" + datum;
 		$.ajax({
 			url : url,
 			method : "GET",
@@ -61,7 +61,11 @@ function loadAllIngredients(){
 }
 
 function InsertIngredient(){
-	var url = "restservices/loadingredients/insert";
+	var hoeveelheid = inputBoxGram = document.getElementById('gram').value;
+	var datum = document.getElementById("datepicker").value;
+	var ingredientnaam = document.getElementById('ingredient').value;
+	var username = window.sessionStorage.getItem("huidigeGebruiker");
+	var url = "restservices/ingredients?Q1=" + username + "&Q2=" + datum;
 		$.ajax({
 			url : url,
 			method : "GET",
