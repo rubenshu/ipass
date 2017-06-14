@@ -1,11 +1,13 @@
 //Inladen ingrediënten
 $(document).ready(function () {
 	loadIngredients();
+	
+	$("#datepicker").datepicker({
+		  onSelect: function(dateText) {
+		    loadIngredients();
+		  }
+		});
 });
-
-$( "#datepicker" ).click(function() {
-	  loadIngredients();
-	});
 
 // Load ingredients from JSON test file
 function loadIngredients() {	
