@@ -9,7 +9,7 @@ public class IngredientService {
 	private IngredientDAO ingredientDAO = new IngredientDAO();
 	private DagboekDAO dagboekDAO = new DagboekDAO();
 	
-	public List<Ingredient> getAllIngredients() {
+	public List<Ingredient> getAll() {
 		return ingredientDAO.findAll();
 	}
 	

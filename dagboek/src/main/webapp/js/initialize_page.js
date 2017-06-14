@@ -43,8 +43,7 @@ function totals(macro, i) {
 	var total = 0.0;
 	$('#table td:nth-child(' + i + '):not(:last)').each(function() {
 		currentFloat = parseFloat($(this).text());
-		console.log(currentFloat);
 		total += currentFloat;
 	});
-	document.getElementById(macro).innerHTML = total;
+	document.getElementById(macro).innerHTML = total.toFixed(1);
 }
