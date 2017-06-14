@@ -54,30 +54,53 @@ public class DagboekDAO extends BaseDAO {
 
 	public List<Dagboek> findToday(String huidigeGebruiker, String datum) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"
-						+ huidigeGebruiker + "' AND datum = '" + datum + "'");
+				"SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"+ huidigeGebruiker + "' AND datum = '" + datum + "'");
 	}
 
 	public Dagboek findById(int dagboek_id) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "
-						+ dagboek_id).get(0);
+				"SELECT dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "+ dagboek_id).get(0);
 	}
 
 	public void insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
+		String query = "select max(dagboek_id) from dagboek";
+		
 		try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
-			ResultSet nextId = stmt.executeQuery("SELECT MAX(dagboek_id) FROM dagboek");
-			int maxId = nextId.getInt("dagboek_id") + 1;
+			ResultSet dbResultSet = stmt.executeQuery(query);
+		    dbResultSet.next();
+		    int maxId = dbResultSet.getInt(1) + 1;
+			stmt.executeQuery("insert into dagboek(dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
 			
-			stmt.executeQuery("insert into dagboek(dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam) "
-					+ "values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
-
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		//return true;
-
 	}
+
+	public void deleteIngredient(String ingredientnaam, String datum, String gebruikersnaam) {
+				String query = "DELETE FROM dagboek WHERE fk_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
+						
+				try (Connection con = getConnection()) {
+					
+					Statement stmt = con.createStatement();
+					stmt.executeUpdate(query);
+							
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+	}
+	
+	public void updateIngredient(String ingredientnaam, String datum, String gebruikersnaam, int hoeveelheid) {
+		String query = "UPDATE dagboek SET hoeveelheid = '"+hoeveelheid+"' WHERE fk_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
+				
+		try (Connection con = getConnection()) {
+			
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(query);
+					
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+}
 
 }

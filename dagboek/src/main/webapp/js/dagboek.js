@@ -29,9 +29,11 @@ function loadIngredients(selected) {
 			success : function(data) {
 				$(".table").find("tr:gt(0):not(:last)").remove();
 				 $(data).each(function (index) {
-					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid"><input class="gramtxt" type="text" value="'+this.hoeveelheid+'" name="gramtxt" id="gramtxt"></td><td class="subtotaal">'+this[selected]+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
+					 var subtotaal = (this.hoeveelheid * this[selected]) / 100;
+					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
 					});
 				 loadTotals();
+				 ingredienten = [];
 				 loadAllIngredients();
 			},
 			error: function(xhr){
@@ -43,7 +45,7 @@ function loadIngredients(selected) {
 
 
 function loadAllIngredients(){
-	var url = "restservices/loadingredients/all";
+	var url = "restservices/ingredients/all";
 		$.ajax({
 			url : url,
 			method : "GET",
@@ -60,12 +62,10 @@ function loadAllIngredients(){
 	return ingredienten;
 }
 
-function InsertIngredient(){
-	var hoeveelheid = inputBoxGram = document.getElementById('gram').value;
+function insertIngredient(ingredientnaam, hoeveelheid){
 	var datum = document.getElementById("datepicker").value;
-	var ingredientnaam = document.getElementById('ingredient').value;
 	var username = window.sessionStorage.getItem("huidigeGebruiker");
-	var url = "restservices/ingredients?Q1=" + username + "&Q2=" + datum;
+	var url = "restservices/ingredients/insert?Q1=" + hoeveelheid + "&Q2=" + datum + "&Q3=" + ingredientnaam + "&Q4=" + username;
 		$.ajax({
 			url : url,
 			method : "GET",
@@ -74,13 +74,76 @@ function InsertIngredient(){
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
-				console.log("Succes");
+				var e = document.getElementById("macro-optie");
+				var selected = e.options[e.selectedIndex].value;
+				 $(data).each(function (index) {
+					 var subtotaal = (this.hoeveelheid * this[selected]) / 100;
+					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
+					});
+				loadTotals();
 			},
 			fail : function() {
 				console.log("Failed");
 			},
 		});
 }
+
+function deleteIngredient(ingredientnaam){
+	var datum = document.getElementById("datepicker").value;
+	var username = window.sessionStorage.getItem("huidigeGebruiker");
+	var url = "restservices/ingredients/delete?&Q1=" + ingredientnaam + "&Q2=" + datum + "&Q3=" + username;
+	$.ajax({
+		url : url,
+		method : "GET",
+		beforeSend : function(xhr) {
+			var token = window.sessionStorage.getItem("sessionToken");
+			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+		},
+		success : function(data) {
+			console.log("Succes");
+			$(".table td:contains("+ingredientnaam+")").parent().remove();
+			loadTotals();
+		},
+		fail : function() {
+			console.log("Failed");
+		},
+	});
+}
+
+function updateIngredient(ingredientnaam){
+	var datum = document.getElementById("datepicker").value;
+	var username = window.sessionStorage.getItem("huidigeGebruiker");
+	var url = "restservices/ingredients/update?&Q1=" + ingredientnaam + "&Q2=" + datum + "&Q3=" + username;
+	$.ajax({
+		url : url,
+		method : "GET",
+		beforeSend : function(xhr) {
+			var token = window.sessionStorage.getItem("sessionToken");
+			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+		},
+		success : function(data) {
+			console.log("Succes");
+			//$(".table td:contains("+ingredientnaam+")").parent().remove();
+			loadTotals();
+		},
+		fail : function() {
+			console.log("Failed");
+		},
+	});
+}
+
+//Onchange hoeveelheid
+$('#gramtext').bind('input', function() { 
+	console.log("Y");
+	var hoeveelheid = $(this).val();
+	console.log(hoeveelheid);
+});
+
+//Onclick remove ingredient
+    $('.table tbody').on( 'click', '.removeingredient', function () {
+        var ingredientnaam = $(this).parent().find('td').html().trim();
+        deleteIngredient(ingredientnaam);
+    });
 
 //Vars for below functions
 var inputBox = document.getElementById('ingredient');
@@ -134,8 +197,9 @@ $("#autocomplete").hover(function(){
 
 // Snelkiezer
 $(document).ready(function() {
-  var recent = ["Appel", "Aardbei", "Aardappelen", "Banaan", "Bananen", "Banana", "Druif"];
   $("#recent, #recentcomplete").hover(function() {
+		var recentstring = localStorage.getItem("laatsteIngredienten");
+		var recent = JSON.parse(recentstring);
     $("#recentcomplete").empty();
     document.getElementById("recentcomplete").style.display = "block";
     recent.forEach(function(item) {
@@ -152,22 +216,29 @@ $(document).ready(function() {
 
 });
 
+var laatsteIngredienten = JSON.parse(localStorage.getItem('laatsteIngredienten')) || [];
 // Voeg toe
 $(document).ready(function() {
   $(document).on('click', '#voegtoe', function() {
-  if(/^[a-z]+$/i.test(inputBox.value) && inputBoxGram.value.length > 0){
-	  //insertIngredient();
-  $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+inputBox.value+'</td><td class="hoeveelheid"><input class="gramtxt" type="text" value="'+inputBoxGram.value+'" name="gramtxt" id="gramtxt"></td><td class="subtotaal">100</td><td class="removeingredient"><a href="#"><i class="fa fa-times text-red"></i></a></td></tr>');
-  totals("totaal", 3);
+  if(/^[a-z]+$/i.test(inputBox.value) && inputBoxGram.value.length > 0 && ingredienten.includes(inputBox.value)){
+	  // If ingredient al in de list: update hoeveelheid. Else: insert
+	  if ( $('#table tr > td:contains('+inputBox.Value+')')   ){
+		  console.log("Ingredient al in de lijst. Update")
+	  }
+	  else{
+		  insertIngredient(inputBox.value, inputBoxGram.value);
+	  }
+	  if (laatsteIngredienten.length > 9){
+		  laatsteIngredienten.pop();
+	  }
+	  laatsteIngredienten.splice(0,0, inputBox.value);
+	  window.localStorage.setItem("laatsteIngredienten", JSON.stringify(laatsteIngredienten));
   }
   else{alert('Foutieve waardes. Controleer');}
 });
 });
-//Onchange hoeveelheid
-$('#gramtext').bind('input', function() { 
-	console.log("Changed: " + $(this).val())
-});
 
+//Onchange dropdown selection
 $("#macro-optie").on('change', function() {
     var optionSelected = $("option:selected", this);
     var valueSelected = this.value;
