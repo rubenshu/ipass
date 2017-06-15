@@ -61,13 +61,13 @@ function loadMacro() {
 				totalKh = totalKh.toFixed(1);
 				totalVezels = totalVezels.toFixed(1);
 				totalZout = totalZout.toFixed(1);
-				onderhoud = onderhoud.toFixed(1);
+				onderhoud = onderhoud.toFixed(0);
 				kcalKh = totalKh * 4;
 				kcalEiwit = totalEiwit * 4;
 				kcalVet = totalVet * 10;
 				kcalTotal = kcalKh + kcalEiwit + kcalVet;
 				pKh = (kcalTotal / kcalKh).toFixed(0);
-				pVv = totalVv / totalVet;
+				pVv = (totalVv / totalVet).toFixed(0);
 				pEiwit = (kcalTotal / kcalEiwit).toFixed(0);
 				pVet = (kcalTotal / kcalVet).toFixed(0);
 				pVezels = (totalVezels / totalCal * 1000).toFixed(1);
@@ -84,14 +84,12 @@ function loadMacro() {
 					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt ligt tussen de richtlijn ('+minCal+'-'+maxCal+'kcal).';
 				}
 				else if (totalCal < minCal){
-					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is minder dan de richtlijn ('+onderhoud+'kcal).';
+					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is ('+(onderhoud-totalCal)+'kcal) minder dan de richtlijn ('+onderhoud+'kcal).';
 				}
 				else {
-					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is meer dan de richtlijn ('+onderhoud+'kcal).';
+					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is ('+(totalCal-onderhoud)+'kcal) meer dan de richtlijn ('+onderhoud+'kcal).';
 				}
 				
-				CalStr += ' Deze richtlijn geldt voor mensen van jouw leeftijd, geslacht en leefstijl. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht.</p>';
-				document.getElementById('advies').innerHTML = CalStr;
 				
 				// VET
 				if (pVet >= 25 & pVet <= 35){
@@ -103,50 +101,42 @@ function loadMacro() {
 				else {
 					VetStr += '<p class="macro" id="vet">Vet: '+totalVet+'g - '+pVet+'%</p><p class="advies">Je voeding bevat te veel vet (meer dan 35%).';
 				}
-				VetStr += "Vetten geven je lichaam energie.";
-				document.getElementById('advies').innerHTML += VetStr;
+				
 				
 				//Verzadigd Vet
 				if (pVv >= 25 & pVv <= 50){
 					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv+'g - '+pVv+'%</p><p class="advies">Je voeding bevat genoeg verzadigd vet (tussen de 25-50%).';
 				}
 				else if (pVv < 25){
-					VvStr += '<p class="macro" id="verzadigd_vet"Verzadigd vet: '+totalVv+'g - '+pVv+'%</p><p class="advies">Je voeding bevat niet genoeg verzadigd vet (minder dan 25%).';
+					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv+'g - '+pVv+'%</p><p class="advies">Je voeding bevat niet genoeg verzadigd vet (minder dan 25%).';
 				}
 				else {
 					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv+'g - '+pVv+'%</p><p class="advies">Je voeding bevat te veel verzadigd vet (meer dan 50%).';
 				}
 				
-				VvStr += ' Deze richtlijn geldt voor mensen van jouw leeftijd, geslacht en leefstijl. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht.</p>';
-				document.getElementById('advies').innerHTML += VvStr;
 				
 				//Eiwit
 				if (pEiwit >= 30 & pEiwit <= 40){
-					EitwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat genoeg eiwit (tussen de 30-40%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat genoeg eiwit (tussen de 30-40%).';
 				}
 				else if (pEiwit < 30){
-					EitwitStr += '<p class="macro" id="eiwit"Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat niet genoeg eiwit (minder dan 30%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat niet genoeg eiwit (minder dan 30%).';
 				}
 				else {
-					EitwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat te veel eiwit (meer dan 40%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat te veel eiwit (meer dan 40%).';
 				}
 				
-				EitwitStr += ' Eiwit</p>';
-				document.getElementById('advies').innerHTML += EitwitStr;
 				
 				//Koolhydraten
 				if (pKh >= 30 & pKh <= 40){
 					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat genoeg koolhydraten (tussen de 30-40%).';
 				}
 				else if (pKh < 30){
-					KhStr += '<p class="macro" id="koolhydraten"Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat niet genoeg koolhydraten (minder dan 30%).';
+					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat niet genoeg koolhydraten (minder dan 30%).';
 				}
 				else {
 					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat te veel koolhydraten (meer dan 40%).';
 				}
-				
-				KhStr += ' Koolhydraten</p>';
-				document.getElementById('advies').innerHTML += KhStr;
 				
 				//Vezels
 				if (pVezels >= 9.6){
@@ -156,22 +146,19 @@ function loadMacro() {
 					VezelsStr += '<p class="macro" id="vezels">Vezels: '+totalVezels+'g - '+pVezels+'g/1000kcal</p><p class="advies">Je voeding bevat niet genoeg vezels (minder dan 9.g per 1000kcal).';
 				}
 				
-				VezelsStr += ' Vezels</p>';
-				document.getElementById('advies').innerHTML += VezelsStr;
 				
 				//Zout
 				if (totalZout >= 3.8 & pKh <= 6){
 					ZoutStr += '<p class="macro" id="zout">Zout: '+totalZout+'g</p><p class="advies">Je voeding bevat genoeg zout (tussen de 3.8-6g).';
 				}
 				else if (totalZout < 3.8){
-					ZoutStr += '<p class="macro" id="zout"Zout: '+totalZout+'g</p><p class="advies">Je voeding bevar niet genoeg zout (minder dan 3.8g).';
+					ZoutStr += '<p class="macro" id="zout">Zout: '+totalZout+'g</p><p class="advies">Je voeding bevar niet genoeg zout (minder dan 3.8g).';
 				}
 				else {
 					ZoutStr += '<p class="macro" id="zout">Zout: '+totalZout+'g</p><p class="advies">Je voeding bevat te veel zout (meer dan 6g).';
 				}
 				
-				ZoutStr += ' Zout</p>';
-				document.getElementById('advies').innerHTML += ZoutStr;
+				document.getElementById('advies').innerHTML = CalStr + VetStr + VvStr + EiwitStr + KhStr + VezelsStr + ZoutStr;
 			},
 		});
 }
