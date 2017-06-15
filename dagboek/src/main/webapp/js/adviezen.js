@@ -56,6 +56,7 @@ function loadMacro(getData) {
 				 var totalKh=0;
 				 var totalVezels=0;
 				 var totalZout=0;
+				 var totalList = [];
 				$(data).each(function (index) {
 					 totalCal = (this.hoeveelheid * this.calorieen) / 100;
 					 totalVet = (this.hoeveelheid * this.vet) / 100;
@@ -64,36 +65,32 @@ function loadMacro(getData) {
 					 totalKh = (this.hoeveelheid * this.koolhydraten) / 100;
 					 totalVezels = (this.hoeveelheid * this.vezels) / 100;
 					 totalZout = (this.hoeveelheid * this.zout) / 100;
+					 totalList.push(totalCal, totalVet, totalVv, totalEiwit, totalKh, totalVezels, totalZout);
 					});
-				getData(totalCal);
+				getData(totalList);
 			},
 		});
 		
 }
 
-function getData(data, dataa)
+var onderhoud, macro;
+function getData(data)
 {
-    var onderhoud = data;
-    var macro = dataa;
-    console.log(onderhoud, macro);
+    onderhoud = data;
+}
+function getData2(data)
+{
+    macro = data;
 }
 loadOnderhoud(getData);
-loadMacro(getData);
+loadMacro(getData2);
+console.log (onderhoud, macro);
 
 function setAdviezen(){
 	var cal = 1800;
 	var onderhoud = 2200;
-	
+	$(".advies").append('<li><a href="#" class="item">' + item + '</a></li>');
 	if (onderhoud > 2000 && onderhoud < 2400){
-		<p class="macro" id="energie">Energie: 2200 kcal</p>
-		<p class="advies" "energie">De hoeveelheid energie die je uit je voeding
-			haalt (774 kcal) is minder dan de richtlijn (2700kcal). Deze
-			richtlijn geldt voor mensen van jouw leeftijd en geslacht die een
-			niet zo actieve leefstijl hebben. Deze richtlijn zegt iets over je
-			energiebehoefte, dus over hoeveel je op een dag zou moeten eten en
-			drinken. Energiebehoefte is ook afhankelijk van je gewicht. Wil je
-			de ontwikkeling van je gewicht in de gaten houden, vul je gewicht
-			regelmatig in en kijk in de grafiek.</p>
 	}
 	
 }
