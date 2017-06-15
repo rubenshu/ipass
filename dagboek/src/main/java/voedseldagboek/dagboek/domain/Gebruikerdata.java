@@ -2,6 +2,8 @@ package voedseldagboek.dagboek.domain;
 
 import java.util.Date;
 
+import javax.json.JsonValue;
+
 public class Gebruikerdata extends Gebruikerlogin{
 	// VARIABLES
 	private Gebruikerlogin gebruikerlogin;
@@ -12,9 +14,10 @@ public class Gebruikerdata extends Gebruikerlogin{
 	private double lengte;
 	private double gewicht;
 	private String geslacht;
+	private double activiteit;
 
 	// CONSTRUCTOR
-	public Gebruikerdata(String voornaam, String achternaam, Date geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht) {
+	public Gebruikerdata(String voornaam, String achternaam, Date geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht, double activiteit) {
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
 		this.geboortedatum = geboortedatum;
@@ -22,9 +25,10 @@ public class Gebruikerdata extends Gebruikerlogin{
 		this.lengte = lengte;
 		this.gewicht = gewicht;
 		this.geslacht = geslacht;
+		this.activiteit = activiteit;
 	}
 	
-	public Gebruikerdata(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam, Date geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht) {
+	public Gebruikerdata(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam, Date geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht, double activiteit) {
 		super(gebruikersnaam, wachtwoord, emailadres);
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
@@ -33,6 +37,7 @@ public class Gebruikerdata extends Gebruikerlogin{
 		this.lengte = lengte;
 		this.gewicht = gewicht;
 		this.geslacht = geslacht;
+		this.activiteit = activiteit;
 	}
 	
 
@@ -46,6 +51,7 @@ public class Gebruikerdata extends Gebruikerlogin{
 	public double getLengte() {return lengte;}
 	public double getGewicht() {return gewicht;}
 	public String getGeslacht() {return geslacht;}
+	public double getActiviteit() {return activiteit;}
 
 	// SETTERS
 	public void setGebruikerlogin(Gebruikerlogin gebruikerlogin) {this.gebruikerlogin = gebruikerlogin;}
@@ -55,5 +61,6 @@ public class Gebruikerdata extends Gebruikerlogin{
 	public void setlengte(double lengte) {this.lengte = lengte;}
 	public void setgewicht(double gewicht) {this.gewicht = gewicht;}
 	public void setgeslacht(String geslacht) {this.geslacht = geslacht;}
+	public void setActiviteit(double activiteit) {this.activiteit = activiteit;}
 
 }

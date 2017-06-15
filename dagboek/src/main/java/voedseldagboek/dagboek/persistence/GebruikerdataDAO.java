@@ -29,11 +29,12 @@ public class GebruikerdataDAO extends BaseDAO {
 				double lengte = dbResultSet.getDouble("lengte");
 				double gewicht = dbResultSet.getDouble("gewicht");
 				String geslacht = dbResultSet.getString("geslacht");
+				double activiteit = dbResultSet.getDouble("activiteit");
 				
 				String gebruikersnaam = dbResultSet.getString("FK_gebruikersnaam");
 				Gebruikerlogin gebruikerlogin = gebruikerloginDAO.findByString(gebruikersnaam);
 				
-				Gebruikerdata newGebruikerdata = new Gebruikerdata(voornaam, achternaam, geboortedatum, leeftijd, lengte, gewicht, geslacht);
+				Gebruikerdata newGebruikerdata = new Gebruikerdata(voornaam, achternaam, geboortedatum, leeftijd, lengte, gewicht, geslacht, activiteit);
 				newGebruikerdata.setGebruikerlogin(gebruikerlogin);
 				
 				results.add(newGebruikerdata);
@@ -54,6 +55,6 @@ public class GebruikerdataDAO extends BaseDAO {
 	//}
 	
 	public Gebruikerdata findByString(String gebruikersnaam) {
-		return selectGebruikerdata("SELECT voornaam, achternaam, geboortedatum, leeftijd, lengte, gewicht, geslacht, FK_gebruikersnaam from gebruikerdata WHERE FK_gebruikersnaam = " +gebruikersnaam).get(0);
+		return selectGebruikerdata("SELECT voornaam, achternaam, geboortedatum, leeftijd, lengte, gewicht, geslacht, FK_gebruikersnaam, activiteit from gebruikerdata WHERE FK_gebruikersnaam = '"+gebruikersnaam+"'").get(0);
 	}
 }

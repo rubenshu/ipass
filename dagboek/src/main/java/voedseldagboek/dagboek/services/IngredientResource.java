@@ -17,7 +17,7 @@ import voedseldagboek.dagboek.domain.IngredientService;
 import voedseldagboek.dagboek.domain.ServiceProvider;
 
 @Path("/ingredients")
-public class DagboekResource {
+public class IngredientResource {
 
 	@GET
 	//@RolesAllowed("user")

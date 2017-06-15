@@ -33,10 +33,11 @@ public class GebruikerResource {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
 			JsonObjectBuilder job = Json.createObjectBuilder();
-			job.add("ingredientnaam", c.getGeslacht());
-			job.add("calorieen", c.getGewicht());
-			job.add("vet", c.getLeeftijd());
-			job.add("verzadigd_vet", c.getLengte());
+			job.add("geslacht", c.getGeslacht());
+			job.add("gewicht", c.getGewicht());
+			job.add("leeftijd", c.getLeeftijd());
+			job.add("lengte", c.getLengte());
+			job.add("activiteit", c.getActiviteit());
 
 			jsonArrayBuilder.add(job);
 		
