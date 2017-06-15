@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import voedseldagboek.dagboek.domain.Dagboek;
+import voedseldagboek.dagboek.domain.GebruikerService;
+import voedseldagboek.dagboek.domain.Gebruikerdata;
 import voedseldagboek.dagboek.domain.Ingredient;
 import voedseldagboek.dagboek.domain.IngredientService;
 import voedseldagboek.dagboek.domain.ServiceProvider;
@@ -26,6 +28,20 @@ public class IngredientResource {
 		IngredientService service = ServiceProvider.getIngredientService();
 		JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));
 		return ingredientArray.toString();
+	}
+	
+	@GET
+	@Path("/gebruiker")
+	//@RolesAllowed("user")
+	@Produces("application/json")
+	public String getTodayGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));
+		
+		GebruikerService service2 = ServiceProvider.getGebruikerService();
+		JsonArray gebruikerArray = buildJsonGebruikerArray(service2.getGebruikerdata(gebruikersnaam));
+		
+		return ingredientArray.toString() + gebruikerArray.toString();
 	}
 
 	@GET
@@ -64,6 +80,22 @@ public class IngredientResource {
 	public void updateIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam, @QueryParam("Q4") int hoeveelheid){
 		IngredientService service = ServiceProvider.getIngredientService();
 		service.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
+	}
+	
+	private JsonArray buildJsonGebruikerArray(Gebruikerdata c) {
+		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("geslacht", c.getGeslacht());
+			job.add("gewicht", c.getGewicht());
+			job.add("leeftijd", c.getLeeftijd());
+			job.add("lengte", c.getLengte());
+			job.add("activiteit", c.getActiviteit());
+
+			jsonArrayBuilder.add(job);
+		
+		JsonArray d = jsonArrayBuilder.build();
+		return d;
 	}
 	
 	private JsonArray buildJsonSingleIngredientArray(Ingredient c, int hoeveelheid) {
