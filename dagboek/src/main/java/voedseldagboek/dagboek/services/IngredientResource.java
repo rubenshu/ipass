@@ -36,12 +36,11 @@ public class IngredientResource {
 	@Produces("application/json")
 	public String getTodayGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
 		IngredientService service = ServiceProvider.getIngredientService();
-		JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));
-		
 		GebruikerService service2 = ServiceProvider.getGebruikerService();
-		JsonArray gebruikerArray = buildJsonGebruikerArray(service2.getGebruikerdata(gebruikersnaam));
 		
-		return ingredientArray.toString() + gebruikerArray.toString();
+		JsonArray ingredientGebruikerArray = buildJsonIngredientGebruikerArray(service.getToday(gebruikersnaam, datum), service2.getGebruikerdata(gebruikersnaam));
+		
+		return ingredientGebruikerArray.toString();
 	}
 
 	@GET
@@ -82,7 +81,7 @@ public class IngredientResource {
 		service.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
 	}
 	
-	private JsonArray buildJsonGebruikerArray(Gebruikerdata c) {
+	private JsonArray buildJsonIngredientGebruikerArray(List<Dagboek> list, Gebruikerdata c) {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
 			JsonObjectBuilder job = Json.createObjectBuilder();
@@ -91,8 +90,21 @@ public class IngredientResource {
 			job.add("leeftijd", c.getLeeftijd());
 			job.add("lengte", c.getLengte());
 			job.add("activiteit", c.getActiviteit());
-
 			jsonArrayBuilder.add(job);
+			
+			for (Dagboek d : list) {
+				Ingredient i = d.getIngredient();
+				job.add("ingredientnaam", i.getIngredientnaam());
+				job.add("hoeveelheid", d.getHoeveelheid());
+				job.add("calorieen", i.getCalorieen());
+				job.add("vet", i.getVet());
+				job.add("verzadigd_vet", i.getVerzadigd_vet());
+				job.add("eiwit", i.getEiwit());
+				job.add("koolhydraten", i.getKoolhydraten());
+				job.add("vezels", i.getVezels());
+				job.add("zout", i.getZout());
+				jsonArrayBuilder.add(job);
+			}
 		
 		JsonArray d = jsonArrayBuilder.build();
 		return d;

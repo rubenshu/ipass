@@ -32,7 +32,7 @@ function loadIngredients() {
 					 var subkh = (this.hoeveelheid * this.koolhydraten) / 100;
 					 var subvezels = (this.hoeveelheid * this.vezels) / 100;
 					 var subzout = (this.hoeveelheid * this.zout) / 100;
-					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">' + this.ingredientnaam + '</td><td class="hoeveelheid">' + this.hoeveelheid + '</td><td class="energie">' + subcal.toFixed(1) + '</td><td class="vet">' + subvet.toFixed(1) + '</td><td class="verzagigd-vet">' + subvv.toFixed(1) + '</td><td class="eiwit">' + subeiwit + '</td><td class="koolhydraten">' + subkh.toFixed(1) + '</td><td class="vezels">' + subvezels.toFixed(1) + '</td><td class="zout">' + subzout.toFixed(1) + '</td></tr>');
+					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">' + this.ingredientnaam + '</td><td class="hoeveelheid">' + this.hoeveelheid + '</td><td class="energie">' + subcal.toFixed(1) + '</td><td class="vet">' + subvet.toFixed(1) + '</td><td class="verzagigd-vet">' + subvv.toFixed(1) + '</td><td class="eiwit">' + subeiwit.toFixed(1) + '</td><td class="koolhydraten">' + subkh.toFixed(1) + '</td><td class="vezels">' + subvezels.toFixed(1) + '</td><td class="zout">' + subzout.toFixed(1) + '</td></tr>');
 					});
 				 loadTotals();
 			},
