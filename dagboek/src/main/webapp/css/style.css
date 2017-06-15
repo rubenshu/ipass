@@ -61,8 +61,8 @@ button:hover {opacity: 0.8;}
 .tabledagboek .subtotaal{	text-align:right;}
 .tabledagboek .totaal{	font-weight:900;	border-top: 1px solid #707173;	text-align:right;}
 .tabledagboek .removeingredient{	width:5%;}
-#autocomplete{	position: absolute;	border: 2px solid #f44336;	background: #fff;	display: none;	overflow: auto;	overflow-x: hidden;	margin: 0 0 5px 0;	padding: 0;	list-style-type: none;	z-index: 1000;}
-#recentcomplete{	position: absolute;	border: 2px solid #f44336;	background: #fff;	display: none;	overflow: auto;	overflow-x: hidden;	margin: 0 0 5px 0;	padding: 0;	list-style-type: none;	z-index: 999;}
+#autocomplete{	position: fixed;	border: 2px solid #f44336;	background: #fff;	display: none;	overflow: auto;	overflow-x: hidden;	margin: 0 0 5px 0;	padding: 0;	list-style-type: none;	z-index: 1000;}
+#recentcomplete{	position: fixed;	border: 2px solid #f44336;	background: #fff;	display: none;	overflow: auto;	overflow-x: hidden;	margin: 0 0 5px 0;	padding: 0;	list-style-type: none;	z-index: 999;}
 @media (max-width:655px){
 	.column{float:none !important;width:100% !important;}
 	.column .quarter{max-width:150px;width:100%;margin:0 auto;}

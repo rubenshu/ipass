@@ -76,7 +76,16 @@ body, h1, h2, h3, h4, h5, h6 {
 			</div>
 
 			<div class="column threequarter dagboektable">
-			<div class="container bodyheader"><button type="submit" name="recent" id="recent" style="max-width: 150px;">snelkiezer</button><input type="text" style="max-width: 150px;" placeholder="IngrediÃ«nt" name="ingedient" id="ingredient"><input type="number" style="max-width: 150px;" placeholder="Gram" name="gram" id="gram"><button type="submit" style="max-width: 150px;" name="voegtoe" id="voegtoe">voeg toe</button></div><div class="dagboek"><table class="table tabledagboek" id="table">
+			<div class="container bodyheader"><button type="submit" name="recent" id="recent" style="max-width: 150px;">snelkiezer</button>
+				<ul id="recentcomplete"
+		style="position: fixed; margin-top:-5px !important; width:inherit; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none;">
+	</ul>
+			<input type="text" style="max-width: 150px;" placeholder="IngrediÃ«nt" name="ingedient" id="ingredient">
+				<ul id="autocomplete"
+		style="position: fixed;     margin-top: -5px !important;
+    margin-left: 81px !important;width:inherit; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; ">
+	</ul>
+			<input type="number" style="max-width: 150px;" placeholder="Gram" name="gram" id="gram"><button type="submit" style="max-width: 150px;" name="voegtoe" id="voegtoe">voeg toe</button></div><div class="dagboek"><table class="table tabledagboek" id="table">
 			<tr><th class="ingredient">Ingrediënt</th>	<th class="hoeveelheid">Hoeveelheid</th><th><select name="macro-optie" id="macro-optie"><option value="calorieen">Energie</option><option value="vet">Vet</option><option value="verzadigd_vet">Verzagigd vet</option>	<option value="eiwit">Eiwit</option><option value="koolhydraten">Koolhydraten</option><option value="vezels">Vezels</option><option value="zout">Zout</option></select><th></th></tr><tr><td class="ingredient"></td><td class="hoeveelheid"></td><td class="totaal" id="totaal"></td><td class="removeingredient"></td></tr>
 			</table></div>
 				</div>
@@ -90,13 +99,5 @@ body, h1, h2, h3, h4, h5, h6 {
 	<script>
 		setDate()
 	</script>
-
-	<ul id="autocomplete"
-		style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto; left: 806px; top: 251px;">
-	</ul>
-
-	<ul id="recentcomplete"
-		style="position: absolute; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; width: 271px; height: auto; left: 716px; top: 251px;">
-	</ul>
 </body>
 </html>

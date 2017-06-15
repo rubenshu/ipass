@@ -1,13 +1,16 @@
-// Storing the ingredients
+// Storing the ingredients + setting the combobox
+var ingredientenVandaag = [];
 var ingredienten = [];
+var e = document.getElementById("macro-optie");
+var selected = e.options[e.selectedIndex].value;
 
 //Inladen ingrediënten
 $(document).ready(function () {
-	loadIngredients("calorieen");
+	loadIngredients(selected);
 	
 	$("#datepicker").datepicker({
 		  onSelect: function(dateText) {
-		    loadIngredients("calorieen");
+		    loadIngredients(selected);
 		  }
 		});
 	
@@ -28,12 +31,13 @@ function loadIngredients(selected) {
 			},
 			success : function(data) {
 				$(".table").find("tr:gt(0):not(:last)").remove();
+				ingredientenVandaag = [];
 				 $(data).each(function (index) {
+					 ingredientenVandaag.push(this.ingredientnaam);
 					 var subtotaal = (this.hoeveelheid * this[selected]) / 100;
-					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
+					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal.toFixed(1)+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
 					});
 				 loadTotals();
-				 ingredienten = [];
 				 loadAllIngredients();
 			},
 			error: function(xhr){
@@ -54,6 +58,7 @@ function loadAllIngredients(){
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				ingredienten = [];
 				$(data).each(function (index) {
 					 ingredienten.push(this.ingredientnaam);
 					 });
@@ -74,8 +79,7 @@ function insertIngredient(ingredientnaam, hoeveelheid){
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
-				var e = document.getElementById("macro-optie");
-				var selected = e.options[e.selectedIndex].value;
+				ingredientenVandaag.push(ingredientnaam);
 				 $(data).each(function (index) {
 					 var subtotaal = (this.hoeveelheid * this[selected]) / 100;
 					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
@@ -100,6 +104,10 @@ function deleteIngredient(ingredientnaam){
 			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 		},
 		success : function(data) {
+			console.log(ingredientenVandaag);
+			var index = ingredientenVandaag.indexOf(ingredientnaam);
+			ingredientenVandaag.splice(index, 1);
+			console.log(ingredientenVandaag);
 			console.log("Succes");
 			$(".table td:contains("+ingredientnaam+")").parent().remove();
 			loadTotals();
@@ -222,13 +230,13 @@ $(document).ready(function() {
   $(document).on('click', '#voegtoe', function() {
   if(/^[a-z]+$/i.test(inputBox.value) && inputBoxGram.value.length > 0 && ingredienten.includes(inputBox.value)){
 	  // If ingredient al in de list: update hoeveelheid. Else: insert
-	  if ( $('#table tr > td:contains('+inputBox.Value+')')   ){
-		  console.log("Ingredient al in de lijst. Update")
+	  if (ingredientenVandaag.includes(inputBox.value)){
+		  alert("Ingrediënt al in de lijst. Verwijder deze en voeg opnieuw toe.");
 	  }
 	  else{
 		  insertIngredient(inputBox.value, inputBoxGram.value);
 	  }
-	  if (laatsteIngredienten.length > 9){
+		  if (laatsteIngredienten.length > 9){
 		  laatsteIngredienten.pop();
 	  }
 	  laatsteIngredienten.splice(0,0, inputBox.value);
@@ -244,6 +252,14 @@ $("#macro-optie").on('change', function() {
     var valueSelected = this.value;
     loadIngredients(valueSelected);
 });
+
+//On resize, fix the two dropdown selection menu's postition's
+/*$(window).on('resize', function(){
+	var  width = $(window).width();
+	console.log(width + ' ... ' +left);
+	var left = width-500;
+	$('#autocomplete').css('left', left)
+});*/
 
 function loadTotals() {
 	totals("totaal", 3);

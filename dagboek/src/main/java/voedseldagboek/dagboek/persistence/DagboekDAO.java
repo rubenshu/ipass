@@ -70,7 +70,7 @@ public class DagboekDAO extends BaseDAO {
 			ResultSet dbResultSet = stmt.executeQuery(query);
 		    dbResultSet.next();
 		    int maxId = dbResultSet.getInt(1) + 1;
-			stmt.executeQuery("insert into dagboek(dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
+			stmt.execute("insert into dagboek(dagboek_id, hoeveelheid, datum, fk_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
 			
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
