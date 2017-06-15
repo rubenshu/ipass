@@ -2,7 +2,7 @@ package voedseldagboek.dagboek.domain;
 
 import java.util.Date;
 
-public class Gebruikerdata {
+public class Gebruikerdata extends Gebruikerlogin{
 	// VARIABLES
 	private Gebruikerlogin gebruikerlogin;
 	private String voornaam;
@@ -24,6 +24,19 @@ public class Gebruikerdata {
 		this.geslacht = geslacht;
 	}
 	
+	public Gebruikerdata(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam, Date geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht) {
+		super(gebruikersnaam, wachtwoord, emailadres);
+		this.voornaam = voornaam;
+		this.achternaam = achternaam;
+		this.geboortedatum = geboortedatum;
+		this.leeftijd = leeftijd;
+		this.lengte = lengte;
+		this.gewicht = gewicht;
+		this.geslacht = geslacht;
+	}
+	
+
+
 	// GETTERS
 	public Gebruikerlogin getGebruikerlogin() {return gebruikerlogin;}
 	public String getVoornaam() {return voornaam;}

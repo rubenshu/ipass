@@ -2,17 +2,20 @@ package voedseldagboek.dagboek.domain;
 
 public class Gebruikerlogin {
 	// VARIABLES
-	private String gebruikersnaam;
-	private String wachtwoord;
-	private String emailadres;
+	protected String gebruikersnaam;
+	protected String wachtwoord;
+	protected String emailadres;
 
 	// CONSTRUCTOR
+	public Gebruikerlogin(){
+	}
+	
 	public Gebruikerlogin(String gebruikersnaam, String wachtwoord, String emailadres) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.wachtwoord = wachtwoord;
 		this.emailadres = emailadres;
 	}
-	
+
 	// GETTERS
 	public String getGebruikersnaam() {return gebruikersnaam;}
 	public String getWachtwoord() {return wachtwoord;}
