@@ -1,18 +1,19 @@
 package voedseldagboek.dagboek.services;
 
 import java.util.List;
-//import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import voedseldagboek.dagboek.domain.Dagboek;
-import voedseldagboek.dagboek.domain.Gebruiker;
 import voedseldagboek.dagboek.domain.GebruikerService;
+import voedseldagboek.dagboek.domain.Gebruikerdata;
 import voedseldagboek.dagboek.domain.Ingredient;
 import voedseldagboek.dagboek.domain.IngredientService;
 import voedseldagboek.dagboek.domain.ServiceProvider;
@@ -89,13 +90,13 @@ public class IngredientResource {
 		service.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
 	}
 	
-	private JsonArray buildJsonIngredientGebruikerArray(List<Dagboek> list, Gebruiker c) {
+	private JsonArray buildJsonIngredientGebruikerArray(List<Dagboek> list, Gebruikerdata c) {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("geslacht", c.getGeslacht());
 			job.add("gewicht", c.getGewicht());
-			job.add("geboortedatum", c.getGeboortedatum());
+			job.add("leeftijd", c.getLeeftijd());
 			job.add("lengte", c.getLengte());
 			job.add("activiteit", c.getActiviteit());
 			jsonArrayBuilder.add(job);

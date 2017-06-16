@@ -14,7 +14,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
-import voedseldagboek.dagboek.persistence.GebruikerDAO;
+import voedseldagboek.dagboek.persistence.GebruikerloginDAO;
 
 @Path("/authentication")
 public class AuthenticationResource {
@@ -25,7 +25,7 @@ public class AuthenticationResource {
 	public Response authenticateUser(@FormParam("gebruikersnaam") String username, @FormParam("wachtwoord") String password) {
 		try {
 			// Authenticate the user against the database
-			GebruikerDAO dao = new GebruikerDAO();
+			GebruikerloginDAO dao = new GebruikerloginDAO();
 			String role = dao.findRoleForUsernameAndPassword(username, password);
 
 			if (role == null) {

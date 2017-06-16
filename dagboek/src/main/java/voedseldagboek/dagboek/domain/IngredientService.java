@@ -1,5 +1,6 @@
 package voedseldagboek.dagboek.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import voedseldagboek.dagboek.persistence.*;

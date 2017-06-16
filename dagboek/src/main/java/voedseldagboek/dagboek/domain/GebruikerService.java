@@ -1,17 +1,16 @@
 package voedseldagboek.dagboek.domain;
 
-import voedseldagboek.dagboek.persistence.GebruikerDAO;
+import java.util.Date;
+import java.util.List;
+
+import voedseldagboek.dagboek.persistence.*;
 
 public class GebruikerService {
-	private GebruikerDAO gebruikerDAO = new GebruikerDAO();
+	private GebruikerdataDAO gebruikerdataDAO = new GebruikerdataDAO();
+	private GebruikerloginDAO gebruikerloginDAO = new GebruikerloginDAO();
 
-	public Gebruiker getGebruiker(String gebruikersnaam) {
-		return gebruikerDAO.findByString(gebruikersnaam);
-	}
-
-	public void insertNewGebruiker(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam,
-			String geboortedatum, double gewicht, int lengte, String geslacht, double activiteit) {
-		gebruikerDAO.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
+	public Gebruikerdata getGebruikerdata(String gebruikersnaam) {
+		return gebruikerdataDAO.findByString(gebruikersnaam);
 	}
 	
 	/*

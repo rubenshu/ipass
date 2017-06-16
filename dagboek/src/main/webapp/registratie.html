@@ -60,45 +60,42 @@ body, h1, h2, h3, h4, h5, h6 {font-family: "Lato", sans-serif}
 					<h2 class="center">Registratie</h2>
 					<h5>
 						
-						<form>
+						<form action="/action_page.php">
 							
 							<div class="container stform">
 								<label><b>Gebruikersnaam</b></label>
-								<input type="text" placeholder="" id="gebruikersnaam" required>
+								<input type="text" placeholder="" name="" required>
 								
 								<label><b>Wachtwoord</b></label>
-								<input type="password" placeholder="" id="wachtwoord" required>
+								<input type="password" placeholder="" name="" required>
 								
 								<label><b>Wachtwoord verificatie</b></label>
-								<input type="password" placeholder="" id="wachtwoord-verificatie" required>
-								
-								<label><b>Emailadres</b></label>
-								<input type="email" placeholder="" id="emailadres" required>
+								<input type="password" placeholder="" name="" required>
 								
 								<label><b>Voornaam</b></label>
-								<input type="text" placeholder="" id="voornaam" required>
+								<input type="text" placeholder="" name="" required>
 								
 								<label><b>Achternaam</b></label>
-								<input type="text" placeholder="" id="achternaam" required>
+								<input type="text" placeholder="" name="" required>
 								
 								<label><b>Geboortedatum</b></label>
-								<input type="date" placeholder="" id="geboortedatum" required>
+								<input type="date" placeholder="" name="" required>
 								
 								<label><b>Gewicht</b></label>
-								<input type="number" placeholder="" id="gewicht" required>
+								<input type="number" placeholder="" name="" required>
 								
 								<label><b>Lengte (cm)</b></label>
-								<input type="number" placeholder="" id="lengte" required>
+								<input type="number" placeholder="" name="" required>
 								
 								<label><b>Geslacht</b></label>
-								<select class="select" name="option" id="geslacht">
+								<select class="select" name="option">
 									<option value="" disabled selected></option>
 									<option value="1">M</option>
 									<option value="2">V</option>
 								</select>
 								
 								<label><b>Activiteitsniveau</b></label>
-								<select class="select" name="option" id="activiteit">
+								<select class="select" name="option">
 									<option value="" disabled selected></option>
 									<option value="1.2">1</option>
 									<option value="1.375">2</option>
@@ -107,7 +104,7 @@ body, h1, h2, h3, h4, h5, h6 {font-family: "Lato", sans-serif}
 									<option value="1.9">5</option>
 								</select>
 								
-								<button type="button">Registreer</button>
+								<button type="submit">Registreer</button>
 								
 							</div>
 						</form>

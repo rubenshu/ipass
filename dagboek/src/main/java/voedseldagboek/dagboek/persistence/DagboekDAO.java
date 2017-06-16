@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Date;
 
 import voedseldagboek.dagboek.domain.Dagboek;
-import voedseldagboek.dagboek.domain.Gebruiker;
+import voedseldagboek.dagboek.domain.Gebruikerlogin;
 import voedseldagboek.dagboek.domain.Ingredient;
 
 public class DagboekDAO extends BaseDAO {
-	private GebruikerDAO gebruikerDAO = new GebruikerDAO();
+	private GebruikerloginDAO gebruikerloginDAO = new GebruikerloginDAO();
 	private IngredientDAO ingredientDAO = new IngredientDAO();
 
 	private List<Dagboek> selectDagboek(String query) {
@@ -32,7 +32,7 @@ public class DagboekDAO extends BaseDAO {
 				Ingredient ingredient = ingredientDAO.findByString(ingredientnaam);
 
 				String gebruikersnaam = dbResultSet.getString("FK_gebruikersnaam");
-				Gebruiker gebruikerlogin = gebruikerDAO.findByString(gebruikersnaam);
+				Gebruikerlogin gebruikerlogin = gebruikerloginDAO.findByString(gebruikersnaam);
 
 				Dagboek newDagboek = new Dagboek(dagboek_id, hoeveelheid, datum);
 				newDagboek.setIngredient(ingredient);
