@@ -1,4 +1,4 @@
-package voedseldagboek.dagboek.persistence;
+/*package voedseldagboek.dagboek.persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,12 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import voedseldagboek.dagboek.domain.Gebruikerlogin;
+import voedseldagboek.dagboek.domain.Gebruiker;
 
-public class GebruikerloginDAO extends BaseDAO {
+public class GebruikerDAO extends BaseDAO {
 	public String findRoleForUsernameAndPassword(String username, String password) {
 		String role = null;
-		String query = "SELECT role FROM gebruikerlogin WHERE gebruikersnaam = ? AND wachtwoord = ?";
+		String query = "SELECT role FROM Gebruiker WHERE gebruikersnaam = ? AND wachtwoord = ?";
 
 		try (Connection con = super.getConnection()) {
 
@@ -32,8 +32,8 @@ public class GebruikerloginDAO extends BaseDAO {
 		return role;
 	}
 	
-	private List<Gebruikerlogin> selectGebruikers(String query) {
-		List<Gebruikerlogin> results = new ArrayList<Gebruikerlogin>();
+	private List<Gebruiker> selectGebruikers(String query) {
+		List<Gebruiker> results = new ArrayList<Gebruiker>();
 		
 		try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
@@ -41,8 +41,8 @@ public class GebruikerloginDAO extends BaseDAO {
 			
 			while (dbResultSet.next()) {
 				String gebruikersnaam = dbResultSet.getString("gebruikersnaam");
-				Gebruikerlogin newGebruikerlogin = new Gebruikerlogin(gebruikersnaam, "", "");
-				results.add(newGebruikerlogin);
+				Gebruiker newGebruiker = new Gebruiker(gebruikersnaam, "", "", gebruikersnaam, gebruikersnaam, gebruikersnaam, 0, 0, 0, gebruikersnaam, 0, gebruikersnaam);
+				results.add(newGebruiker);
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -51,8 +51,9 @@ public class GebruikerloginDAO extends BaseDAO {
 		return results;
 	}
 	
-	public Gebruikerlogin findByString(String gebruikersnaam) {
-		return selectGebruikers("SELECT gebruikersnaam FROM gebruikerlogin WHERE gebruikersnaam = '"+gebruikersnaam +"'").get(0);
+	public Gebruiker findByString(String gebruikersnaam) {
+		return selectGebruikers("SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '"+gebruikersnaam +"'").get(0);
 	}
 	
 }
+*/
