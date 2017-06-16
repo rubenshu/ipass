@@ -48,4 +48,17 @@ public class IngredientDAO extends BaseDAO {
 	public Ingredient findByString(String ingredientNaam) {
 		return selectIngredients("SELECT ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient WHERE ingredientnaam = '"+ingredientNaam +"'").get(0);
 	}
+
+	public void insertNewIngredient(String ingredientnaam, String calorieen, String vet, String verzadigd_vet,
+			String eiwit, String koolhydraten, String vezels, String zout) {
+			String query = "insert into ingredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout) values('"+ingredientnaam+"','" + calorieen + "','" + vet + "','" + verzadigd_vet + "','" + eiwit + ",'" + koolhydraten + ",'" + vezels + ",'" + zout + "')";
+			
+			try (Connection con = super.getConnection()) {
+				Statement stmt = con.createStatement();
+				stmt.execute(query);
+				
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+		}
+	}
 }

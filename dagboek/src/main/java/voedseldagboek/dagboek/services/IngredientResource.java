@@ -66,6 +66,15 @@ public class IngredientResource {
 	}
 	
 	@GET
+	@Path("/insertingredient")
+	@Produces("application/json")
+	//@RolesAllowed("user")
+	public void insertNewIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String calorieen, @QueryParam("Q3") String vet, @QueryParam("Q4") String verzadigd_vet, @QueryParam("Q5") String eiwit, @QueryParam("Q6") String koolhydraten, @QueryParam("Q7") String vezels, @QueryParam("Q8") String zout) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		service.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+	}
+	
+	@GET
 	@Produces("text/html")
 	@Path("/delete")
 	public void deleteIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam){

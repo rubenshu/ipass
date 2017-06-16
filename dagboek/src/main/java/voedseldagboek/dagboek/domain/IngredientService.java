@@ -32,4 +32,10 @@ public class IngredientService {
 	public void updateIngredient(String ingredientnaam, String datum, String gebruikersnaam, int hoeveelheid) {
 		dagboekDAO.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
 	}
+
+	public void insertNewIngredient(String ingredientnaam, String calorieen, String vet, String verzadigd_vet,
+			String eiwit, String koolhydraten, String vezels, String zout) {
+		ingredientDAO.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+		
+	}
 }
