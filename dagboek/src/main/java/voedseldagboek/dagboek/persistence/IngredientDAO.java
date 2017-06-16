@@ -49,9 +49,9 @@ public class IngredientDAO extends BaseDAO {
 		return selectIngredients("SELECT ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient WHERE ingredientnaam = '"+ingredientNaam +"'").get(0);
 	}
 
-	public void insertNewIngredient(String ingredientnaam, String calorieen, String vet, String verzadigd_vet,
-			String eiwit, String koolhydraten, String vezels, String zout) {
-			String query = "insert into ingredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout) values('"+ingredientnaam+"','" + calorieen + "','" + vet + "','" + verzadigd_vet + "','" + eiwit + ",'" + koolhydraten + ",'" + vezels + ",'" + zout + "')";
+	public void insertNewIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
+			double eiwit, double koolhydraten, double vezels, double zout) {
+			String query = "insert into ingredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout) values('"+ingredientnaam+"','" + calorieen + "','" + vet + "','" + verzadigd_vet + "','" + eiwit + "','" + koolhydraten + "','" + vezels + "','" + zout + "')";
 			
 			try (Connection con = super.getConnection()) {
 				Statement stmt = con.createStatement();

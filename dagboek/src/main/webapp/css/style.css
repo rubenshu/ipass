@@ -41,9 +41,9 @@ button:hover {opacity: 0.8;}
 	.column.m9{width:74.99999%}
 }
 
-/* Login page */
-.login input[type=text], .login input[type=password] {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
-.login button{width: 100%;padding: 14px 20px;margin: 8px 0;}
+/* Forms */
+.formst input[type=text], .formst input[type=password], .formst input[type=number] {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
+.formst button{width: 100%;padding: 14px 20px;margin: 8px 0;}
 
 /* Dagboek page */
 .bodyheader input[type=text], .bodyheader input[type=number], .bodyheader input[type=submit]{border: 1px solid #333;height: 30px;padding: 4px;width:33.333332%;}

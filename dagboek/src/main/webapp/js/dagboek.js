@@ -12,6 +12,8 @@ $(document).ready(function () {
 		  onSelect: function(dateText) {
 		    loadIngredients(selected);
 		    window.sessionStorage.setItem("selectedDatepicker", dateText);
+		    var selectedDatepicker = window.sessionStorage.getItem("selectedDatepicker");
+		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
 	
@@ -229,7 +231,7 @@ var laatsteIngredienten = JSON.parse(localStorage.getItem('laatsteIngredienten')
 // Voeg toe
 $(document).ready(function() {
   $(document).on('click', '#voegtoe', function() {
-  if(/^[a-z]+$/i.test(inputBox.value) && inputBoxGram.value.length > 0 && ingredienten.includes(inputBox.value)){
+  if(inputBoxGram.value.length > 0 && ingredienten.includes(inputBox.value)){
 	  // If ingredient al in de list: update hoeveelheid. Else: insert
 	  if (ingredientenVandaag.includes(inputBox.value)){
 		  alert("Ingrediënt al in de lijst. Verwijder deze en voeg opnieuw toe.");

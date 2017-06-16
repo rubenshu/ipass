@@ -6,6 +6,8 @@ $(document).ready(function () {
 		  onSelect: function(dateText) {
 		    loadIngredients();
 		    window.sessionStorage.setItem("selectedDatepicker", dateText);
+		    var selectedDatepicker = window.sessionStorage.getItem("selectedDatepicker");
+		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
 });
