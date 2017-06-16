@@ -89,7 +89,7 @@ function loadMacro() {
 				else {
 					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is ('+(totalCal-onderhoud)+'kcal) meer dan de richtlijn ('+onderhoud+'kcal).';
 				}
-				
+				CalStr += ' Deze richtlijn geldt voor mensen van jouw leeftijd, geslacht en leefstijl. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Eet je meer, dan kom je aan in gewicht. Eet je minder, dan val je af.</p>';
 				
 				// VET
 				if (pVet >= 25 & pVet <= 35){
@@ -101,7 +101,7 @@ function loadMacro() {
 				else {
 					VetStr += '<p class="macro" id="vet">Vet: '+totalVet+'g - '+pVet+'%</p><p class="advies">Je voeding bevat te veel vet (meer dan 35%).';
 				}
-				
+				VetStr += "Vetten geven je lichaam energie. Ook wordt het gebruikt als bouwstof voor je lichaamscellen. Gezonde vetten dragen bij aan een verlaagde kans op  hart- en vaatziekten. Per gram levert vet circa 10 kcal. Gezonde keuzes voor vet zijn: (vette) vis, eieren, noten, avocado. Minder gezond zijn: snoep, fastfood.";
 				
 				//Verzadigd Vet
 				if (pVv >= 25 & pVv <= 50){
@@ -113,7 +113,7 @@ function loadMacro() {
 				else {
 					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv+'g - '+pVv+'%</p><p class="advies">Je voeding bevat te veel verzadigd vet (meer dan 50%).';
 				}
-				
+				VvStr += ' Veel verzadigde vetten in de supermarkt zijn ongezond. Deze dragen bij aan een verhoogd LDL-cholesterol in het bloed, eet hier dus niet te veel van. Dit draagt bij aan een verhoogde kans op hart- en vaatziekten. Maar er zijn ook gezonde onverzadigde vetten, deze helpen de functies van je lichaamscellen.</p>';
 				
 				//Eiwit
 				if (pEiwit >= 30 & pEiwit <= 40){
@@ -125,7 +125,7 @@ function loadMacro() {
 				else {
 					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat te veel eiwit (meer dan 40%).';
 				}
-				
+				EiwitStr += "Eiwitten zijn belangrijk voor de opbouw en het in stand houden van lichaamscellen. Ook voor je spieren is een goede hoeveelheid eiwit op een dag zeer belangrijk. Per gram levert eiwit circa 4 kcal."
 				
 				//Koolhydraten
 				if (pKh >= 30 & pKh <= 40){
@@ -137,6 +137,7 @@ function loadMacro() {
 				else {
 					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat te veel koolhydraten (meer dan 40%).';
 				}
+				KhStr += "Koolhydraten geven je lichaam energie. Per gram levert koolhydraten circa 4kcal. Gezonde keuzes voor koolhydraten zijn o.a.: volkorenproducten, meergranenproducten, fruit, aardappelen. Minder gezond zijn: gebak, koek, snoep, frisdrank."
 				
 				//Vezels
 				if (pVezels >= 9.6){
@@ -145,6 +146,7 @@ function loadMacro() {
 				else {
 					VezelsStr += '<p class="macro" id="vezels">Vezels: '+totalVezels+'g - '+pVezels+'g/1000kcal</p><p class="advies">Je voeding bevat niet genoeg vezels (minder dan 9.g per 1000kcal).';
 				}
+				VezelsStr += "Voor een goede darmwerking zijn vezels belangrijk. Ze geven je ook een vol gevoel. Vezels zitten o.a. in meergranen producten, volkoren producten, aardappelen, fruit, groente en noten."
 				
 				
 				//Zout
@@ -157,6 +159,7 @@ function loadMacro() {
 				else {
 					ZoutStr += '<p class="macro" id="zout">Zout: '+totalZout+'g</p><p class="advies">Je voeding bevat te veel zout (meer dan 6g).';
 				}
+				ZoutStr += "Keukenzout zit tegenwoordig in bijna alle producten. Het is belangrijk (en soms moeilijk) om hier op een dag niet te veel van binnen te krijgen. De fabrikant voegt vaak zout toe voor smaak of houdbaarheid. Daarnaast wordt het door onszelf ook regelmatig toegevoegd aan het eten."
 				
 				document.getElementById('advies').innerHTML = CalStr + VetStr + VvStr + EiwitStr + KhStr + VezelsStr + ZoutStr;
 			},
