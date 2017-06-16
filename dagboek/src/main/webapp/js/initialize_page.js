@@ -23,9 +23,18 @@ function setDate() {
 			+ months[now.getMonth()] + " " + now.getFullYear();
 	var datetext = ("0" + now.getDate()).slice(-2) + "-"
 			+ ("0" + (now.getMonth() + 1)).slice(-2) + "-" + now.getFullYear();
-
-	document.getElementById("add-date").innerHTML += newdate;
-	document.getElementById("datepicker").value = datetext;
+	
+	var selectedDatepicker;
+	if (window.sessionStorage.getItem("selectedDatepicker") != null){
+		selectedDatepicker = window.sessionStorage.getItem("selectedDatepicker");
+		
+	}
+	else{
+		selectedDatepicker = datetext;
+	}
+	
+	document.getElementById("datepicker").value = selectedDatepicker;
+	document.getElementById("add-date").innerHTML += " voor " + selectedDatepicker;
 }
 
 // Toggle mobile menu

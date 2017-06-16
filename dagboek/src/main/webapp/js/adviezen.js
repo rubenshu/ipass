@@ -5,6 +5,7 @@ $(document).ready(function () {
 	$("#datepicker").datepicker({
 		  onSelect: function(dateText) {
 		    loadMacro();
+		    window.sessionStorage.setItem("selectedDatepicker", dateText);
 		  }
 		});
 });
@@ -50,7 +51,8 @@ function loadMacro() {
 							 totalZout += (this.hoeveelheid * this.zout) / 100;
 						}
 					});
-				
+				// If there's info for today.
+				if (totalCal > 0){
 				//LOGIC
 				var minCal = (onderhoud - 200).toFixed(0);
 				var maxCal = (onderhoud + 200).toFixed(0);
@@ -66,10 +68,10 @@ function loadMacro() {
 				kcalEiwit = totalEiwit * 4;
 				kcalVet = totalVet * 10;
 				kcalTotal = kcalKh + kcalEiwit + kcalVet;
-				pKh = (kcalTotal / kcalKh).toFixed(0);
+				pVet = ((kcalVet / kcalTotal)*100).toFixed(0);
+				pKh = ((kcalKh / kcalTotal) *100).toFixed(0);
 				pVv = (totalVv / totalVet).toFixed(0);
-				pEiwit = (kcalTotal / kcalEiwit).toFixed(0);
-				pVet = (kcalTotal / kcalVet).toFixed(0);
+				pEiwit = ((kcalEiwit / kcalTotal)*100).toFixed(0);
 				pVezels = (totalVezels / totalCal * 1000).toFixed(1);
 				var CalStr="";
 				var VetStr="";
@@ -91,7 +93,7 @@ function loadMacro() {
 				}
 				CalStr += ' Deze richtlijn geldt voor mensen van jouw leeftijd, geslacht en leefstijl. Deze richtlijn zegt iets over je energiebehoefte, dus over hoeveel je op een dag zou moeten eten en drinken. Energiebehoefte is ook afhankelijk van je gewicht. Eet je meer, dan kom je aan in gewicht. Eet je minder, dan val je af.</p>';
 				
-				// VET
+				// VET®
 				if (pVet >= 25 & pVet <= 35){
 					VetStr += '<p class="macro" id="vet">Vet: '+totalVet+'g - '+pVet+'%</p><p class="advies">Je voeding bevat genoeg vet (tussen de 25-35%).';
 				}
@@ -117,25 +119,25 @@ function loadMacro() {
 				
 				//Eiwit
 				if (pEiwit >= 30 & pEiwit <= 40){
-					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat genoeg eiwit (tussen de 30-40%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g - '+pEiwit+'%</p><p class="advies">Je voeding bevat genoeg eiwit (tussen de 30-40%).';
 				}
 				else if (pEiwit < 30){
-					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat niet genoeg eiwit (minder dan 30%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g - '+pEiwit+'%</p><p class="advies">Je voeding bevat niet genoeg eiwit (minder dan 30%).';
 				}
 				else {
-					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g</p><p class="advies">Je voeding bevat te veel eiwit (meer dan 40%).';
+					EiwitStr += '<p class="macro" id="eiwit">Eiwit: '+totalEiwit+'g - '+pEiwit+'%</p><p class="advies">Je voeding bevat te veel eiwit (meer dan 40%).';
 				}
 				EiwitStr += "Eiwitten zijn belangrijk voor de opbouw en het in stand houden van lichaamscellen. Ook voor je spieren is een goede hoeveelheid eiwit op een dag zeer belangrijk. Per gram levert eiwit circa 4 kcal."
 				
 				//Koolhydraten
 				if (pKh >= 30 & pKh <= 40){
-					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat genoeg koolhydraten (tussen de 30-40%).';
+					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g - '+pKh+'%</p><p class="advies">Je voeding bevat genoeg koolhydraten (tussen de 30-40%).';
 				}
 				else if (pKh < 30){
-					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat niet genoeg koolhydraten (minder dan 30%).';
+					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g - '+pKh+'%</p><p class="advies">Je voeding bevat niet genoeg koolhydraten (minder dan 30%).';
 				}
 				else {
-					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g</p><p class="advies">Je voeding bevat te veel koolhydraten (meer dan 40%).';
+					KhStr += '<p class="macro" id="koolhydraten">Koolhydraten: '+totalKh+'g - '+pKh+'%</p><p class="advies">Je voeding bevat te veel koolhydraten (meer dan 40%).';
 				}
 				KhStr += "Koolhydraten geven je lichaam energie. Per gram levert koolhydraten circa 4kcal. Gezonde keuzes voor koolhydraten zijn o.a.: volkorenproducten, meergranenproducten, fruit, aardappelen. Minder gezond zijn: gebak, koek, snoep, frisdrank."
 				
@@ -161,7 +163,10 @@ function loadMacro() {
 				}
 				ZoutStr += "Keukenzout zit tegenwoordig in bijna alle producten. Het is belangrijk (en soms moeilijk) om hier op een dag niet te veel van binnen te krijgen. De fabrikant voegt vaak zout toe voor smaak of houdbaarheid. Daarnaast wordt het door onszelf ook regelmatig toegevoegd aan het eten."
 				
-				document.getElementById('advies').innerHTML = CalStr + VetStr + VvStr + EiwitStr + KhStr + VezelsStr + ZoutStr;
+				printStr = CalStr + VetStr + VvStr + EiwitStr + KhStr + VezelsStr + ZoutStr;
+				document.getElementById('advies').innerHTML = printStr;
+				}
+				else{document.getElementById('advies').innerHTML = "Er is bij deze datum geen dagboek ingevuld.";}
 			},
 		});
 }

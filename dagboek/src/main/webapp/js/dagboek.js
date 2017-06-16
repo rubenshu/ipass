@@ -11,6 +11,7 @@ $(document).ready(function () {
 	$("#datepicker").datepicker({
 		  onSelect: function(dateText) {
 		    loadIngredients(selected);
+		    window.sessionStorage.setItem("selectedDatepicker", dateText);
 		  }
 		});
 	
