@@ -42,7 +42,7 @@ button:hover {opacity: 0.8;}
 }
 
 /* Forms */
-.formst input[type=text], .formst input[type=password], .formst input[type=number] {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
+.formst input[type=text], .formst input[type=password], .formst input[type=number], .formst input[type=date], .formst select {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
 .formst button{width: 100%;padding: 14px 20px;margin: 8px 0;}
 
 /* Dagboek page */
