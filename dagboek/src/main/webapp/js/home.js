@@ -8,14 +8,14 @@ $(document).ready(function() {
 	}
 });
 
-$(document).on('click', '#logout', function() {
-	window.sessionStorage.removeItem('timestamp');
-	window.sessionStorage.removeItem('sessionToken');
-	window.sessionStorage.removeItem('huidigeGebruiker')
-	window.location.replace("index.html");
-  });
-
 $(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
 	$("#gebruikersnaammenu, #autouser").hover(function(){
 		console.log("Y");
 	    document.getElementById("autouser").style.display = "block";
@@ -32,6 +32,9 @@ $(document).ready(function() {
 $("#loginbutton").click(function(event) {
 	var data = $("#loginform").serialize();
 	var huidigeGebruiker = document.getElementById("gebruikersnaam").value;
+	var gebruikersnaam = document.getElementById("gebruikersnaam").value;
+	var wachtwoord = document.getElementById("wachtwoord").value;
+	if (gebruikersnaam.length > 0 & wachtwoord.length > 0){
 	$.post("restservices/authentication", data, function(response) {
 		var timestamp = new Date().getTime() / 1000;
 		window.sessionStorage.setItem("timestamp", timestamp)
@@ -40,9 +43,14 @@ $("#loginbutton").click(function(event) {
 		document.getElementById("homepage").innerHTML = '<h2 class="center">Homepage</h2><p>U bent ingelogd. U kunt nu alle functionaliteiten van de website gebruiken.<br/><a href="dagboek.html">Dagboek</a><br/><a href="adviezen.html">Adviezen</a><br/><a href="overzicht.html">Overzicht</a><br/><a href="#" id="logout">Logout</a>';
 		loadMenuItem();
 	}).fail(function(jqXHR, textStatus, errorThrown) {
+		alert("Gebruikersnaam of wachtwoord fout.")
 		console.log(textStatus);
 		console.log(errorThrown);
 	});
+	}
+	else{
+		alert("Vul gebruikersnaam en wachtwoord in.");
+	}
 });
 
 //Menu Item + Name Display

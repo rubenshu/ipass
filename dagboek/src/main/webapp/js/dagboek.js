@@ -11,11 +11,11 @@ time = new Date().getTime() / 1000;
 		console.log(time, timestamp, time-timestamp);
 		if((time - timestamp) > 1200 || timestamp == null){
 			window.location.replace("index.html");
-			loadMenuItem();
 		}
 //Inladen ingrediënten
 		else{
 	loadIngredients(selected);
+	loadMenuItem();
 	
 	$("#datepicker").datepicker({
 		  onSelect: function(dateText) {
@@ -97,6 +97,8 @@ function insertIngredient(ingredientnaam, hoeveelheid){
 					 var subtotaal = (this.hoeveelheid * this[selected]) / 100;
 					 $(".table").find('tr:last').prev().after('<tr><td class="ingredient">'+this.ingredientnaam+'</td><td class="hoeveelheid">'+this.hoeveelheid+'</td><td class="subtotaal">'+subtotaal+'</td><td class="removeingredient"><a href="#"> <i class="fa fa-times text-red"></i></a></td></tr>');
 					});
+				 document.getElementById('ingredient').value = "";
+				 document.getElementById('gram').value = "";
 				loadTotals();
 			},
 			fail : function() {
@@ -275,6 +277,27 @@ $("#macro-optie").on('change', function() {
 function loadTotals() {
 	totals("totaal", 3);
 }
+
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
+	$("#gebruikersnaammenu, #autouser").hover(function(){
+		console.log("Y");
+	    document.getElementById("autouser").style.display = "block";
+	},function(){
+	    document.getElementById("autouser").style.display = "none";
+	});
+  $(document).on('click', '#gebruikersnaammenu a', function() {
+	  document.getElementById("autouser").style.display = "none";
+  });
+
+});
 
 //Menu Item + Name Display
 function loadMenuItem(){

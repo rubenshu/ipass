@@ -2,13 +2,32 @@ $(document).ready(function () {
 	time = new Date().getTime() / 1000;
 	timestamp = window.sessionStorage.getItem('timestamp');
 	console.log(time, timestamp, time-timestamp);
-	if((time - timestamp) > 1200 || timestamp == null){
+	if(timestamp != null){
 		window.location.replace("index.html");
-		loadMenuItem();
 	}
 });
 
-//VARIABLES
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
+	$("#gebruikersnaammenu, #autouser").hover(function(){
+		console.log("Y");
+	    document.getElementById("autouser").style.display = "block";
+	},function(){
+	    document.getElementById("autouser").style.display = "none";
+	});
+  $(document).on('click', '#gebruikersnaammenu a', function() {
+	  document.getElementById("autouser").style.display = "none";
+  });
+
+});
+
 function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit){
 	var url = "restservices/gebruiker/insertgebruiker?Q1=" + gebruikersnaam + "&Q2=" + wachtwoord + "&Q3=" + emailadres + "&Q4=" + voornaam + "&Q5=" + achternaam + "&Q6=" + geboortedatum + "&Q7=" + gewicht + "&Q8=" + lengte + "&Q9=" + geslacht+ "&Q10=" + activiteit;
 		$.ajax({
@@ -42,8 +61,18 @@ $(document).ready(function() {
 	  var lengte = document.getElementById('lengte').value;
 	  var geslacht = document.getElementById('geslacht').value;
 	  var activiteit = document.getElementById('activiteit').value;
-	  if (true){
+	  if (geboortedatum.length > 0, gewicht.length > 0, lengte.length > 0, geslacht.length > 0, activiteit.length > 0, gebruikersnaam.length > 0, wachtwoord.length > 0, wachtwoord_verificatie.length > 0, emailadres.length > 0, voornaam.length > 0, achternaam.length > 0){
+		  if (wachtwoord === wachtwoord_verificatie){
 		  insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
+		  }
+		  else{
+			  alert("Wachtwoorden komen niet overeen.");
+			  document.getElementById('wachtwoord').value = "";
+			  document.getElementById('wachtwoord_verificatie').value = "";
+		  }
+	}
+	  else{
+		  alert("Niet alles is ingevuld.");
 	  }
 });
 });

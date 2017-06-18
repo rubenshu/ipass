@@ -30,6 +30,7 @@ body, h1, h2, h3, h4, h5, h6 {font-family: "Lato", sans-serif}
 
 	<div>
 		<div class="topmenu mainMenu red shadow center">
+				<div class="floatmenucontainer">
 			<a
 				class="menu-item button hide-menu-two hide-large right padding-one hover-white large red"
 				href="javascript:void(0);" onclick="mobFunc()"
@@ -48,6 +49,7 @@ body, h1, h2, h3, h4, h5, h6 {font-family: "Lato", sans-serif}
     <li><a href="persoonlijke-gegevens.html">Persoonlijke gegevens</a></li>
     <li><a href="#" id="logout">Logout</a></li>
 	</ul>
+	</div>
 		</div>
 
 		<!-- Navbar on small screens -->
@@ -99,18 +101,18 @@ body, h1, h2, h3, h4, h5, h6 {font-family: "Lato", sans-serif}
 								<label><b>Geslacht</b></label>
 								<select class="select" name="option" id="geslacht">
 									<option value="" disabled selected></option>
-									<option value="1">M</option>
-									<option value="2">V</option>
+									<option value="m">M</option>
+									<option value="v">V</option>
 								</select>
 								
 								<label><b>Activiteitsniveau</b></label>
 								<select class="select" name="option" id="activiteit">
 									<option value="" disabled selected></option>
-									<option value="1.2">1</option>
-									<option value="1.375">2</option>
-									<option value="1.55">3</option>
-									<option value="1.725">4</option>
-									<option value="1.9">5</option>
+									<option value="1.2">1 - Weinig of geen training / kantoorwerk</option>
+									<option value="1.375">2 - Lichte training/sport 1-3 dagen per week</option>
+									<option value="1.55">3 - Gemiddelde training/sport 3-5 dagen per week</option>
+									<option value="1.725">4 - Zware training/sport 6-7 dagen per week</option>
+									<option value="1.9">5 - Zware dagelijkse training/sport plus lichamelijk werk</option>
 								</select>
 								
 								<button type="button" id="registreer">Registreer</button>

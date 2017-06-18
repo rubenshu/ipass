@@ -35,7 +35,6 @@ public class IngredientService {
 	public void insertNewIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
 			double eiwit, double koolhydraten, double vezels, double zout) {
 		ingredientDAO.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
-		
 	}
 
 	public void updateExistingIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,

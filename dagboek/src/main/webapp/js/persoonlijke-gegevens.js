@@ -5,11 +5,22 @@ $(document).ready(function () {
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
-		loadMenuItem();
 	}
 	else{
+		loadMenuItem();
 	loadGegevens();
 	}
+});
+
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+
 });
 
 function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam){
@@ -69,9 +80,12 @@ $(document).on('click', '#opslaan', function() {
 	var lengte = document.getElementById('lengte').value;
 	var geslacht = document.getElementById('geslacht').value;
 	var activiteit = document.getElementById('activiteit').value;
-	if (true){
-		updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
-	}
+	  if (gebruikersnaam.length > 0& voornaam.length > 0& achternaam.length > 0& emailadres.length > 0& geboortedatum.length > 0& gewicht.length > 0& lengte.length > 0& geslacht.length > 0& activiteit.length > 0){
+		  updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);  
+	  }
+		  else{
+			  alert("Niet alle waarden zijn ingevuld.");
+		  }
 });
 
 //Menu Item + Name Display

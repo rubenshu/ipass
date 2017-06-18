@@ -5,11 +5,10 @@ $(document).ready(function () {
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
-		loadMenuItem();
 	}
 	else{
 	loadIngredients();
-	
+	loadMenuItem();
 	$("#datepicker").datepicker({
 		  onSelect: function(dateText) {
 		    loadIngredients();
@@ -19,6 +18,27 @@ $(document).ready(function () {
 		  }
 		});
 	}
+});
+
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
+	$("#gebruikersnaammenu, #autouser").hover(function(){
+		console.log("Y");
+	    document.getElementById("autouser").style.display = "block";
+	},function(){
+	    document.getElementById("autouser").style.display = "none";
+	});
+  $(document).on('click', '#gebruikersnaammenu a', function() {
+	  document.getElementById("autouser").style.display = "none";
+  });
+
 });
 
 // Load ingredients from JSON test file

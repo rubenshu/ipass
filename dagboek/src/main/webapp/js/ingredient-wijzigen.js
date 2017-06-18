@@ -5,11 +5,32 @@ $(document).ready(function () {
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
-		loadMenuItem();
-	}
+		loadMenuItem()	}
 	else{
 	loadAllIngredients();
+	loadMenuItem();
 	}
+});
+
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
+	$("#gebruikersnaammenu, #autouser").hover(function(){
+		console.log("Y");
+	    document.getElementById("autouser").style.display = "block";
+	},function(){
+	    document.getElementById("autouser").style.display = "none";
+	});
+  $(document).on('click', '#gebruikersnaammenu a', function() {
+	  document.getElementById("autouser").style.display = "none";
+  });
+
 });
 
 //Storing the ingredients + setting the combobox
@@ -170,8 +191,16 @@ $(document).on('click', '#ingredientopslaan', function() {
 	var koolhydraten = document.getElementById('koolhydraten').value;
 	var vezels = document.getElementById('vezels').value;
 	var zout = document.getElementById('zout').value;
-	if (true){
+	if (calorieen.length > 0 & vet.length > 0 & verzadigd_vet.length > 0 & eiwit.length > 0 & koolhydraten.length > 0 & vezels.length > 0 & zout.length > 0){
+		if (ingredienten.includes(ingredientnaam)){
 		updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+		}
+		else{
+			alert("Ingevulde ingrediëntnaam bestaat niet.");
+		}
+	}
+	else{
+		alert("Niet alle waardes zijn ingevuld.");
 	}
 });
 

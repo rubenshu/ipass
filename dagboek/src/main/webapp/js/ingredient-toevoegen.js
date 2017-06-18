@@ -4,14 +4,38 @@ $(document).ready(function () {
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
+	}
+	else{
 		loadMenuItem();
 	}
+});
+
+
+$(document).ready(function() {
+	$(document).on('click', '#logout', function() {
+		window.sessionStorage.removeItem('timestamp');
+		window.sessionStorage.removeItem('sessionToken');
+		window.sessionStorage.removeItem('huidigeGebruiker')
+		window.location.replace("index.html");
+	  });
+	
+	$("#gebruikersnaammenu, #autouser").hover(function(){
+		console.log("Y");
+	    document.getElementById("autouser").style.display = "block";
+	},function(){
+	    document.getElementById("autouser").style.display = "none";
+	});
+  $(document).on('click', '#gebruikersnaammenu a', function() {
+	  document.getElementById("autouser").style.display = "none";
+  });
+
 });
 
 //VARIABLES
 function insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout){
 	var url = "restservices/ingredients/insertingredient?Q1=" + ingredientnaam + "&Q2=" + calorieen + "&Q3=" + vet + "&Q4=" + verzadigd_vet + "&Q5=" + eiwit + "&Q6=" + koolhydraten + "&Q7=" + vezels + "&Q8=" + zout;
-		$.ajax({
+	if (ingredientnaam.length > 0, calorieen.length > 0, vet.length > 0, verzadigd_vet.length > 0, eiwit.length > 0, koolhydraten.length > 0, vezels.length > 0, zout.length > 0){	
+	$.ajax({
 			url : url,
 			method : "GET",
 			beforeSend : function(xhr) {
@@ -33,6 +57,10 @@ function insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwi
 				console.log("Failed");
 			},
 		});
+	}
+	else{
+		alert("Onjuiste waardes ingevuld. Controleer de velden.");
+	}
 }
 
 // Voeg toe
