@@ -5,6 +5,7 @@ $(document).ready(function () {
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
+		loadMenuItem();
 	}
 	else{
 	loadGegevens();

@@ -45,7 +45,7 @@ $("#loginbutton").click(function(event) {
 	});
 });
 
-// Menu Item + Name Display
+//Menu Item + Name Display
 function loadMenuItem(){
 	var gebruikersnaam = window.sessionStorage.getItem("huidigeGebruiker");
 	var url = "restservices/gebruiker?Q1=" + gebruikersnaam;
