@@ -1,6 +1,7 @@
 // Storing the ingredients + setting the combobox
 var ingredientenVandaag = [];
 var ingredienten = [];
+var recent;
 var e = document.getElementById("macro-optie");
 var selected = e.options[e.selectedIndex].value;
 
@@ -24,6 +25,8 @@ time = new Date().getTime() / 1000;
 		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
+	recent = JSON.parse(localStorage.getItem("snelkiezer")) || [];
+	console.log(recent);
 		}
 });
 
@@ -51,7 +54,7 @@ function loadIngredients(selected) {
 				 loadAllIngredients();
 			},
 			error: function(xhr){
-				$(".dagboektable").html('Ophalen ingrediënten mislukt. Ben je ingelogd?');
+				$(".dagboektable").html('Ophalen ingrediënten mislukt.');
 			},
 		});
 }
@@ -114,11 +117,8 @@ function deleteIngredient(ingredientnaam){
 			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 		},
 		success : function(data) {
-			console.log(ingredientenVandaag);
 			var index = ingredientenVandaag.indexOf(ingredientnaam);
 			ingredientenVandaag.splice(index, 1);
-			console.log(ingredientenVandaag);
-			console.log("Succes");
 			$(".table td:contains("+ingredientnaam+")").parent().remove();
 			loadTotals();
 		},
@@ -216,8 +216,6 @@ $("#autocomplete").hover(function(){
 // Snelkiezer
 $(document).ready(function() {
   $("#recent, #recentcomplete").hover(function() {
-		var recentstring = localStorage.getItem("laatsteIngredienten");
-		var recent = JSON.parse(recentstring);
     $("#recentcomplete").empty();
     document.getElementById("recentcomplete").style.display = "block";
     recent.forEach(function(item) {
@@ -234,23 +232,34 @@ $(document).ready(function() {
 
 });
 
-var laatsteIngredienten = JSON.parse(localStorage.getItem('laatsteIngredienten')) || [];
 // Voeg toe
 $(document).ready(function() {
   $(document).on('click', '#voegtoe', function() {
   if(inputBoxGram.value.length > 0 && ingredienten.includes(inputBox.value)){
-	  // If ingredient al in de list: update hoeveelheid. Else: insert
-	  if (ingredientenVandaag.includes(inputBox.value)){
+	  var ingredientnaam = inputBox.value;
+	  if (ingredientenVandaag.includes(ingredientnaam)){
 		  alert("Ingrediënt al in de lijst. Verwijder deze en voeg opnieuw toe.");
 	  }
 	  else{
 		  insertIngredient(inputBox.value, inputBoxGram.value);
+		  
+		  if (!recent.includes(ingredientnaam)){
+			  if (recent.length > 9){
+				  console.log(recent);
+				  recent.splice(0,0, ingredientnaam);
+				  recent.length = 9;
+				  console.log(recent);
+				  window.localStorage.setItem("snelkiezer", JSON.stringify(recent));
+			  }
+			  else{
+			  recent.push(ingredientnaam);
+			  window.localStorage.setItem("snelkiezer", JSON.stringify(recent));
+			  }
+		  }
+		  else{
+			  console.log("In lijst");
+		  }
 	  }
-		  if (laatsteIngredienten.length > 9){
-		  laatsteIngredienten.pop();
-	  }
-	  laatsteIngredienten.splice(0,0, inputBox.value);
-	  window.localStorage.setItem("laatsteIngredienten", JSON.stringify(laatsteIngredienten));
   }
   else{alert('Foutieve waardes. Controleer');}
 });
