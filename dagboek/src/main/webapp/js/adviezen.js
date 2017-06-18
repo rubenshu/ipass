@@ -178,3 +178,30 @@ function loadMacro() {
 			},
 		});
 }
+
+//Menu Item + Name Display
+function loadMenuItem(){
+	var gebruikersnaam = window.sessionStorage.getItem("huidigeGebruiker");
+	var url = "restservices/gebruiker?Q1=" + gebruikersnaam;
+		$.ajax({
+			url : url,
+			method : "GET",
+			beforeSend : function(xhr) {
+				var token = window.sessionStorage.getItem("sessionToken");
+				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+			},
+			success : function(data) {
+				$(data).each(function (index) {
+					document.getElementById('gebruikersnaammenu').innerHTML = this.voornaam;
+					
+				if (this.role == "admin"){
+					var adminli = '<li><a href="ingredient-wijzigen.html">Ingrediënt wijzigen</a></li>';
+					$(".autouser li:last-child").before (adminli);
+				}
+				});
+			},
+			fail : function() {
+				console.log("Failed");
+			},
+		});
+}
