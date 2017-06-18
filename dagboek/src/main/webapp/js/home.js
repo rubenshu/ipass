@@ -9,7 +9,9 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '#logout', function() {
-	window.sessionStorage.setItem('timestamp', "");
+	window.sessionStorage.removeItem('timestamp');
+	window.sessionStorage.removeItem('sessionToken');
+	window.sessionStorage.removeItem('huidigeGebruiker')
 	window.location.replace("index.html");
   });
 

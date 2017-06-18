@@ -28,10 +28,18 @@ public class GebruikerResource {
 	@GET
 	@Path("/insertgebruiker")
 	@Produces("application/json")
-	@RolesAllowed({"user","admin"})
 	public void insertNewIngredient(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
 		service.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
+	}
+	
+	@GET
+	@Path("/updategebruiker")
+	@RolesAllowed({"user","admin"})
+	@Produces("application/json")
+	public void updateGebruiker(@QueryParam("Q1") String voornaam, @QueryParam("Q2") String achternaam, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String geboortedatum, @QueryParam("Q5") double gewicht, @QueryParam("Q6") int lengte, @QueryParam("Q7") String geslacht, @QueryParam("Q8") double activiteit, @QueryParam("Q9") String gebruikersnaam){
+		GebruikerService service = ServiceProvider.getGebruikerService();
+		service.updateGebruiker(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
 	}
 	
 	
@@ -39,6 +47,7 @@ public class GebruikerResource {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
 			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("emailadres", c.getEmailadres());
 			job.add("achternaam", c.getAchternaam());
 			job.add("voornaam", c.getVoornaam());
 			job.add("geslacht", c.getGeslacht());

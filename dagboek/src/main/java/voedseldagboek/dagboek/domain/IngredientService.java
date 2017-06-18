@@ -44,6 +44,6 @@ public class IngredientService {
 	}
 
 	public void deleteIngedient(String ingredientnaam) {
-		ingredientDAO.deleteIngredient(ingredientnaam);
+		dagboekDAO.deleteSoloIngredient(ingredientnaam);
 	}
 }

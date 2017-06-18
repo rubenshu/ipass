@@ -3,7 +3,8 @@ $(document).ready(function () {
 	timestamp = window.sessionStorage.getItem('timestamp');
 	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
-		window.location.replace("index.html");
+		console.log("redirect");
+		//window.location.replace("index.html");
 	}
 });
 

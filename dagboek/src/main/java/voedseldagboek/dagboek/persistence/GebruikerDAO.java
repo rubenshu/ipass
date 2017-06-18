@@ -83,4 +83,17 @@ public class GebruikerDAO extends BaseDAO {
 					sqle.printStackTrace();
 		}
 	}
+
+	public void updateGebruiker(String voornaam, String achternaam, String emailadres, String geboortedatum,
+			double gewicht, int lengte, String geslacht, double activiteit, String gebruikersnaam) {
+		String query = "UPDATE gebruiker SET voornaam = '"+voornaam+"', achternaam = '" + achternaam + "', emailadres = '" + emailadres + "', geboortedatum = '" + geboortedatum + "', gewicht = '" + gewicht + "', lengte = '" + lengte + "', geslacht = '" + geslacht + "', activiteit = '" + activiteit + "' WHERE gebruikersnaam = '"+gebruikersnaam+"'";
+		
+		try (Connection con = super.getConnection()) {
+	Statement stmt = con.createStatement();
+	stmt.execute(query);
+	
+} catch (SQLException sqle) {
+	sqle.printStackTrace();
 }
+}
+	}

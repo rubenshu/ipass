@@ -74,16 +74,4 @@ public class IngredientDAO extends BaseDAO {
 			sqle.printStackTrace();
 	}
 	}
-
-	public void deleteIngredient(String ingredientnaam) {
-		String query = "DELETE FROM ingredient WHERE ingredientnaam = '"+ingredientnaam+"'";
-		
-		try (Connection con = super.getConnection()) {
-	Statement stmt = con.createStatement();
-	stmt.execute(query);
-	
-} catch (SQLException sqle) {
-	sqle.printStackTrace();
-}
-	}
 }

@@ -34,7 +34,6 @@ function loadMacro() {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
-				console.log(data);
 				 var totalCal=0;
 				 var totalVet=0;
 				 var totalVv=0;

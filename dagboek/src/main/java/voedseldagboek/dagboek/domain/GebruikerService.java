@@ -13,6 +13,11 @@ public class GebruikerService {
 			String geboortedatum, double gewicht, int lengte, String geslacht, double activiteit) {
 		gebruikerDAO.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
 	}
+
+	public void updateGebruiker(String voornaam, String achternaam, String emailadres, String geboortedatum,
+			double gewicht, int lengte, String geslacht, double activiteit, String gebruikersnaam) {
+		gebruikerDAO.updateGebruiker(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
+	}
 	
 	/*
 	private IngredientDAO ingredientDAO = new IngredientDAO();
