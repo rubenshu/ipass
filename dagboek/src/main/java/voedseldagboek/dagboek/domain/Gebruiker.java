@@ -15,7 +15,7 @@ public class Gebruiker{
 	private String role;
 
 	// CONSTRUCTOR
-	public Gebruiker(String gebruikersnaam, String wachtwoord, String emailadres,String voornaam, String achternaam, String geboortedatum, int leeftijd, double lengte, double gewicht, String geslacht, double activiteit, String role) {
+	public Gebruiker(String gebruikersnaam, String wachtwoord, String emailadres,String voornaam, String achternaam, String geboortedatum, double lengte, double gewicht, String geslacht, double activiteit, String role) {
 		this.gebruikersnaam = gebruikersnaam;
 		this.wachtwoord = wachtwoord;
 		this.emailadres = emailadres;

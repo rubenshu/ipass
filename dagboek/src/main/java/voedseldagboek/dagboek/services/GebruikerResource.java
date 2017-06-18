@@ -1,5 +1,6 @@
 package voedseldagboek.dagboek.services;
 
+import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -16,18 +17,18 @@ import voedseldagboek.dagboek.domain.ServiceProvider;
 public class GebruikerResource {
 
 	@GET
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
 	public String getToday(@QueryParam("Q1") String gebruikersnaam) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
-		JsonArray gebruikerArray = buildJsonGebruikerArray(service.getGebruikerdata(gebruikersnaam));
+		JsonArray gebruikerArray = buildJsonGebruikerArray(service.getGebruiker(gebruikersnaam));
 		return gebruikerArray.toString();
 	}
 	
 	@GET
 	@Path("/insertgebruiker")
 	@Produces("application/json")
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	public void insertNewIngredient(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
 		service.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
@@ -38,11 +39,14 @@ public class GebruikerResource {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 
 			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("achternaam", c.getAchternaam());
+			job.add("voornaam", c.getVoornaam());
 			job.add("geslacht", c.getGeslacht());
 			job.add("gewicht", c.getGewicht());
 			job.add("geboortedatum", c.getGeboortedatum());
 			job.add("lengte", c.getLengte());
 			job.add("activiteit", c.getActiviteit());
+			job.add("role", c.getRole());
 
 			jsonArrayBuilder.add(job);
 		

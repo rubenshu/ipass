@@ -41,6 +41,7 @@ body, h1, h2, h3, h4, h5, h6 {
 
 	<div>
 		<div class="topmenu mainMenu red shadow center">
+		<div class="floatmenucontainer">
 			<a
 				class="menu-item button hide-menu-two hide-large right padding-one hover-white large red"
 				href="javascript:void(0);" onclick="mobFunc()"
@@ -53,6 +54,13 @@ body, h1, h2, h3, h4, h5, h6 {
 				class="menu-item button hide-menu-item padding-one hover-white">Adviezen</a>
 			<a href="overzicht.html"
 				class="menu-item button hide-menu-item padding-one hover-white">Overzicht</a>
+				<a href = "#" class="menu-item button hide-menu-item padding-one usermenu" id="gebruikersnaammenu" style="background:transparent !important;background-color:transparent !important;color:#fff !important;"></a>
+				<ul id="autouser" class="autouser" style="position: fixed;margin-top: -5px !important;
+    width:inherit;max-width:200px; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; ">
+    <li><a href="persoonlijke-gegevens.html">Persoonlijke gegevens</a></li>
+    <li><a href="#" id="logout">Logout</a></li>
+	</ul>
+		</div>
 		</div>
 
 		<!-- Navbar on small screens -->
@@ -81,8 +89,10 @@ body, h1, h2, h3, h4, h5, h6 {
 								placeholder="Enter Password" name="wachtwoord" required>
 
 							<button type="button" id="loginbutton" value="login">Login</button>
-
+							
+							<label style="font-size:12px;font-family: "Lato", sans-serif;">Nog geen account? <a href="registratie.html">Registreer nu</a></label>
 						</div>
+						
 					</form>
 
 				</h5>

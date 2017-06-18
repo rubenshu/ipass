@@ -1,3 +1,12 @@
+$(document).ready(function () {
+	time = new Date().getTime() / 1000;
+	timestamp = window.sessionStorage.getItem('timestamp');
+	console.log(time, timestamp, time-timestamp);
+	if((time - timestamp) > 1200 || timestamp == null){
+		window.location.replace("index.html");
+	}
+});
+
 //VARIABLES
 function insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout){
 	var url = "restservices/ingredients/insertingredient?Q1=" + ingredientnaam + "&Q2=" + calorieen + "&Q3=" + vet + "&Q4=" + verzadigd_vet + "&Q5=" + eiwit + "&Q6=" + koolhydraten + "&Q7=" + vezels + "&Q8=" + zout;

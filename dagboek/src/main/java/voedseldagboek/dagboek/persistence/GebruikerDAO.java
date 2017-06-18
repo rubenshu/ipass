@@ -41,18 +41,18 @@ public class GebruikerDAO extends BaseDAO {
 			
 			while (dbResultSet.next()) {
 				String gebruikersnaam = dbResultSet.getString("gebruikersnaam");
+				String wachtwoord = "";
 				String emailadres = dbResultSet.getString("emailadres");
 				String voornaam = dbResultSet.getString("voornaam");
 				String achternaam = dbResultSet.getString("achternaam");
 				String geboortedatum = dbResultSet.getString("geboortedatum");
-				int leeftijd = dbResultSet.getInt("leeftijd");
 				double lengte = dbResultSet.getDouble("lengte");
 				double gewicht = dbResultSet.getDouble("gewicht");
 				String geslacht = dbResultSet.getString("geslacht");
 				double activiteit = dbResultSet.getDouble("activiteit");
 				String role = dbResultSet.getString("role");
 				
-				Gebruiker newGebruikerdata = new Gebruiker(gebruikersnaam, "", emailadres, voornaam, achternaam, geboortedatum, leeftijd, lengte, gewicht, geslacht, activiteit, role);
+				Gebruiker newGebruikerdata = new Gebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, lengte, gewicht, geslacht, activiteit, role);
 				
 				results.add(newGebruikerdata);
 			}
@@ -64,8 +64,11 @@ public class GebruikerDAO extends BaseDAO {
 	}
 	
 	
+	
+	
+	
 	public Gebruiker findByString(String gebruikersnaam) {
-		return selectGebruikers("SELECT gebruikersnaam FROM Gebruiker WHERE gebruikersnaam = '"+gebruikersnaam +"'").get(0);
+		return selectGebruikers("SELECT gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit, role FROM gebruiker WHERE gebruikersnaam = '"+gebruikersnaam +"'").get(0);
 	}
 
 	public void insertNewGebruiker(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam,

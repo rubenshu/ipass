@@ -64,39 +64,47 @@ body, h1, h2, h3, h4, h5, h6 {
 		<div class="row-padding padding-16 container">
 			<div class="content">
 				<div class="column threequarter">
-					<h2 class="center">IngrediÃ«nt wijzigen</h2>
+					<h2 class="center">Ingrediënt wijzigen</h2>
 					<h5>
 						
 						<form>
 							
-							<div class="container stform">
+							<div class="container formst">
+							
+							<label id="message" style="color:green;border:2px solid greeen;"></label>
+							
 								<label><b>Naam</b></label>
-								<input type="text" placeholder="" name="" required>
+								<input type="text" placeholder="" id="ingredientnaam" required>
+								<ul id="autocomplete"
+		style="position: fixed;     margin-top: -8px !important;
+    margin-left: 0px !important;width:inherit; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; ">
+	</ul>
 								
 								<label><b>Energie (kcal)</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="calorieen" required>
 								
 								<label><b>Vet</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="vet" required>
 								
 								<label><b>Verzadigd_vet</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="verzadigd_vet" required>
 								
 								<label><b>Koolhydraten</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="koolhydraten" required>
 								
 								
 								<label><b>Eiwit</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="eiwit" required>
 								
 								<label><b>Vezels</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="vezels" required>
 								
 								<label><b>Zout</b></label>
-								<input type="number" placeholder="" name="" required>
+								<input type="number" placeholder="" id="zout" required>
 								
-								<button type="button">Ingrediënt toevoegen</button>
-								
+								<div style="width:100%;">
+								<button type="button" id="ingredientopslaan">Ingrediënt opslaan</button>
+								</div>
 							</div>
 						</form>
 						
@@ -105,6 +113,7 @@ body, h1, h2, h3, h4, h5, h6 {
 				
 				<div class="column quarter center">
 					<i class="fa fa-cutlery padding-64 text-red"></i>
+					<button type="button" id="ingredientverwijderen">Ingrediënt verwijderen</button>
 				</div>
 			</div>
 		</div>
@@ -112,7 +121,7 @@ body, h1, h2, h3, h4, h5, h6 {
 	<footer class="container padding-64 center opacity">
 		<p>Copyright &#9400; 2017 Ruben Sikkens. All rights reserved.</p>
 	</footer>
-	<script src="js/ingredient-wijzigen.html" type="text/javascript"></script>
+	<script src="js/ingredient-wijzigen.js" type="text/javascript"></script>
 		
 	</body>
 </html>

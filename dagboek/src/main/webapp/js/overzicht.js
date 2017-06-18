@@ -1,5 +1,12 @@
 //Inladen ingrediënten
 $(document).ready(function () {
+	time = new Date().getTime() / 1000;
+	timestamp = window.sessionStorage.getItem('timestamp');
+	console.log(time, timestamp, time-timestamp);
+	if((time - timestamp) > 1200 || timestamp == null){
+		window.location.replace("index.html");
+	}
+	else{
 	loadIngredients();
 	
 	$("#datepicker").datepicker({
@@ -10,6 +17,7 @@ $(document).ready(function () {
 		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
+	}
 });
 
 // Load ingredients from JSON test file

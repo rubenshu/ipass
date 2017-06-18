@@ -61,4 +61,29 @@ public class IngredientDAO extends BaseDAO {
 				sqle.printStackTrace();
 		}
 	}
+
+	public void updateExistingIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
+			double eiwit, double koolhydraten, double vezels, double zout) {
+		String query = "UPDATE ingredient SET ingredientnaam = '"+ingredientnaam+"', calorieen = '" + calorieen + "', vet = '" + vet + "', verzadigd_vet = '" + verzadigd_vet + "', eiwit = '" + eiwit + "', koolhydraten = '" + koolhydraten + "', vezels = '" + vezels + "', zout = '" + zout + "' WHERE ingredientnaam = '"+ingredientnaam+"'";
+						
+				try (Connection con = super.getConnection()) {
+			Statement stmt = con.createStatement();
+			stmt.execute(query);
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+	}
+	}
+
+	public void deleteIngredient(String ingredientnaam) {
+		String query = "DELETE FROM ingredient WHERE ingredientnaam = '"+ingredientnaam+"'";
+		
+		try (Connection con = super.getConnection()) {
+	Statement stmt = con.createStatement();
+	stmt.execute(query);
+	
+} catch (SQLException sqle) {
+	sqle.printStackTrace();
+}
+	}
 }

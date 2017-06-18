@@ -1,5 +1,12 @@
 //Inladen ingrediënten
 $(document).ready(function () {
+	time = new Date().getTime() / 1000;
+	timestamp = window.sessionStorage.getItem('timestamp');
+	console.log(time, timestamp, time-timestamp);
+	if((time - timestamp) > 1200 || timestamp == null){
+		window.location.replace("index.html");
+	}
+	else{
 	loadMacro();
 	
 	$("#datepicker").datepicker({
@@ -10,6 +17,7 @@ $(document).ready(function () {
 		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
+	}
 });
 
 // Load ingredients from JSON test file
@@ -26,6 +34,7 @@ function loadMacro() {
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				console.log(data);
 				 var totalCal=0;
 				 var totalVet=0;
 				 var totalVv=0;
@@ -36,11 +45,16 @@ function loadMacro() {
 				 var onderhoud=0;
 				$(data).each(function (index) {
 					if (index === 0){
+						value = this.geboortedatum;
+						today = new Date();
+						dob = new Date(value.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+						leeftijd = today.getFullYear() - dob.getFullYear();
+					    
 	                    if (this.geslacht == "m"){
-	                        onderhoud = (66 + (13.7 * this.gewicht) + (5 * (this.lengte*100)) - (6.8 * this.leeftijd)) * this.activiteit;
+	                        onderhoud = (66 + (13.7 * this.gewicht) + (5 * this.lengte) - (6.8 * leeftijd)) * this.activiteit;
 	                    }
 	                    else if (this.geslacht == "v"){
-	                        onderhoud = (655 + (9.6 * this.gewicht) + (1.8 * (this.lengte*100)) - (4.7 * this.leeftijd)) * this.activiteit;
+	                        onderhoud = (655 + (9.6 * this.gewicht) + (1.8 * this.lengte) - (4.7 * leeftijd)) * this.activiteit;
 	                    }
 					}
 						else if (index > 0){
@@ -76,7 +90,7 @@ function loadMacro() {
 				
 				//CALORIEEN
 				if (totalCal >= minCal & totalCal <= maxCal){
-					CalStr += '<p class="macro" id="calorieen">Energie: '+kcalTotal.toFixed(0)+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt ligt tussen de richtlijn ('+minCal.toFixed(0)+'-'+maxCal.toFixed(0)+'kcal).';
+					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal.toFixed(0)+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt ligt tussen de richtlijn ('+minCal.toFixed(0)+'-'+maxCal.toFixed(0)+'kcal).';
 				}
 				else if (totalCal < minCal){
 					CalStr += '<p class="macro" id="calorieen">Energie: '+totalCal.toFixed(0)+' kcal</p><p class="advies">De hoeveelheid energie die je uit je voeding haalt is ('+(onderhoud-totalCal).toFixed(0)+'kcal) minder dan de richtlijn ('+onderhoud.toFixed(0)+'kcal).';
@@ -90,7 +104,7 @@ function loadMacro() {
 				if (pVet >= 25 & pVet <= 35){
 					VetStr += '<p class="macro" id="vet">Vet: '+totalVet.toFixed(1)+'g - '+pVet.toFixed(1)+'%</p><p class="advies">Je voeding bevat genoeg vet (tussen de 25-35%).';
 				}
-				if (pVet < 25){
+				else if (pVet < 25){
 					VetStr += '<p class="macro" id="vet">Vet: '+totalVet.toFixed(1)+'g - '+pVet.toFixed(1)+'%</p><p class="advies">Je voeding bevat niet genoeg vet (minder dan 25%).';
 				}
 				else {
@@ -158,18 +172,9 @@ function loadMacro() {
 				
 				printStr = CalStr + VetStr + VvStr + EiwitStr + KhStr + VezelsStr + ZoutStr;
 				document.getElementById('advies').innerHTML = printStr;
+				
 				}
 				else{document.getElementById('advies').innerHTML = "Er is bij deze datum geen dagboek ingevuld.";}
 			},
 		});
 }
-/*
-function setAdviezen(){
-	var cal = 1800;
-	var onderhoud = 2200;
-	if (onderhoud > 2000 && onderhoud < 2400){
-		$(".advies").append('<li><a href="#" class="item">' + item + '</a></li>');
-	}
-	
-}
-*/

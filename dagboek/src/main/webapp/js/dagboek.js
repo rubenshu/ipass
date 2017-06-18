@@ -4,8 +4,15 @@ var ingredienten = [];
 var e = document.getElementById("macro-optie");
 var selected = e.options[e.selectedIndex].value;
 
-//Inladen ingrediënten
 $(document).ready(function () {
+time = new Date().getTime() / 1000;
+		timestamp = window.sessionStorage.getItem('timestamp');
+		console.log(time, timestamp, time-timestamp);
+		if((time - timestamp) > 1200 || timestamp == null){
+			window.location.replace("index.html");
+		}
+//Inladen ingrediënten
+		else{
 	loadIngredients(selected);
 	
 	$("#datepicker").datepicker({
@@ -16,8 +23,7 @@ $(document).ready(function () {
 		    document.getElementById("add-date").innerHTML = "Mijn adviezen voor " + selectedDatepicker;
 		  }
 		});
-	
-	//Change total when other macro is selected in dagboek
+		}
 });
 
 //Load ingredients from DB
@@ -255,14 +261,6 @@ $("#macro-optie").on('change', function() {
     var valueSelected = this.value;
     loadIngredients(valueSelected);
 });
-
-//On resize, fix the two dropdown selection menu's postition's
-/*$(window).on('resize', function(){
-	var  width = $(window).width();
-	console.log(width + ' ... ' +left);
-	var left = width-500;
-	$('#autocomplete').css('left', left)
-});*/
 
 function loadTotals() {
 	totals("totaal", 3);

@@ -1,6 +1,8 @@
 package voedseldagboek.dagboek.services;
 
 import java.util.List;
+
+import javax.annotation.security.RolesAllowed;
 //import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -21,7 +23,7 @@ import voedseldagboek.dagboek.domain.ServiceProvider;
 public class IngredientResource {
 
 	@GET
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
 	public String getToday(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
 		IngredientService service = ServiceProvider.getIngredientService();
@@ -30,21 +32,31 @@ public class IngredientResource {
 	}
 	
 	@GET
+	@Path("/ingredient")
+	@RolesAllowed("admin")
+	@Produces("application/json")
+	public String getIngredient(@QueryParam("Q1") String ingredientnaam) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		JsonArray ingredientArray = buildJsonOnlyIngredientArray(service.getIngredient(ingredientnaam));
+		return ingredientArray.toString();
+	}
+	
+	@GET
 	@Path("/gebruiker")
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
 	public String getTodayGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
 		IngredientService service = ServiceProvider.getIngredientService();
 		GebruikerService service2 = ServiceProvider.getGebruikerService();
 		
-		JsonArray ingredientGebruikerArray = buildJsonIngredientGebruikerArray(service.getToday(gebruikersnaam, datum), service2.getGebruikerdata(gebruikersnaam));
+		JsonArray ingredientGebruikerArray = buildJsonIngredientGebruikerArray(service.getToday(gebruikersnaam, datum), service2.getGebruiker(gebruikersnaam));
 		
 		return ingredientGebruikerArray.toString();
 	}
 
 	@GET
 	@Path("/all")
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
 	public String getToday() {
 		IngredientService service = ServiceProvider.getIngredientService();
@@ -55,7 +67,7 @@ public class IngredientResource {
 	@GET
 	@Path("/insert")
 	@Produces("application/json")
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	public String insertIngredient(@QueryParam("Q1") int hoeveelheid, @QueryParam("Q2") String datum,@QueryParam("Q3") String ingredientnaam , @QueryParam("Q4") String gebruikersnaam) {
 		IngredientService service = ServiceProvider.getIngredientService();
 		service.insertIngredient(hoeveelheid, datum, ingredientnaam, gebruikersnaam);
@@ -67,7 +79,7 @@ public class IngredientResource {
 	@GET
 	@Path("/insertingredient")
 	@Produces("application/json")
-	//@RolesAllowed("user")
+	@RolesAllowed({"user","admin"})
 	public void insertNewIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
 		IngredientService service = ServiceProvider.getIngredientService();
 		service.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
@@ -76,6 +88,7 @@ public class IngredientResource {
 	@GET
 	@Produces("text/html")
 	@Path("/delete")
+	@RolesAllowed({"user","admin"})
 	public void deleteIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam){
 		IngredientService service = ServiceProvider.getIngredientService();
 		service.deleteIngredient(ingredientnaam, datum, gebruikersnaam);
@@ -84,9 +97,28 @@ public class IngredientResource {
 	@GET
 	@Produces("text/html")
 	@Path("/update")
+	@RolesAllowed({"user","admin"})
 	public void updateIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam, @QueryParam("Q4") int hoeveelheid){
 		IngredientService service = ServiceProvider.getIngredientService();
 		service.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
+	}
+	
+	@GET
+	@Path("/updateingredient")
+	@Produces("application/json")
+	@RolesAllowed("admin")
+	public void updateExistingIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		service.updateExistingIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+	}
+	
+	@GET
+	@Path("/deleteingredient")
+	@Produces("application/json")
+	@RolesAllowed("admin")
+	public void deleteIngredient(@QueryParam("Q1") String ingredientnaam) {
+		IngredientService service = ServiceProvider.getIngredientService();
+		service.deleteIngedient(ingredientnaam);
 	}
 	
 	private JsonArray buildJsonIngredientGebruikerArray(List<Dagboek> list, Gebruiker c) {
@@ -177,5 +209,23 @@ public class IngredientResource {
 		}
 		JsonArray c = jsonArrayBuilder.build();
 		return c;
+	}
+	
+	private JsonArray buildJsonOnlyIngredientArray(Ingredient c) {
+		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("ingredientnaam", c.getIngredientnaam());
+			job.add("calorieen", c.getCalorieen());
+			job.add("vet", c.getVet());
+			job.add("verzadigd_vet", c.getVerzadigd_vet());
+			job.add("eiwit", c.getEiwit());
+			job.add("koolhydraten", c.getKoolhydraten());
+			job.add("vezels", c.getVezels());
+			job.add("zout", c.getZout());
+
+			jsonArrayBuilder.add(job);
+		
+		JsonArray d = jsonArrayBuilder.build();
+		return d;
 	}
 }

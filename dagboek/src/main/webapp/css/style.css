@@ -16,6 +16,8 @@ button:hover {opacity: 0.8;}
 .padding-16{padding-top:16px!important;padding-bottom:16px!important}.padding-24{padding-top:24px!important;padding-bottom:24px!important}
 .padding-32{padding-top:32px!important;padding-bottom:32px!important}.padding-48{padding-top:48px!important;padding-bottom:48px!important}
 .padding-64{padding-top:64px!important;padding-bottom:64px!important}
+.usermenu{float:left;padding-left:0px !important;padding-right:0px !important;}
+.floatmenucontainer{width:100%;max-width:980px;margin:0 auto;}
 .left{float:left!important}.right{float:right!important}
 .button{border:none;display:inline-block;outline:0;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
 .shadow{box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.45), 0 2px 10px 0 rgba(0,0,0,0.12)}
@@ -42,7 +44,7 @@ button:hover {opacity: 0.8;}
 }
 
 /* Forms */
-.formst input[type=text], .formst input[type=password], .formst input[type=number], .formst input[type=date], .formst select {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
+.formst input[type=text], .formst input[type=password], .formst input[type=number], .formst input[type=date], .formst input[type=email], .formst select {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #c1c1c1;box-sizing: border-box;}
 .formst button{width: 100%;padding: 14px 20px;margin: 8px 0;}
 
 /* Dagboek page */
