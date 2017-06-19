@@ -69,6 +69,7 @@ function updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, 
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Ingrediënt succesvol opgeslagen. <br />';
 				  document.getElementById("ingredientnaam").value = "";
 				  document.getElementById("calorieen").value="";
@@ -78,6 +79,10 @@ function updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, 
 				  document.getElementById('koolhydraten').value="";
 				  document.getElementById('vezels').value="";
 				  document.getElementById('zout').value="";
+				}
+				else{
+					alert("Verwijderen niet gelukt");
+				}
 			},
 			fail : function() {
 				console.log("Failed");
@@ -124,6 +129,7 @@ function verwijderIngredient(ingredientnaam){
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Ingrediënt succesvol verwijderd. <br />';
 				  document.getElementById("ingredientnaam").value = "";
 				  document.getElementById("calorieen").value="";
@@ -133,6 +139,10 @@ function verwijderIngredient(ingredientnaam){
 				  document.getElementById('koolhydraten').value="";
 				  document.getElementById('vezels').value="";
 				  document.getElementById('zout').value="";
+			}
+			else{
+				alert("Verwijderen niet gelukt");
+			}
 			},
 			fail : function() {
 				console.log("Failed");

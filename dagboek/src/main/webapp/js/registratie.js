@@ -39,6 +39,7 @@ function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, ac
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Registratie succesvol! U kunt nu inloggen op de <a href="index.html">homepagina</a> <br />';
 				$('html, body').animate({ scrollTop: 0 }, 'fast');
 				document.getElementById('gebruikersnaam').value = "";
@@ -52,6 +53,10 @@ function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, ac
 				document.getElementById('lengte').value = "";
 				document.getElementById('geslacht').value = "";
 				document.getElementById('activiteit').value = "";
+				}
+				else{
+					alert("Registratie niet gelukt.");
+				}
 			},
 			fail : function() {
 				console.log("Failed");

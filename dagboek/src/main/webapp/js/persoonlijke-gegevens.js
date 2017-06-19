@@ -34,8 +34,14 @@ function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
+				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Gegevens succesvol opgeslagen. <br />';
 				loadGegevens();
+			}
+				else{
+					alert("Opslaan niet gelukt.");
+				}
+
 			},
 			fail : function() {
 				console.log("Failed");

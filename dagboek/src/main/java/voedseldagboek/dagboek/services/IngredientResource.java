@@ -102,7 +102,6 @@ public class IngredientResource {
 	//Update ingredient values
 	@GET
 	@Path("/updateingredient")
-	@Produces("application/json")
 	@RolesAllowed("admin")
 	public boolean updateExistingIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
 		IngredientService service = ServiceProvider.getIngredientService();
@@ -112,7 +111,6 @@ public class IngredientResource {
 	//Delete ingredient entry
 	@GET
 	@Path("/deleteingredient")
-	@Produces("application/json")
 	@RolesAllowed("admin")
 	public boolean deleteIngredient(@QueryParam("Q1") String ingredientnaam) {
 		IngredientService service = ServiceProvider.getIngredientService();
