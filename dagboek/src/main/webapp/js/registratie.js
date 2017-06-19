@@ -38,7 +38,19 @@ function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, ac
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
-				console.log("Succes");
+				document.getElementById('message').innerHTML = 'Registratie succesvol! U kunt nu inloggen op de <a href="index.html">homepagina</a> <br />';
+				$('html, body').animate({ scrollTop: 0 }, 'fast');
+				document.getElementById('gebruikersnaam').value = "";
+				document.getElementById('wachtwoord').value = "";
+				document.getElementById('wachtwoord-verificatie').value = "";
+				document.getElementById('emailadres').value = "";
+				document.getElementById('voornaam').value = "";
+				document.getElementById('achternaam').value = "";
+				document.getElementById('geboortedatum').value = "";
+				document.getElementById('gewicht').value = "";
+				document.getElementById('lengte').value = "";
+				document.getElementById('geslacht').value = "";
+				document.getElementById('activiteit').value = "";
 			},
 			fail : function() {
 				console.log("Failed");
@@ -68,7 +80,7 @@ $(document).ready(function() {
 		  else{
 			  alert("Wachtwoorden komen niet overeen.");
 			  document.getElementById('wachtwoord').value = "";
-			  document.getElementById('wachtwoord_verificatie').value = "";
+			  document.getElementById('wachtwoord-verificatie').value = "";
 		  }
 	}
 	  else{

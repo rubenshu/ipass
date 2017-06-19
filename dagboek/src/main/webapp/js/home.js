@@ -67,7 +67,7 @@ function loadMenuItem(){
 			success : function(data) {
 				$(data).each(function (index) {
 					document.getElementById('gebruikersnaammenu').innerHTML = this.voornaam;
-					
+					console.log(this.role);
 				if (this.role == "admin"){
 					var adminli = '<li><a href="ingredient-wijzigen.html">Ingrediënt wijzigen</a></li>';
 					$(".autouser li:last-child").before (adminli);

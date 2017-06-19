@@ -28,8 +28,8 @@ public class DagboekDAO extends BaseDAO {
 				int hoeveelheid = dbResultSet.getInt("hoeveelheid");
 				Date datum = dbResultSet.getDate("datum");
 
-				String ingredientnaam = dbResultSet.getString("ingredientnaam");
-				Ingredient ingredient = ingredientDAO.findByString(ingredientnaam);
+				String FK_ingredientnaam = dbResultSet.getString("FK_ingredientnaam");
+				Ingredient ingredient = ingredientDAO.findByString(FK_ingredientnaam);
 
 				String gebruikersnaam = dbResultSet.getString("FK_gebruikersnaam");
 				Gebruiker gebruikerlogin = gebruikerDAO.findByString(gebruikersnaam);
@@ -47,19 +47,14 @@ public class DagboekDAO extends BaseDAO {
 		return results;
 	}
 
-	// public List<Dagboek> findAll() {
-	// return selectIngredients("SELECT ingredientnaam, calorieen, vet,
-	// verzadigd_vet, eiwit, koolhydraten, vezels, zout FROM ingredient");
-	// }
-
 	public List<Dagboek> findToday(String huidigeGebruiker, String datum) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"+ huidigeGebruiker + "' AND datum = '" + datum + "'");
+				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"+ huidigeGebruiker + "' AND datum = '" + datum + "'");
 	}
 
 	public Dagboek findById(int dagboek_id) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "+ dagboek_id).get(0);
+				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "+ dagboek_id).get(0);
 	}
 
 	public void insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
@@ -70,7 +65,7 @@ public class DagboekDAO extends BaseDAO {
 			ResultSet dbResultSet = stmt.executeQuery(query);
 		    dbResultSet.next();
 		    int maxId = dbResultSet.getInt(1) + 1;
-			stmt.execute("insert into dagboek(dagboek_id, hoeveelheid, datum, ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
+			stmt.execute("insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
 			
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -78,7 +73,7 @@ public class DagboekDAO extends BaseDAO {
 	}
 
 	public void deleteIngredient(String ingredientnaam, String datum, String gebruikersnaam) {
-				String query = "DELETE FROM dagboek WHERE ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
+				String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
 						
 				try (Connection con = getConnection()) {
 					
@@ -91,7 +86,7 @@ public class DagboekDAO extends BaseDAO {
 	}
 	
 	public void updateIngredient(String ingredientnaam, String datum, String gebruikersnaam, int hoeveelheid) {
-		String query = "UPDATE dagboek SET hoeveelheid = '"+hoeveelheid+"' WHERE ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
+		String query = "UPDATE dagboek SET hoeveelheid = '"+hoeveelheid+"' WHERE FK_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
 				
 		try (Connection con = getConnection()) {
 			
@@ -104,7 +99,7 @@ public class DagboekDAO extends BaseDAO {
 }
 
 	public void deleteSoloIngredient(String ingredientnaam) {
-		String query = "DELETE FROM dagboek WHERE ingredientnaam = '"+ingredientnaam+"'";
+		String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"'";
 		String query2 = "DELETE FROM ingredient WHERE ingredientnaam = '"+ingredientnaam+"'";
 		
 		try (Connection con = super.getConnection()) {

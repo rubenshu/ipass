@@ -96,11 +96,13 @@ function loadMacro() {
 				kcalKh = totalKh * 4;
 				kcalEiwit = totalEiwit * 4;
 				kcalVet = totalVet * 10;
+				kcalVv = totalVv * 10;
 				pVet = kcalVet / totalCal*100;
 				pKh = kcalKh / totalCal *100;
-				pVv = totalVv / totalVet*100;
+				pVv = kcalVv / totalCal *100;
 				pEiwit = kcalEiwit / totalCal *100;
 				pVezels = totalVezels / totalCal * 1000;
+				console.log(kcalKh, kcalEiwit, kcalVet, totalCal);
 				var CalStr="";
 				var VetStr="";
 				var VvStr="";

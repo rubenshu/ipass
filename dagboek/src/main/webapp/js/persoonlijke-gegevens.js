@@ -33,7 +33,7 @@ function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 			},
 			success : function(data) {
-				document.getElementById('message').innerHTML = 'Ingrediënt succesvol opgeslagen. <br />';
+				document.getElementById('message').innerHTML = 'Gegevens succesvol opgeslagen. <br />';
 				loadGegevens();
 			},
 			fail : function() {
@@ -86,6 +86,17 @@ $(document).on('click', '#opslaan', function() {
 		  else{
 			  alert("Niet alle waarden zijn ingevuld.");
 		  }
+});
+
+
+$("#gebruikersnaammenu, #autouser").hover(function(){
+	console.log("Y");
+    document.getElementById("autouser").style.display = "block";
+},function(){
+    document.getElementById("autouser").style.display = "none";
+});
+$(document).on('click', '#gebruikersnaammenu a', function() {
+  document.getElementById("autouser").style.display = "none";
 });
 
 //Menu Item + Name Display

@@ -5,7 +5,7 @@ CREATE TABLE gebruiker (
 	voornaam varchar(20) NOT NULL,
 	achternaam varchar(40) NOT NULL,
 	geboortedatum varchar(10) NOT NULL,
-	lengte decimal(3) NOT NULL,
+	lengte integer NOT NULL,
 	gewicht decimal(4,1) NOT NULL,
 	geslacht char(1) NOT NULL,
 	activiteit decimal(4,3) NOT NULL,
@@ -14,14 +14,14 @@ CREATE TABLE gebruiker (
 );
 
 CREATE TABLE ingredient (
-	ingredientnaam varchar(40) NOT NULL UNIQUE ON DELETE RESTRICT,
+	ingredientnaam varchar(40) NOT NULL UNIQUE,
 	calorieen integer NOT NULL,
-	vet double NOT NULL,
-	verzadigd_vet double NOT NULL,
-	eiwit double NOT NULL,
-	koolhydraten double NOT NULL,
-	vezels double NOT NULL,
-	zout double NOT NULL,
+	vet numeric NOT NULL,
+	verzadigd_vet numeric NOT NULL,
+	eiwit numeric NOT NULL,
+	koolhydraten numeric NOT NULL,
+	vezels numeric NOT NULL,
+	zout numeric NOT NULL,
     PRIMARY KEY (ingredientnaam)
 );
 
@@ -29,11 +29,11 @@ CREATE TABLE dagboek (
 	dagboek_id integer NOT NULL UNIQUE,
 	hoeveelheid integer NOT NULL,
 	datum varchar(10) NOT NULL,
-	ingredientnaam varchar(40),
-	FK_gebruikersnaam varchar(40),
+	FK_ingredientnaam varchar(40),
+	FK_gebruikersnaam varchar(20),
     PRIMARY KEY (dagboek_id),
-	FOREIGN KEY (FK_ingredientnaam) REFERENCES ingredient ON DELETE CASCADE,
-	FOREIGN KEY (FK_gebruikersnaam) REFERENCES gebruikerlogin (gebruikersnaam)
+	FOREIGN KEY (FK_ingredientnaam) REFERENCES ingredient (ingredientnaam) ON DELETE CASCADE,
+	FOREIGN KEY (FK_gebruikersnaam) REFERENCES gebruiker (gebruikersnaam)
 );
 
 INSERT INTO "ingredient" VALUES ('Banaan', 89, 0.9, 0.3, 1.2, 20.4, 1.9, 0.0);
