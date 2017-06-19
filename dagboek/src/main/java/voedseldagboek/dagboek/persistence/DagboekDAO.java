@@ -77,7 +77,7 @@ public class DagboekDAO extends BaseDAO {
 		    dbResultSet.next();
 		    int maxId = dbResultSet.getInt(1) + 1;
 		    String query2 = "insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')";
-		    if (stmt.executeUpdate(query2) == 1) { // 1 row updated!
+		    if (stmt.executeUpdate(query2) == 1) { // Statement succesful
 		    	result = true;
 		    }
 		} catch (SQLException sqle) {
@@ -112,7 +112,7 @@ public class DagboekDAO extends BaseDAO {
 		
 		try (Connection con = super.getConnection()) {
 	Statement stmt = con.createStatement();
-	if (stmt.executeUpdate(query) == 1 & stmt.executeUpdate(query2) == 1) { // 1 row updated!
+	if (stmt.executeUpdate(query) == 1 & stmt.executeUpdate(query2) == 1) { // Statement succesful
 		result = true;
 	}
 	

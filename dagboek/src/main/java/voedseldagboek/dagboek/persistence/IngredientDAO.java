@@ -62,7 +62,7 @@ public class IngredientDAO extends BaseDAO {
 			
 			try (Connection con = super.getConnection()) {
 				Statement stmt = con.createStatement();
-				if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+				if (stmt.executeUpdate(query) == 1) { // Statement succesful
 				result = true;
 				}
 				
@@ -80,7 +80,7 @@ public class IngredientDAO extends BaseDAO {
 						
 				try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
-			if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+			if (stmt.executeUpdate(query) == 1) { // Statement succesful
 				result = true;
 			}
 			

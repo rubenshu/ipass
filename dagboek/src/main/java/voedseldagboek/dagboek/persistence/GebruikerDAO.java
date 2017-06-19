@@ -84,7 +84,7 @@ public class GebruikerDAO extends BaseDAO {
 				String query = "insert into gebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit, role) values('"+gebruikersnaam+"','"+wachtwoord+"','"+emailadres+"','"+voornaam+"','" + achternaam + "','" + geboortedatum + "','" + gewicht + "','" + lengte + "','" + geslacht + "','" + activiteit + "','user')";
 				try (Connection con = super.getConnection()) {
 					Statement stmt = con.createStatement();
-					if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+					if (stmt.executeUpdate(query) == 1) { // Statement succesful
 						result = true;
 					}
 				} catch (SQLException sqle) {
@@ -101,7 +101,7 @@ public class GebruikerDAO extends BaseDAO {
 		
 		try (Connection con = super.getConnection()) {
 	Statement stmt = con.createStatement();
-	if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+	if (stmt.executeUpdate(query) == 1) { // Statement succesful
 	result = true;
 	}
 	
