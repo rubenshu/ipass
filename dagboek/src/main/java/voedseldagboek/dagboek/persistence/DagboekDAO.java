@@ -67,7 +67,8 @@ public class DagboekDAO extends BaseDAO {
 	}
 
 	//Insert a new ingredient into the dagboek from selected date&user
-	public void insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
+	public boolean insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
+		boolean result = false;
 		String query = "select max(dagboek_id) from dagboek";
 		
 		try (Connection con = super.getConnection()) {
@@ -75,11 +76,14 @@ public class DagboekDAO extends BaseDAO {
 			ResultSet dbResultSet = stmt.executeQuery(query);
 		    dbResultSet.next();
 		    int maxId = dbResultSet.getInt(1) + 1;
-			stmt.execute("insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')");
-			
+		    String query2 = "insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')";
+		    if (stmt.executeUpdate(query2) == 1) { // 1 row updated!
+		    	result = true;
+		    }
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
+		return result;
 	}
 
 	// Delete ingredient from dagboek from selected user&datum
@@ -101,18 +105,21 @@ public class DagboekDAO extends BaseDAO {
 	}
 
 	//Delete all dagboek entry's from specific ingredient & delete ingredient from ingredients
-	public void deleteSoloIngredient(String ingredientnaam) {
+	public boolean deleteSoloIngredient(String ingredientnaam) {
+		boolean result = false;
 		String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"'";
 		String query2 = "DELETE FROM ingredient WHERE ingredientnaam = '"+ingredientnaam+"'";
 		
 		try (Connection con = super.getConnection()) {
 	Statement stmt = con.createStatement();
-	stmt.execute(query);
-	stmt.execute(query2);
+	if (stmt.executeUpdate(query) == 1 & stmt.executeUpdate(query2) == 1) { // 1 row updated!
+		result = true;
+	}
 	
 } catch (SQLException sqle) {
 	sqle.printStackTrace();
 }
+		return result;
 	}
 
 }

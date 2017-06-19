@@ -30,9 +30,9 @@ public class GebruikerResource {
 	@GET
 	@Path("/insertgebruiker")
 	@Produces("application/json")
-	public void insertNewGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
+	public boolean insertNewGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
-		service.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
+		return service.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
 	}
 	
 	//Update an existing gebruiker
@@ -40,9 +40,9 @@ public class GebruikerResource {
 	@Path("/updategebruiker")
 	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
-	public void updateGebruiker(@QueryParam("Q1") String voornaam, @QueryParam("Q2") String achternaam, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String geboortedatum, @QueryParam("Q5") double gewicht, @QueryParam("Q6") int lengte, @QueryParam("Q7") String geslacht, @QueryParam("Q8") double activiteit, @QueryParam("Q9") String gebruikersnaam){
+	public boolean updateGebruiker(@QueryParam("Q1") String voornaam, @QueryParam("Q2") String achternaam, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String geboortedatum, @QueryParam("Q5") double gewicht, @QueryParam("Q6") int lengte, @QueryParam("Q7") String geslacht, @QueryParam("Q8") double activiteit, @QueryParam("Q9") String gebruikersnaam){
 		GebruikerService service = ServiceProvider.getGebruikerService();
-		service.updateGebruiker(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
+		return service.updateGebruiker(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
 	}
 	
 	// Build a new JsonArray with database values from gebruiker

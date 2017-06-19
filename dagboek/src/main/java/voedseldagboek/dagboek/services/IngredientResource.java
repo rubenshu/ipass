@@ -86,9 +86,9 @@ public class IngredientResource {
 	@Path("/insertingredient")
 	@Produces("application/json")
 	@RolesAllowed({"user","admin"})
-	public void insertNewIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
+	public boolean insertNewIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
 		IngredientService service = ServiceProvider.getIngredientService();
-		service.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+		return service.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
 	}
 	
 	//delete ingredient from dagboek
@@ -105,9 +105,9 @@ public class IngredientResource {
 	@Path("/updateingredient")
 	@Produces("application/json")
 	@RolesAllowed("admin")
-	public void updateExistingIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
+	public boolean updateExistingIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
 		IngredientService service = ServiceProvider.getIngredientService();
-		service.updateExistingIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
+		return service.updateExistingIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
 	}
 	
 	//Delete ingredient entry
@@ -115,9 +115,9 @@ public class IngredientResource {
 	@Path("/deleteingredient")
 	@Produces("application/json")
 	@RolesAllowed("admin")
-	public void deleteIngredient(@QueryParam("Q1") String ingredientnaam) {
+	public boolean deleteIngredient(@QueryParam("Q1") String ingredientnaam) {
 		IngredientService service = ServiceProvider.getIngredientService();
-		service.deleteIngedient(ingredientnaam);
+		return service.deleteIngedient(ingredientnaam);
 	}
 	
 	// JsonArray builders: takes the return from called function & returns the processed values needed

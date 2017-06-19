@@ -78,28 +78,36 @@ public class GebruikerDAO extends BaseDAO {
 	}
 
 	//Insert a new gebruiker (registration)
-	public void insertNewGebruiker(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam,
+	public boolean insertNewGebruiker(String gebruikersnaam, String wachtwoord, String emailadres, String voornaam, String achternaam,
 			String geboortedatum, double gewicht, int lengte, String geslacht, double activiteit) {
+		boolean result = false;
 				String query = "insert into gebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit, role) values('"+gebruikersnaam+"','"+wachtwoord+"','"+emailadres+"','"+voornaam+"','" + achternaam + "','" + geboortedatum + "','" + gewicht + "','" + lengte + "','" + geslacht + "','" + activiteit + "','user')";
 				try (Connection con = super.getConnection()) {
 					Statement stmt = con.createStatement();
-					stmt.execute(query);
+					if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+						result = true;
+					}
 				} catch (SQLException sqle) {
 					sqle.printStackTrace();
 		}
+				return result;
 	}
 
 	//Update an existing gebruiker
-	public void updateGebruiker(String voornaam, String achternaam, String emailadres, String geboortedatum,
+	public boolean updateGebruiker(String voornaam, String achternaam, String emailadres, String geboortedatum,
 			double gewicht, int lengte, String geslacht, double activiteit, String gebruikersnaam) {
+		boolean result = false;
 		String query = "UPDATE gebruiker SET voornaam = '"+voornaam+"', achternaam = '" + achternaam + "', emailadres = '" + emailadres + "', geboortedatum = '" + geboortedatum + "', gewicht = '" + gewicht + "', lengte = '" + lengte + "', geslacht = '" + geslacht + "', activiteit = '" + activiteit + "' WHERE gebruikersnaam = '"+gebruikersnaam+"'";
 		
 		try (Connection con = super.getConnection()) {
 	Statement stmt = con.createStatement();
-	stmt.execute(query);
+	if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+	result = true;
+	}
 	
 } catch (SQLException sqle) {
 	sqle.printStackTrace();
 }
+		return result;
 }
 	}

@@ -55,30 +55,38 @@ public class IngredientDAO extends BaseDAO {
 	}
 
 	//Insert a new ingredient
-	public void insertNewIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
+	public boolean insertNewIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
 			double eiwit, double koolhydraten, double vezels, double zout) {
+		boolean result = false;
 			String query = "insert into ingredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout) values('"+ingredientnaam+"','" + calorieen + "','" + vet + "','" + verzadigd_vet + "','" + eiwit + "','" + koolhydraten + "','" + vezels + "','" + zout + "')";
 			
 			try (Connection con = super.getConnection()) {
 				Statement stmt = con.createStatement();
-				stmt.execute(query);
+				if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+				result = true;
+				}
 				
 			} catch (SQLException sqle) {
 				sqle.printStackTrace();
 		}
+			return result;
 	}
 
 	//Update an existing ingredient
-	public void updateExistingIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
+	public boolean updateExistingIngredient(String ingredientnaam, int calorieen, double vet, double verzadigd_vet,
 			double eiwit, double koolhydraten, double vezels, double zout) {
+		boolean result = false;
 		String query = "UPDATE ingredient SET ingredientnaam = '"+ingredientnaam+"', calorieen = '" + calorieen + "', vet = '" + vet + "', verzadigd_vet = '" + verzadigd_vet + "', eiwit = '" + eiwit + "', koolhydraten = '" + koolhydraten + "', vezels = '" + vezels + "', zout = '" + zout + "' WHERE ingredientnaam = '"+ingredientnaam+"'";
 						
 				try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
-			stmt.execute(query);
+			if (stmt.executeUpdate(query) == 1) { // 1 row updated!
+				result = true;
+			}
 			
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 	}
+				return result;
 	}
 }
