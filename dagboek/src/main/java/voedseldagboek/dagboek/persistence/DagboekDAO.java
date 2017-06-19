@@ -83,17 +83,21 @@ public class DagboekDAO extends BaseDAO {
 	}
 
 	// Delete ingredient from dagboek from selected user&datum
-	public void deleteIngredient(String ingredientnaam, String datum, String gebruikersnaam) {
+	public boolean deleteIngredient(String ingredientnaam, String datum, String gebruikersnaam) {
+				boolean result = false;
 				String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
 						
 				try (Connection con = getConnection()) {
 					
 					Statement stmt = con.createStatement();
-					stmt.executeUpdate(query);
+					if (stmt.executeUpdate(query) == 1){ //Succesful delete
+					result = true;
+					}
 							
 				} catch (SQLException sqle) {
 					sqle.printStackTrace();
 				}
+			return result;
 	}
 
 	//Delete all dagboek entry's from specific ingredient & delete ingredient from ingredients

@@ -121,10 +121,16 @@ function deleteIngredient(ingredientnaam){
 			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 		},
 		success : function(data) {
+			console.log(data);
+			if (data == true){
 			var index = ingredientenVandaag.indexOf(ingredientnaam);
 			ingredientenVandaag.splice(index, 1);
 			$(".table td:contains("+ingredientnaam+")").parent().remove();
 			loadTotals();
+			}
+			else{
+				alert("Verwijderen niet gelukt");
+			}
 		},
 		fail : function() {
 			console.log("Failed");

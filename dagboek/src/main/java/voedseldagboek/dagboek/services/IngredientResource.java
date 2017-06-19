@@ -96,9 +96,9 @@ public class IngredientResource {
 	@Produces("text/html")
 	@Path("/delete")
 	@RolesAllowed({"user","admin"})
-	public void deleteIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam){
+	public boolean deleteIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam){
 		IngredientService service = ServiceProvider.getIngredientService();
-		service.deleteIngredient(ingredientnaam, datum, gebruikersnaam);
+		return(service.deleteIngredient(ingredientnaam, datum, gebruikersnaam));
 	}
 	
 	//Update ingredient values
