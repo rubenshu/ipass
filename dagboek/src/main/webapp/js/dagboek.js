@@ -60,7 +60,7 @@ function loadIngredients(selected) {
 }
 
 
-
+//Loading all ingredients
 function loadAllIngredients(){
 	var url = "restservices/ingredients/all";
 		$.ajax({
@@ -80,6 +80,7 @@ function loadAllIngredients(){
 	return ingredienten;
 }
 
+//Inserting new ingredient
 function insertIngredient(ingredientnaam, hoeveelheid){
 	var datum = document.getElementById("datepicker").value;
 	var username = window.sessionStorage.getItem("huidigeGebruiker");
@@ -107,6 +108,7 @@ function insertIngredient(ingredientnaam, hoeveelheid){
 		});
 }
 
+//Delete an ingredient
 function deleteIngredient(ingredientnaam){
 	var datum = document.getElementById("datepicker").value;
 	var username = window.sessionStorage.getItem("huidigeGebruiker");
@@ -122,28 +124,6 @@ function deleteIngredient(ingredientnaam){
 			var index = ingredientenVandaag.indexOf(ingredientnaam);
 			ingredientenVandaag.splice(index, 1);
 			$(".table td:contains("+ingredientnaam+")").parent().remove();
-			loadTotals();
-		},
-		fail : function() {
-			console.log("Failed");
-		},
-	});
-}
-
-function updateIngredient(ingredientnaam){
-	var datum = document.getElementById("datepicker").value;
-	var username = window.sessionStorage.getItem("huidigeGebruiker");
-	var url = "restservices/ingredients/update?&Q1=" + ingredientnaam + "&Q2=" + datum + "&Q3=" + username;
-	$.ajax({
-		url : url,
-		method : "GET",
-		beforeSend : function(xhr) {
-			var token = window.sessionStorage.getItem("sessionToken");
-			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-		},
-		success : function(data) {
-			console.log("Succes");
-			//$(".table td:contains("+ingredientnaam+")").parent().remove();
 			loadTotals();
 		},
 		fail : function() {
@@ -278,7 +258,7 @@ function loadTotals() {
 	totals("totaal", 3);
 }
 
-
+//Logout
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');

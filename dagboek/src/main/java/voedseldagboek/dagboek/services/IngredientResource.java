@@ -22,15 +22,17 @@ import voedseldagboek.dagboek.domain.ServiceProvider;
 @Path("/ingredients")
 public class IngredientResource {
 
+	//Return ingredients of selected day & hoeveelheid of ingredient
 	@GET
 	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
-	public String getToday(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
+	public String getTodayAmount(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String datum) {
 		IngredientService service = ServiceProvider.getIngredientService();
 		JsonArray ingredientArray = buildJsonIngredientArray(service.getToday(gebruikersnaam, datum));
 		return ingredientArray.toString();
 	}
 	
+	//Return single ingredient values
 	@GET
 	@Path("/ingredient")
 	@RolesAllowed("admin")
@@ -41,6 +43,7 @@ public class IngredientResource {
 		return ingredientArray.toString();
 	}
 	
+	//Return gebruiker & all ingredients of selected date
 	@GET
 	@Path("/gebruiker")
 	@RolesAllowed({"user","admin"})
@@ -54,16 +57,18 @@ public class IngredientResource {
 		return ingredientGebruikerArray.toString();
 	}
 
+	//Return all ingredients
 	@GET
 	@Path("/all")
 	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
-	public String getToday() {
+	public String getAll() {
 		IngredientService service = ServiceProvider.getIngredientService();
 		JsonArray ingredientArray = buildJsonAllIngredientArray(service.getAll());
 		return ingredientArray.toString();
 	}
 	
+	//Insert new dagboek entry & return ingredient+amount
 	@GET
 	@Path("/insert")
 	@Produces("application/json")
@@ -76,6 +81,7 @@ public class IngredientResource {
 		return ingredientArray.toString();
 	}
 	
+	//Insert new ingredient
 	@GET
 	@Path("/insertingredient")
 	@Produces("application/json")
@@ -85,6 +91,7 @@ public class IngredientResource {
 		service.insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
 	}
 	
+	//delete ingredient from dagboek
 	@GET
 	@Produces("text/html")
 	@Path("/delete")
@@ -94,15 +101,7 @@ public class IngredientResource {
 		service.deleteIngredient(ingredientnaam, datum, gebruikersnaam);
 	}
 	
-	@GET
-	@Produces("text/html")
-	@Path("/update")
-	@RolesAllowed({"user","admin"})
-	public void updateIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam, @QueryParam("Q4") int hoeveelheid){
-		IngredientService service = ServiceProvider.getIngredientService();
-		service.updateIngredient(ingredientnaam, datum, gebruikersnaam, hoeveelheid);
-	}
-	
+	//Update ingredient values
 	@GET
 	@Path("/updateingredient")
 	@Produces("application/json")
@@ -112,6 +111,7 @@ public class IngredientResource {
 		service.updateExistingIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout);
 	}
 	
+	//Delete ingredient entry
 	@GET
 	@Path("/deleteingredient")
 	@Produces("application/json")
@@ -121,6 +121,7 @@ public class IngredientResource {
 		service.deleteIngedient(ingredientnaam);
 	}
 	
+	// JsonArray builders: takes the return from called function & returns the processed values needed
 	private JsonArray buildJsonIngredientGebruikerArray(List<Dagboek> list, Gebruiker c) {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 

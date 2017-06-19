@@ -12,7 +12,7 @@ $(document).ready(function () {
 	}
 });
 
-
+//Logout
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');
@@ -23,6 +23,7 @@ $(document).ready(function() {
 
 });
 
+//Update gegevens
 function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam){
 	var url = "restservices/gebruiker/updategebruiker?Q1=" + voornaam + "&Q2=" + achternaam + "&Q3=" + emailadres + "&Q4=" + geboortedatum + "&Q5=" + gewicht + "&Q6=" + lengte + "&Q7=" + geslacht + "&Q8=" + activiteit + "&Q9=" + gebruikersnaam;
 		$.ajax({
@@ -42,6 +43,7 @@ function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht
 		});
 }
 
+//Load gegevens
 function loadGegevens(){
 	var url = "restservices/gebruiker?Q1=" + window.sessionStorage.getItem("huidigeGebruiker");
 		$.ajax({
@@ -88,7 +90,7 @@ $(document).on('click', '#opslaan', function() {
 		  }
 });
 
-
+//Usermenu
 $("#gebruikersnaammenu, #autouser").hover(function(){
 	console.log("Y");
     document.getElementById("autouser").style.display = "block";

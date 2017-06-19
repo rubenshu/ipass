@@ -8,6 +8,7 @@ $(document).ready(function() {
 	}
 });
 
+//Logout & usermenu
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');

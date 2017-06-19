@@ -7,7 +7,7 @@ $(document).ready(function () {
 	}
 });
 
-
+//Logout & user menu
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');
@@ -28,6 +28,7 @@ $(document).ready(function() {
 
 });
 
+//Insert new gebruiker
 function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit){
 	var url = "restservices/gebruiker/insertgebruiker?Q1=" + gebruikersnaam + "&Q2=" + wachtwoord + "&Q3=" + emailadres + "&Q4=" + voornaam + "&Q5=" + achternaam + "&Q6=" + geboortedatum + "&Q7=" + gewicht + "&Q8=" + lengte + "&Q9=" + geslacht+ "&Q10=" + activiteit;
 		$.ajax({

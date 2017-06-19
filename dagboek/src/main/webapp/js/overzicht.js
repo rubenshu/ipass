@@ -20,7 +20,7 @@ $(document).ready(function () {
 	}
 });
 
-
+//Logout & user menu
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');

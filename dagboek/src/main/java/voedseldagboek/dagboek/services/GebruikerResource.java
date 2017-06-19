@@ -16,6 +16,7 @@ import voedseldagboek.dagboek.domain.ServiceProvider;
 @Path("/gebruiker")
 public class GebruikerResource {
 
+	//Return information from 1 gebruiker
 	@GET
 	@RolesAllowed({"user","admin"})
 	@Produces("application/json")
@@ -25,14 +26,16 @@ public class GebruikerResource {
 		return gebruikerArray.toString();
 	}
 	
+	//Insert a new gebruiker (registration)
 	@GET
 	@Path("/insertgebruiker")
 	@Produces("application/json")
-	public void insertNewIngredient(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
+	public void insertNewGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
 		service.insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, achternaam, geboortedatum, gewicht, lengte, geslacht, activiteit);
 	}
 	
+	//Update an existing gebruiker
 	@GET
 	@Path("/updategebruiker")
 	@RolesAllowed({"user","admin"})
@@ -42,7 +45,7 @@ public class GebruikerResource {
 		service.updateGebruiker(voornaam, achternaam, emailadres, geboortedatum, gewicht, lengte, geslacht, activiteit, gebruikersnaam);
 	}
 	
-	
+	// Build a new JsonArray with database values from gebruiker
 	private JsonArray buildJsonGebruikerArray(Gebruiker c) {
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 

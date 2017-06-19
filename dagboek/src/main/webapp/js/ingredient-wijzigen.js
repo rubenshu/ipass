@@ -12,7 +12,7 @@ $(document).ready(function () {
 	}
 });
 
-
+//Logout & user menu
 $(document).ready(function() {
 	$(document).on('click', '#logout', function() {
 		window.sessionStorage.removeItem('timestamp');
@@ -37,7 +37,7 @@ $(document).ready(function() {
 var ingredienten = [];
 var inputBox = document.getElementById('ingredientnaam');
 
-
+//Loading all ingredients
 function loadAllIngredients(){
 	var url = "restservices/ingredients/all";
 		$.ajax({
@@ -58,6 +58,7 @@ function loadAllIngredients(){
 	return ingredienten;
 }
 
+//Updating an existing ingredient
 function updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, koolhydraten, vezels, zout){
 	var url = "restservices/ingredients/updateingredient?Q1=" + ingredientnaam + "&Q2=" + calorieen + "&Q3=" + vet + "&Q4=" + verzadigd_vet + "&Q5=" + eiwit + "&Q6=" + koolhydraten + "&Q7=" + vezels + "&Q8=" + zout;
 		$.ajax({
@@ -84,6 +85,7 @@ function updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, 
 		});
 }
 
+//Load an ingredient
 function loadIngredient(ingredientnaam){
 	var url = "restservices/ingredients/ingredient?Q1=" + ingredientnaam;
 		$.ajax({
@@ -111,6 +113,7 @@ function loadIngredient(ingredientnaam){
 		});
 }
 
+//Remove an ingredient
 function verwijderIngredient(ingredientnaam){
 	var url = "restservices/ingredients/deleteingredient?Q1=" + ingredientnaam;
 		$.ajax({
