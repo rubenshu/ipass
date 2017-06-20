@@ -2,7 +2,6 @@
 $(document).ready(function () {
 	time = new Date().getTime() / 1000;
 	timestamp = window.sessionStorage.getItem('timestamp');
-	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
 	}
@@ -36,6 +35,7 @@ function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht
 			success : function(data) {
 				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Gegevens succesvol opgeslagen. <br />';
+				$('html, body').animate({ scrollTop: 0 }, 'fast');
 				loadGegevens();
 			}
 				else{
@@ -98,7 +98,6 @@ $(document).on('click', '#opslaan', function() {
 
 //Usermenu
 $("#gebruikersnaammenu, #autouser").hover(function(){
-	console.log("Y");
     document.getElementById("autouser").style.display = "block";
 },function(){
     document.getElementById("autouser").style.display = "none";

@@ -1,7 +1,6 @@
 $(document).ready(function () {
 	time = new Date().getTime() / 1000;
 	timestamp = window.sessionStorage.getItem('timestamp');
-	console.log(time, timestamp, time-timestamp);
 	if((time - timestamp) > 1200 || timestamp == null){
 		window.location.replace("index.html");
 	}
@@ -20,7 +19,6 @@ $(document).ready(function() {
 	  });
 	
 	$("#gebruikersnaammenu, #autouser").hover(function(){
-		console.log("Y");
 	    document.getElementById("autouser").style.display = "block";
 	},function(){
 	    document.getElementById("autouser").style.display = "none";
@@ -44,6 +42,7 @@ function insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwi
 			},
 			success : function(data) {
 				document.getElementById('message').innerHTML = 'Ingrediënt succesvol toegevoegd. <br />';
+				$('html, body').animate({ scrollTop: 0 }, 'fast');
 				  document.getElementById("ingredientnaam").value = "";
 				  document.getElementById("calorieen").value="";
 				  document.getElementById('vet').value="";

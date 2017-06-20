@@ -1,7 +1,6 @@
 $(document).ready(function () {
 	time = new Date().getTime() / 1000;
 	timestamp = window.sessionStorage.getItem('timestamp');
-	console.log(time, timestamp, time-timestamp);
 	if(timestamp != null){
 		window.location.replace("index.html");
 	}
@@ -17,7 +16,6 @@ $(document).ready(function() {
 	  });
 	
 	$("#gebruikersnaammenu, #autouser").hover(function(){
-		console.log("Y");
 	    document.getElementById("autouser").style.display = "block";
 	},function(){
 	    document.getElementById("autouser").style.display = "none";

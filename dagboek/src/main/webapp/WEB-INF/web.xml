@@ -25,6 +25,16 @@
 		<servlet-name>Jersey REST Service</servlet-name>
 		<url-pattern>/restservices/*</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+<error-code>404</error-code>
+<location>/errorpage.html</location>
+</error-page>
+	<error-page>
+<error-code>500</error-code>
+<location>/errorpage.html</location>
+</error-page>
+	
 
 
 </web-app>
