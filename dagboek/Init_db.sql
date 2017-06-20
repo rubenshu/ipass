@@ -36,13 +36,19 @@ CREATE TABLE dagboek (
 	FOREIGN KEY (FK_gebruikersnaam) REFERENCES gebruiker (gebruikersnaam)
 );
 
+INSERT INTO "ingredient" VALUES ('Meergranen biscuits', 503, 24.5, 12, 7.3, 63.4, 5.2, 0.4);
+INSERT INTO "ingredient" VALUES ('Chocolade, puur, 85%', 585, 47, 29, 11.2, 22, 0, 0.03);
+INSERT INTO "ingredient" VALUES ('Cashewnoten', 44, 7.8, 18, 30, 3.3, 0.03);
+INSERT INTO "ingredient" VALUES ('Schouderham', 100, 6.2, 2.1, 16.4, 2.4, 0.4, 2.25);
+INSERT INTO "ingredient" VALUES ('Kaas, jong belegen 48+', 381, 31, 21, 24, 0, 0, 2);
+INSERT INTO "ingredient" VALUES ('Paprika, gekookt', 25, 0.1, 0, 0.8, 4.2, 1.9, 0);
 INSERT INTO "ingredient" VALUES ('Banaan', 89, 0.9, 0.3, 1.2, 20.4, 1.9, 0.0);
 INSERT INTO "ingredient" VALUES ('Ei, gekookt', 128, 8.8, 2.9, 0, 12.3, 0, 0.37);
-INSERT INTO "ingredient" VALUES ('Tomaat', 19, 0.2, 0, 1, 2.9, 1, 0);
 INSERT INTO "ingredient" VALUES ('Wortel', 27, 0.2, 0, 0.9, 10, 2.8, 0);
 INSERT INTO "ingredient" VALUES ('Aardappel', 75, 0, 0, 2, 17, 2.2, 0);
 INSERT INTO "ingredient" VALUES ('Aardbei', 32, 0.3, 0, 0.7, 8, 2, 0);
 INSERT INTO "ingredient" VALUES ('Volkorenbrood', 293, 3.3, 0.7, 11, 54, 2.3, 0.6);
-INSERT INTO "ingredient" VALUES ('Witte druiven', 137, 0.7, 0.2, 0.9, 30.4, 2.5, 0.01);
+INSERT INTO "ingredient" VALUES ('Druiven, wit', 137, 0.7, 0.2, 0.9, 30.4, 2.5, 0.01);
+INSERT INTO "ingredient" VALUES ('Druiven, rood', 137, 0.7, 0.2, 0.9, 30.4, 2.5, 0.01);
 INSERT INTO "ingredient" VALUES ('Griekse feta', 257, 23, 13, 17, 0.7, 0, 1.2);
 INSERT INTO "ingredient" VALUES ('Kipfilet', 110, 1.5, 0.5, 23, 0, 0, 0.1);

@@ -31,7 +31,7 @@ function insertNewGebruiker(gebruikersnaam, wachtwoord, emailadres, voornaam, ac
 	var url = "restservices/gebruiker/insertgebruiker?Q1=" + gebruikersnaam + "&Q2=" + wachtwoord + "&Q3=" + emailadres + "&Q4=" + voornaam + "&Q5=" + achternaam + "&Q6=" + geboortedatum + "&Q7=" + gewicht + "&Q8=" + lengte + "&Q9=" + geslacht+ "&Q10=" + activiteit;
 		$.ajax({
 			url : url,
-			method : "GET",
+			method : "POST",
 			beforeSend : function(xhr) {
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);

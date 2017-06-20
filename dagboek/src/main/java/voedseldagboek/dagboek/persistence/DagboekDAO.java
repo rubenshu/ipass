@@ -13,22 +13,23 @@ import voedseldagboek.dagboek.domain.Ingredient;
 
 //Extending base DAO for functionality
 public class DagboekDAO extends BaseDAO {
-	//DAO calls so it can call for the DAO functions
+	// DAO calls so it can call for the DAO functions
 	private GebruikerDAO gebruikerDAO = new GebruikerDAO();
 	private IngredientDAO ingredientDAO = new IngredientDAO();
 
-	//The select method. This method is called when a return is needed.
+	// The select method. This method is called when a return is needed.
 	private List<Dagboek> selectDagboek(String query) {
 		// New List to store values in
 		List<Dagboek> results = new ArrayList<Dagboek>();
 
-		//Make the connection to the DB
+		// Make the connection to the DB
 		try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
-			//Query gets passed into the executeQuery
+			// Query gets passed into the executeQuery
 			ResultSet dbResultSet = stmt.executeQuery(query);
 
-			//As long as there is a next result, save the results in a new Ingredient object and add it to the results
+			// As long as there is a next result, save the results in a new
+			// Ingredient object and add it to the results
 			while (dbResultSet.next()) {
 				int dagboek_id = dbResultSet.getInt("dagboek_id");
 				int hoeveelheid = dbResultSet.getInt("hoeveelheid");
@@ -46,7 +47,7 @@ public class DagboekDAO extends BaseDAO {
 
 				results.add(newDagboek);
 			}
-			//Catch any errors if the try statement fails
+			// Catch any errors if the try statement fails
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
@@ -54,32 +55,36 @@ public class DagboekDAO extends BaseDAO {
 		return results;
 	}
 
-	//Select & return all ingredients from the selected date and gebruiker
+	// Select & return all ingredients from the selected date and gebruiker
 	public List<Dagboek> findToday(String huidigeGebruiker, String datum) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"+ huidigeGebruiker + "' AND datum = '" + datum + "'");
+				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE fk_gebruikersnaam = '"
+						+ huidigeGebruiker + "' AND datum = '" + datum + "'");
 	}
 
-	//Select & return 1 dagboek_id
+	// Select & return 1 dagboek_id
 	public Dagboek findById(int dagboek_id) {
 		return selectDagboek(
-				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "+ dagboek_id).get(0);
+				"SELECT dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam FROM dagboek WHERE dagboek_id = "
+						+ dagboek_id).get(0);
 	}
 
-	//Insert a new ingredient into the dagboek from selected date&user
+	// Insert a new ingredient into the dagboek from selected date&user
 	public boolean insertIngredient(int hoeveelheid, String datum, String ingredientnaam, String gebruikersnaam) {
 		boolean result = false;
 		String query = "select max(dagboek_id) from dagboek";
-		
+
 		try (Connection con = super.getConnection()) {
 			Statement stmt = con.createStatement();
 			ResultSet dbResultSet = stmt.executeQuery(query);
-		    dbResultSet.next();
-		    int maxId = dbResultSet.getInt(1) + 1;
-		    String query2 = "insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"+maxId+"','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam + "')";
-		    if (stmt.executeUpdate(query2) == 1) { // Statement succesful
-		    	result = true;
-		    }
+			dbResultSet.next();
+			int maxId = dbResultSet.getInt(1) + 1;
+			String query2 = "insert into dagboek(dagboek_id, hoeveelheid, datum, FK_ingredientnaam, fk_gebruikersnaam) values('"
+					+ maxId + "','" + hoeveelheid + "','" + datum + "','" + ingredientnaam + "','" + gebruikersnaam
+					+ "')";
+			if (stmt.executeUpdate(query2) == 1) { // Statement succesful
+				result = true;
+			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
@@ -88,37 +93,43 @@ public class DagboekDAO extends BaseDAO {
 
 	// Delete ingredient from dagboek from selected user&datum
 	public boolean deleteIngredient(String ingredientnaam, String datum, String gebruikersnaam) {
-				boolean result = false;
-				String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"' AND datum ='"+datum+"' AND fk_gebruikersnaam='"+gebruikersnaam+"'"; 
-						
-				try (Connection con = getConnection()) {
-					
-					Statement stmt = con.createStatement();
-					if (stmt.executeUpdate(query) == 1){ //Succesful delete
-					result = true;
-					}
-							
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
-				}
-			return result;
+		boolean result = false;
+		String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '" + ingredientnaam + "' AND datum ='" + datum
+				+ "' AND fk_gebruikersnaam='" + gebruikersnaam + "'";
+
+		try (Connection con = getConnection()) {
+
+			Statement stmt = con.createStatement();
+			if (stmt.executeUpdate(query) == 1) { // Succesful delete
+				result = true;
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return result;
 	}
 
-	//Delete all dagboek entry's from specific ingredient & delete ingredient from ingredients
+	// Delete all dagboek entry's from specific ingredient & delete ingredient
+	// from ingredients
 	public boolean deleteSoloIngredient(String ingredientnaam) {
 		boolean result = false;
-		String query = "DELETE FROM dagboek WHERE FK_ingredientnaam = '"+ingredientnaam+"'";
-		String query2 = "DELETE FROM ingredient WHERE ingredientnaam = '"+ingredientnaam+"'";
-		
+		String query = "DELETE FROM dagboek WHERE fk_ingredientnaam = '" + ingredientnaam + "'";
+		String query2 = "DELETE FROM ingredient WHERE ingredientnaam = '" + ingredientnaam + "'";
+
 		try (Connection con = super.getConnection()) {
-	Statement stmt = con.createStatement();
-	if (stmt.executeUpdate(query) == 1 & stmt.executeUpdate(query2) == 1) { // Statement succesful
-		result = true;
-	}
-	
-} catch (SQLException sqle) {
-	sqle.printStackTrace();
-}
+			Statement stmt = con.createStatement();
+			if (stmt.executeUpdate(query) == 1) { // Statement succesful
+				result = true;
+			}
+			
+			if (stmt.executeUpdate(query2) == 1) { // Statement succesful
+				result = true;
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
 		return result;
 	}
 

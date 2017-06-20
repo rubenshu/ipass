@@ -1,16 +1,3 @@
-// Select current menu item
-$(document).ready(
-		function() {
-			var url = window.location;
-			$('.topmenu a').filter(function() {
-				return this.href == url;
-			}).removeClass('hover-white').removeClass('premoveing-large')
-					.removeClass('hide-menu-item').removeClass('button')
-					.removeClass('menu-item').addClass('white').addClass(
-							'padding-large').addClass('button').addClass(
-							'menu-item');
-		});
-
 // Date initialization for datapicker + h2 title
 function setDate() {
 	var now = new Date();

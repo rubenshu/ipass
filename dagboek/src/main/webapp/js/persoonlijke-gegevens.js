@@ -27,7 +27,7 @@ function updateGegevens(voornaam, achternaam, emailadres, geboortedatum, gewicht
 	var url = "restservices/gebruiker/updategebruiker?Q1=" + voornaam + "&Q2=" + achternaam + "&Q3=" + emailadres + "&Q4=" + geboortedatum + "&Q5=" + gewicht + "&Q6=" + lengte + "&Q7=" + geslacht + "&Q8=" + activiteit + "&Q9=" + gebruikersnaam;
 		$.ajax({
 			url : url,
-			method : "GET",
+			method : "PUT",
 			beforeSend : function(xhr) {
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);

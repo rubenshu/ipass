@@ -6,6 +6,8 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -27,7 +29,7 @@ public class GebruikerResource {
 	}
 	
 	//Insert a new gebruiker (registration)
-	@GET
+	@POST
 	@Path("/insertgebruiker")
 	public boolean insertNewGebruiker(@QueryParam("Q1") String gebruikersnaam, @QueryParam("Q2") String wachtwoord, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String voornaam, @QueryParam("Q5") String achternaam, @QueryParam("Q6") String geboortedatum, @QueryParam("Q7") double gewicht, @QueryParam("Q8") int lengte, @QueryParam("Q9") String geslacht, @QueryParam("Q10") double activiteit) {
 		GebruikerService service = ServiceProvider.getGebruikerService();
@@ -35,7 +37,7 @@ public class GebruikerResource {
 	}
 	
 	//Update an existing gebruiker
-	@GET
+	@PUT
 	@Path("/updategebruiker")
 	@RolesAllowed({"user","admin"})
 	public boolean updateGebruiker(@QueryParam("Q1") String voornaam, @QueryParam("Q2") String achternaam, @QueryParam("Q3") String emailadres, @QueryParam("Q4") String geboortedatum, @QueryParam("Q5") double gewicht, @QueryParam("Q6") int lengte, @QueryParam("Q7") String geslacht, @QueryParam("Q8") double activiteit, @QueryParam("Q9") String gebruikersnaam){

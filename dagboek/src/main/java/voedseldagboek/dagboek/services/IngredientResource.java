@@ -8,7 +8,10 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -69,7 +72,7 @@ public class IngredientResource {
 	}
 	
 	//Insert new dagboek entry & return ingredient+amount
-	@GET
+	@POST
 	@Path("/insert")
 	@Produces("application/json")
 	@RolesAllowed({"user","admin"})
@@ -82,7 +85,7 @@ public class IngredientResource {
 	}
 	
 	//Insert new ingredient
-	@GET
+	@POST
 	@Path("/insertingredient")
 	@RolesAllowed({"user","admin"})
 	public boolean insertNewIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
@@ -91,7 +94,7 @@ public class IngredientResource {
 	}
 	
 	//delete ingredient from dagboek
-	@GET
+	@DELETE
 	@Path("/delete")
 	@RolesAllowed({"user","admin"})
 	public boolean deleteIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") String datum, @QueryParam("Q3") String gebruikersnaam){
@@ -100,7 +103,7 @@ public class IngredientResource {
 	}
 	
 	//Update ingredient values
-	@GET
+	@PUT
 	@Path("/updateingredient")
 	@RolesAllowed("admin")
 	public boolean updateExistingIngredient(@QueryParam("Q1") String ingredientnaam, @QueryParam("Q2") int calorieen, @QueryParam("Q3") double vet, @QueryParam("Q4") double verzadigd_vet, @QueryParam("Q5") double eiwit, @QueryParam("Q6") double koolhydraten, @QueryParam("Q7") double vezels, @QueryParam("Q8") double zout) {
@@ -109,7 +112,7 @@ public class IngredientResource {
 	}
 	
 	//Delete ingredient entry
-	@GET
+	@DELETE
 	@Path("/deleteingredient")
 	@RolesAllowed("admin")
 	public boolean deleteIngredient(@QueryParam("Q1") String ingredientnaam) {

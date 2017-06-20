@@ -85,7 +85,7 @@ function insertIngredient(ingredientnaam, hoeveelheid){
 	var url = "restservices/ingredients/insert?Q1=" + hoeveelheid + "&Q2=" + datum + "&Q3=" + ingredientnaam + "&Q4=" + username;
 		$.ajax({
 			url : url,
-			method : "GET",
+			method : "POST",
 			beforeSend : function(xhr) {
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -113,7 +113,7 @@ function deleteIngredient(ingredientnaam){
 	var url = "restservices/ingredients/delete?&Q1=" + ingredientnaam + "&Q2=" + datum + "&Q3=" + username;
 	$.ajax({
 		url : url,
-		method : "GET",
+		method : "DELETE",
 		beforeSend : function(xhr) {
 			var token = window.sessionStorage.getItem("sessionToken");
 			xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -197,7 +197,9 @@ $(document).ready(function() {
     $("#recentcomplete").empty();
     document.getElementById("recentcomplete").style.display = "block";
     recent.forEach(function(item) {
+    	if (ingredienten.includes(item)){
       $("#recentcomplete").append('<li><a href="#">' + item + '</a></li>');
+    	}
     });
   }, function() {
     document.getElementById("recentcomplete").style.display = "none";

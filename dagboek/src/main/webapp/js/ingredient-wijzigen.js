@@ -60,7 +60,7 @@ function updateIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwit, 
 	var url = "restservices/ingredients/updateingredient?Q1=" + ingredientnaam + "&Q2=" + calorieen + "&Q3=" + vet + "&Q4=" + verzadigd_vet + "&Q5=" + eiwit + "&Q6=" + koolhydraten + "&Q7=" + vezels + "&Q8=" + zout;
 		$.ajax({
 			url : url,
-			method : "GET",
+			method : "PUT",
 			beforeSend : function(xhr) {
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -121,7 +121,7 @@ function verwijderIngredient(ingredientnaam){
 	var url = "restservices/ingredients/deleteingredient?Q1=" + ingredientnaam;
 		$.ajax({
 			url : url,
-			method : "GET",
+			method : "DELETE",
 			beforeSend : function(xhr) {	
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -129,6 +129,7 @@ function verwijderIngredient(ingredientnaam){
 			success : function(data) {
 				if (data == "true"){
 				document.getElementById('message').innerHTML = 'Ingrediënt succesvol verwijderd. <br />';
+				$('html, body').animate({ scrollTop: 0 }, 'fast');
 				  document.getElementById("ingredientnaam").value = "";
 				  document.getElementById("calorieen").value="";
 				  document.getElementById('vet').value="";
@@ -137,6 +138,7 @@ function verwijderIngredient(ingredientnaam){
 				  document.getElementById('koolhydraten').value="";
 				  document.getElementById('vezels').value="";
 				  document.getElementById('zout').value="";
+				  loadAllIngredients();
 			}
 			else{
 				alert("Verwijderen niet gelukt");

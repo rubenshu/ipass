@@ -35,7 +35,7 @@ function insertNewIngredient(ingredientnaam, calorieen, vet, verzadigd_vet, eiwi
 	if (ingredientnaam.length > 0, calorieen.length > 0, vet.length > 0, verzadigd_vet.length > 0, eiwit.length > 0, koolhydraten.length > 0, vezels.length > 0, zout.length > 0){	
 	$.ajax({
 			url : url,
-			method : "GET",
+			method : "POST",
 			beforeSend : function(xhr) {
 				var token = window.sessionStorage.getItem("sessionToken");
 				xhr.setRequestHeader('Authorization', 'Bearer ' + token);
