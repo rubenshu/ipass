@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dagboek - Voedseldagboek</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+	href="imports/font-awesome-4.7.0/css/font-awesome.min.css">
+<link
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+	rel="stylesheet" type="text/css" />
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/initialize_page.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="js/jquery-ui-i18n.min.js"></script>
+<script src="js/datepicker.js" type="text/javascript"></script>
+	<style>
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", sans-serif
+}
+
+.mainMenu, h1, button {
+	font-family: "Montserrat", sans-serif
+}
+</style>
+</head>
+<body>
+
+	<!-- Navbar -->
+	<!-- Header -->
+	<header class="container red center">
+		<h1 class="margin jumbo">Voedseldagboek</h1>
+		<!--<p class="xlarge">Een voedseldagboek</p>-->
+	</header>
+
+	<div>
+		<div class="topmenu mainMenu red shadow center">
+				<div class="floatmenucontainer">
+			<a
+				class="menu-item button hide-menu-two hide-large right padding-one hover-white large red"
+				href="javascript:void(0);" onclick="mobFunc()"
+				title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
+				href="index.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Home</a>
+			<a href="dagboek.html"
+				class="padding-one white padding-large button menu-item">Dagboek</a>
+			<a href="adviezen.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Adviezen</a>
+			<a href="overzicht.html"
+				class="menu-item button hide-menu-item padding-one hover-white">Overzicht</a>
+				<a href = "#" class="menu-item button hide-menu-item padding-one usermenu" id="gebruikersnaammenu" style="background:transparent !important;background-color:transparent !important;color:#fff !important;"></a>
+				<ul id="autouser" class="autouser" style="margin-left:-12px !important;position: fixed;margin-top: -13px !important;
+    width:inherit;max-width:200px; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; ">
+    <li><a href="persoonlijke-gegevens.html">Persoonlijke gegevens</a></li>
+    <li><a href="#" id="logout">Logout</a></li>
+	</ul></div>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navMob"
+			class="mainMenu-block white hide hide-large hide-menu-two">
+			<a href="index.html" class="menu-item button padding-one">Home</a> <a
+				href="dagboek.html" class="menu-item button padding-one">Dagboek</a>
+			<a href="adviezen.html" class="menu-item button padding-one">Adviezen</a>
+			<a href="overzicht.html" class="menu-item button padding-one">Overzicht</a>
+		</div>
+	</div>
+	<div class="row-padding padding-16 container">
+		<div class="content row">
+			<h2 id="add-date" class="center">Mijn dagboek</h2>
+			<div class="column quarter center">
+				<div class="datepicker">
+					<div class="datepickerhead">
+						<h3 style="margin: 0; height: 48px;">Datum</h3>
+					</div>
+					<div class="datepickercont">
+						<input type="text" id="datepicker">
+					</div>
+				</div>
+			</div>
+
+			<div class="column threequarter dagboektable">
+			<div class="container bodyheader"><button type="submit" name="recent" id="recent" style="max-width: 150px;">snelkiezer</button>
+				<ul id="recentcomplete"
+		style="position: fixed; margin-top:-5px !important; width:inherit; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none;">
+	</ul>
+			<input type="text" style="max-width: 150px;" placeholder="IngrediÃ«nt" name="ingedient" id="ingredient">
+				<ul id="autocomplete"
+		style="position: fixed;     margin-top: -5px !important;
+    margin-left: 81px !important;width:inherit; border: 2px solid red; background: white; display: none; overflow-x: hidden; overflow-y: auto; margin: 0px 0px 10px; padding: 5px; list-style-type: none; ">
+	</ul>
+			<input type="number" style="max-width: 150px;" placeholder="Gram" name="gram" id="gram"><button type="submit" style="max-width: 150px;" name="voegtoe" id="voegtoe">voeg toe</button></div><div class="dagboek"><table class="table tabledagboek" id="table">
+			<tr><th class="ingredient">Ingrediënt</th>	<th class="hoeveelheid">Hoeveelheid</th><th><select name="macro-optie" id="macro-optie"><option value="calorieen">Energie</option><option value="vet">Vet</option><option value="verzadigd_vet">Verzagigd vet</option>	<option value="eiwit">Eiwit</option><option value="koolhydraten">Koolhydraten</option><option value="vezels">Vezels</option><option value="zout">Zout</option></select><th></th></tr><tr><td class="ingredient"></td><td class="hoeveelheid"></td><td class="totaal" id="totaal"></td><td class="removeingredient"></td></tr>
+			</table>
+			</div>
+			<a style="color:inherit;font-size:12px;" href="ingredient-toevoegen.html">Bestaat het ingrediënt nog niet? Voeg een nieuw ingrediënt toe!</a>
+				</div>
+			</div>
+		</div>
+	<!-- Footer -->
+	<footer class="container padding-64 center opacity">
+				<p>Copyright &#9400; 2017 <a href="https://www.groeisprong.nl/">de Groeisprong</a> &#174;. All rights reserved.</p>
+	</footer>
+	<script src="js/dagboek.js" type="text/javascript"></script>
+	<script>
+		setDate()
+	</script>
+</body>
+</html>
