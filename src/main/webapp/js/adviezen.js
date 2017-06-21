@@ -140,7 +140,7 @@ function loadMacro() {
 					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat niet genoeg verzadigd vet (minder dan 12%).';
 				}
 				else {
-					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat te veel verzadigd vet (meer dan 50%).';
+					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat te veel verzadigd vet (meer dan 24%).';
 				}
 				VvStr += ' Veel verzadigde vetten in de supermarkt zijn ongezond. Deze dragen bij aan een verhoogd LDL-cholesterol in het bloed, eet hier dus niet te veel van. Dit resulteert in een verhoogde kans op hart- en vaatziekten.</p>';
 				
