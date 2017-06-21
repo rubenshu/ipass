@@ -133,16 +133,16 @@ function loadMacro() {
 				VetStr += "Vetten geven je lichaam energie. Ook wordt het gebruikt als bouwstof voor je lichaamscellen. Gezonde vetten dragen bij aan een verlaagde kans op  hart- en vaatziekten. Per gram levert vet circa 10 kcal. Gezonde keuzes voor vet zijn: (vette) vis, eieren, noten, avocado. Minder gezond zijn: snoep, fastfood.";
 				
 				//Verzadigd Vet
-				if (pVv >= 25 & pVv <= 50){
-					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat genoeg verzadigd vet (tussen de 25-50%).';
+				if (pVv >= 12 & pVv <= 24){
+					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat genoeg verzadigd vet (tussen de 12-24%).';
 				}
-				else if (pVv < 25){
-					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat niet genoeg verzadigd vet (minder dan 25%).';
+				else if (pVv < 12){
+					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat niet genoeg verzadigd vet (minder dan 12%).';
 				}
 				else {
 					VvStr += '<p class="macro" id="verzadigd_vet">Verzadigd vet: '+totalVv.toFixed(1)+'g - '+pVv.toFixed(1)+'%</p><p class="advies">Je voeding bevat te veel verzadigd vet (meer dan 50%).';
 				}
-				VvStr += ' Veel verzadigde vetten in de supermarkt zijn ongezond. Deze dragen bij aan een verhoogd LDL-cholesterol in het bloed, eet hier dus niet te veel van. Dit draagt bij aan een verhoogde kans op hart- en vaatziekten. Maar er zijn ook gezonde onverzadigde vetten, deze helpen de functies van je lichaamscellen.</p>';
+				VvStr += ' Veel verzadigde vetten in de supermarkt zijn ongezond. Deze dragen bij aan een verhoogd LDL-cholesterol in het bloed, eet hier dus niet te veel van. Dit resulteert in een verhoogde kans op hart- en vaatziekten.</p>';
 				
 				//Eiwit
 				if (pEiwit >= 30 & pEiwit <= 40){
